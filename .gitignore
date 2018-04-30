@@ -1,9 +1,6 @@
 
-/target
+protocol/.vs
+protocol/target
+protocol/Cargo.lock
 **/*.rs.bk
 
-/target
-**/*.rs.bk
-Cargo.lock
-
-.vs
