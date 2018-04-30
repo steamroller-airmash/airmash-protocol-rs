@@ -1,6 +1,4 @@
-
 use std;
-use serde;
 
 #[derive(Debug, Clone)]
 pub enum Error {
@@ -28,16 +26,5 @@ impl std::fmt::Display for Error {
 impl std::error::Error for Error {
 	fn description(&self) -> &str {
 		self.desc()
-	}
-}
-
-impl serde::de::Error for Error {
-	fn custom<T>(_: T) -> Self {
-		unimplemented!();
-	}
-}
-impl serde::ser::Error for Error {
-	fn custom<T>(_: T) -> Self {
-		unimplemented!();
 	}
 }

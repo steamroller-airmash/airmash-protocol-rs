@@ -1,6 +1,10 @@
 
-extern crate serde;
+mod serde;
 
 mod error;
-mod deserialize;
-mod serialize;
+mod de;
+mod ser;
+/*mod field;
+
+mod server;
+mod client;*/
