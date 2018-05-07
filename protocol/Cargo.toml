@@ -4,4 +4,3 @@ version = "0.1.0"
 authors = ["STEAMROLLER"]
 
 [dependencies]
-#airmash-protocol-derive = { path = "../protocol-derive" }

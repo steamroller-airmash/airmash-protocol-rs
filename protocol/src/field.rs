@@ -106,3 +106,113 @@ pub mod arraysmall {
 	}
 }
 
+pub mod rotation {
+	use serde::*;
+	use field::*;
+
+	const MULT: f32 = 6553.6;
+
+	pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
+		where S: Serializer
+	{
+		ser.serialize_u16((*val * MULT) as u16)
+	}
+	pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
+		where D: Deserializer<'de>
+	{
+		Ok((de.deserialize_u16()? as f32) / MULT)
+	}
+}
+
+pub mod healthnergy {
+	use serde::*;
+	use field::*;
+
+	const MULT: f32 = 255.0;
+
+	pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
+		where S: Serializer
+	{
+		ser.serialize_u16((*val * MULT) as u16)
+	}
+	pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
+		where D: Deserializer<'de>
+	{
+		Ok((de.deserialize_u16()? as f32) / MULT)
+	}
+}
+
+pub mod uint24 {
+	use serde::*;
+	use field::*;
+
+	pub fn serialize<S>(val: u32, ser: &mut S) -> SerResult<S>
+		where S: Serializer
+	{
+		ser.serialize_u16((val >> 8) as u16)?;
+		ser.serialize_u8(val as u8)
+	}
+	pub fn deserialize<'de, D>(de: &mut D) -> Result<u32, D::Error>
+		where D: Deserializer<'de>
+	{
+		let hi = de.deserialize_u16()?;
+		let lo = de.deserialize_u8()?;
+
+		Ok(((hi << 8) as u32) | (lo as u32))
+	}
+}
+
+pub mod coord24 {
+	use serde::*;
+	use field::*;
+
+	// Note: This assumes that f32 has enough precision,
+	//       the client uses f64 as it is written in js
+	
+	const SHIFT: i32 = 8388608;
+	const MULT: f32 = 512.0;
+
+	pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
+		where S: Serializer
+	{
+		uint24::serialize(((*val * MULT) as i32 + SHIFT) as u32, ser)
+	}
+	pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
+		where D: Deserializer<'de>
+	{
+		Ok((((uint24::deserialize(de)? as i32) - SHIFT) as f32) / MULT)
+	}
+}
+
+macro_rules! shift_mult_decode {
+	($name:ident, $shift:expr, $mult:expr) => {
+		
+		pub mod $name {
+			use serde::*;
+			use field::*;
+
+			// Note: This assumes that f32 has enough precision,
+			//       the client uses f64 as it is written in js
+			
+			const SHIFT: i32 = $shift;
+			const MULT: f32 = $mult;
+
+			pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
+				where S: Serializer
+			{
+				ser.serialize_u16(((*val * MULT) as i32 + SHIFT) as u16)
+			}
+			pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
+				where D: Deserializer<'de>
+			{
+				Ok((((de.deserialize_u16()? as i32) - SHIFT) as f32) / MULT)
+			}
+		}
+	};
+}
+
+shift_mult_decode!(coordy, 32768, 4.0);
+shift_mult_decode!(coordx, 32768, 2.0);
+shift_mult_decode!(regen, 32768, 1.0e6);
+shift_mult_decode!(accel, 32768, 32768.0);
+shift_mult_decode!(speed, 32768, 1638.4);

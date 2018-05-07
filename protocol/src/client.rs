@@ -1,6 +1,14 @@
 //! Messages sent from client to server
 
 serde_decls! {
+    /* READ BEFORE EDITING THIS FILE:
+        Serialization/Deserialization is done in
+        the order that the fields are declared.
+        Changing the order of the fields without
+        being aware of this will break things!
+    */
+
+    
     /// Login packet
     pub struct Login {
         pub protocol: u8,
