@@ -1,5 +1,6 @@
 
 use std::mem;
+use std::str;
 
 use serde::{self, Deserialize};
 use error::{Error, Result};
@@ -90,5 +91,13 @@ impl<'de> serde::Deserializer<'de> for Deserializer<'de> {
 		let slice = &self.bytes[0..len];
 		self.bytes = &self.bytes[len..];
 		Ok(slice)
+	}
+	fn deserialize_str(&mut self, len: usize) -> Result<&'de str> {
+		let bytes = self.deserialize_bytes(len)?;
+		
+		match str::from_utf8(bytes) {
+			Ok(val) => Ok(val),
+			Err(e) => Err(Error::Utf8Error(e))
+		}
 	}
 }

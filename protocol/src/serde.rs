@@ -39,6 +39,7 @@ pub trait Deserializer<'de> {
 
 	fn deserialize_unit(&mut self) -> Result<(), Self::Error>;
 	fn deserialize_bytes(&mut self, len: usize) -> Result<&'de [u8], Self::Error>;
+	fn deserialize_str(&mut self, len: usize) -> Result<&'de str, Self::Error>;
 }
 
 pub trait Serialize {

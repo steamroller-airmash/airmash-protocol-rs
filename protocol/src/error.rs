@@ -1,16 +1,19 @@
 use std;
+use std::str::Utf8Error;
 
 #[derive(Debug, Clone)]
 pub enum Error {
 	Eof,
-	TrailingBytes
+	TrailingBytes,
+	Utf8Error(Utf8Error)
 }
 
 impl Error {
 	pub(self) fn desc(&self) -> &str {
 		match self {
 			&Error::Eof => "unexpected end of message reached",
-			&Error::TrailingBytes => "unexpected remaining bytes"
+			&Error::TrailingBytes => "unexpected remaining bytes",
+			&Error::Utf8Error(_) => "invalid utf-8 in string"
 		}	
 	}
 }

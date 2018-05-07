@@ -1,8 +1,7 @@
 [package]
-name = "airmash-protocol-serde"
+name = "airmash-protocol"
 version = "0.1.0"
 authors = ["STEAMROLLER"]
 
 [dependencies]
-serde = { version = "*", features = [ "derive" ] }
-
+#airmash-protocol-derive = { path = "../protocol-derive" }
