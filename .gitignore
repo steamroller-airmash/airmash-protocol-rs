@@ -1,6 +1,16 @@
 
+**/*.rs.bk
+
+.vs
+.vscode
+
 protocol/.vs
+protocol/.vscode
 protocol/target
 protocol/Cargo.lock
-**/*.rs.bk
+
+protocol-derive/.vs
+protocol-derive/.vscode
+protocol-derive/target
+protocol-derive/Cargo.lock
 

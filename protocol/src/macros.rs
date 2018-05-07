@@ -57,7 +57,7 @@ macro_rules! get_field_type {
 }
 
 macro_rules! serde_decl {
-    (struct $name:ident { $($field:ident : $type:tt),* }) => {
+    ($(#[$attr:meta])* struct $name:ident { $($field:ident : $type:tt),* }) => {
         impl ::serde::Serialize for $name {
             fn serialize<S>(&self, ser: &mut S) -> Result<S::Ok, S::Error> 
                 where S: ::serde::Serializer
@@ -78,7 +78,7 @@ macro_rules! serde_decl {
         }
 
         impl<'de> ::serde::Deserialize<'de> for $name {
-            fn deserialize<D>(de: &mut D) -> Result<Self, D::Error>
+            fn deserialize<D>(_de: &mut D) -> Result<Self, D::Error>
                 where D: ::serde::Deserializer<'de>
             {
                 #[allow(unused_imports)]
@@ -86,12 +86,13 @@ macro_rules! serde_decl {
 
                 Ok(Self {
                     $(
-                        $field: field_deserialize!(de, $field : $type),
+                        $field: field_deserialize!(_de, $field : $type),
                     )*
                 })
             }
         }
-
+        
+        $(#[$attr])*
         pub struct $name {
             $(
                 pub $field: get_field_type!($type),
@@ -102,9 +103,10 @@ macro_rules! serde_decl {
 
 #[macro_export]
 macro_rules! serde_decls {
-    {$(pub struct $name:ident { $(pub $field:ident : $type:tt),* })*} => {
+    {$($(#[$attr:meta])* pub struct $name:ident { $(pub $field:ident : $type:tt),* })*} => {
         $(
             serde_decl!{
+                $( #[$attr] )*
                 struct $name {
                     $( $field : $type ),*
                 }

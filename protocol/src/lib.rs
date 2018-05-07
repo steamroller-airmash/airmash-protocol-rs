@@ -11,7 +11,10 @@ mod de;
 mod ser;
 mod field;
 
+mod impls;
+
 pub mod server;
 pub mod client;
 
-mod impls;
+pub use de::from_bytes;
+pub use ser::to_bytes;

@@ -1,6 +1,7 @@
-
+//! Messages sent from client to server
 
 serde_decls! {
+    /// Login packet
     pub struct Login {
         pub protocol: u8,
         pub name: text,
