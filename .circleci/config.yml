@@ -9,7 +9,6 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Check Formatting
         command: |
           cargo fmt -- --write-mode=diff
 
