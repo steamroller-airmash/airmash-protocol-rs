@@ -1,15 +1,14 @@
-
 #[macro_use]
 mod macros;
 
 mod serde;
 
-mod error;
 mod de;
-mod ser;
+mod error;
 mod field;
+mod ser;
 
 mod impls;
 
-pub mod server;
 pub mod client;
+pub mod server;

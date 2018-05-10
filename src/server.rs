@@ -459,5 +459,5 @@ pub enum ServerPacket {
     ChatVoteMutePassed(ChatVoteMutePassed),
     ChatVoteMuted,
     ServerMessage(ServerMessage),
-    ServerCustom(ServerCustom)
+    ServerCustom(ServerCustom),
 }

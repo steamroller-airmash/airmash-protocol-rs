@@ -8,7 +8,7 @@ serde_decls! {
         being aware of this will break things!
     */
 
-    
+
     /// Login packet
     pub struct Login {
         pub protocol: u8,
@@ -82,5 +82,5 @@ pub enum ClientPacket {
     Whisper(Whisper),
     Say(Say),
     VoteMute(VoteMute),
-    LocalPing(LocalPing)
+    LocalPing(LocalPing),
 }
