@@ -7,44 +7,44 @@ jobs:
       - image: abronan/rust-circleci:latest
     
     steps:
-      - checkout
-      - run:
-        command: |
-          cargo fmt -- --write-mode=diff
+        - checkout
+        - run:
+            command: |
+                cargo fmt -- --write-mode=diff
 
   nightly_build:
     docker:
       - image: abronan/rust-circleci:latest
     
     steps:
-      - checkout
-      - run:
-        command: |
-          rustup run nightly rustc --version
-          rustup run nightly cargo --version
-      - run:
-        command: |
-          rustup run nightly cargo build
-      - run:
-        command: |
-          rustup run nightly cargo test
+        - checkout
+        - run:
+            command: |
+                rustup run nightly rustc --version
+                rustup run nightly cargo --version
+        - run:
+            command: |
+                rustup run nightly cargo build
+        - run:
+            command: |
+                rustup run nightly cargo test
 
   stable_build:
     docker:
       - image: abronan/rust-circleci:latest
     
     steps:
-      - checkout
-      - run:
-        command: |
-          rustup run stable rustc --version
-          rustup run stable cargo --version
-      - run:
-        command: |
-          rustup run stable cargo build
-      - run:
-        command: |
-          rustup run stable cargo test
+        - checkout
+        - run:
+            command: |
+                rustup run stable rustc --version
+                rustup run stable cargo --version
+        - run:
+            command: |
+                rustup run stable cargo build
+        - run:
+            command: |
+                rustup run stable cargo test
 
 workflows:
   version: 2
