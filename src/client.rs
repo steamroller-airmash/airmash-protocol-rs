@@ -28,7 +28,7 @@ serde_decls! {
         pub horizon_y: u16
     }
 
-    pub struct Ack { }
+    //pub struct Ack { }
 
     pub struct Pong {
         pub num: u32
@@ -45,7 +45,7 @@ serde_decls! {
         pub data: text
     }
 
-    pub struct ScoreDetailed { }
+    //pub struct ScoreDetailed { }
 
     pub struct Chat {
         pub text: text
@@ -67,4 +67,20 @@ serde_decls! {
     pub struct LocalPing {
         pub auth: u32
     }
+}
+
+pub enum ClientPacket {
+    Login(Login),
+    Backup(Backup),
+    Horizon(Horizon),
+    Ack,
+    Pong(Pong),
+    Key(Key),
+    Command(Command),
+    ScoreDetailed,
+    Chat(Chat),
+    Whisper(Whisper),
+    Say(Say),
+    VoteMute(VoteMute),
+    LocalPing(LocalPing)
 }

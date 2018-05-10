@@ -47,7 +47,7 @@ serde_decls! {
         pub players_game: u32
     }
 
-    pub struct Ack { }
+    //pub struct Ack { }
 
     pub struct CommandReply {
         pub ty: u8,
@@ -362,6 +362,22 @@ serde_decls! {
         pub scores: array[ScoreDetailedCTFScore]
     }
 
+    pub struct ScoreDetailedBTRScore {
+        pub id: u16,
+        pub level: u8,
+        pub alive: bool,
+        pub wins: u16,
+        pub score: u32,
+        pub kills: u16,
+        pub deaths: u16,
+        pub damage: f32,
+        pub ping: u16
+    }
+
+    pub struct ScoreDetailedBTR {
+        pub scores: array[ScoreDetailedBTRScore]
+    }
+
     pub struct ChatTeam {
         pub id: u16,
         pub text: text
@@ -387,7 +403,7 @@ serde_decls! {
         pub id: u16
     }
 
-    pub struct ChatVoteMuted { }
+    //pub struct ChatVoteMuted { }
 
     pub struct ServerMessage {
         pub ty: u8,
@@ -399,4 +415,49 @@ serde_decls! {
         pub ty: u8,
         pub data: textbig
     }
+}
+
+pub enum ServerPacket {
+    Login(Login),
+    Backup,
+    Ping(Ping),
+    PingResult(PingResult),
+    Ack,
+    CommandReply(CommandReply),
+    PlayerNew(PlayerNew),
+    PlayerLeave(PlayerLeave),
+    PlayerUpdate(PlayerUpdate),
+    PlayerFire(PlayerFire),
+    PlayerSay(PlayerSay),
+    PlayerRespawn(PlayerRespawn),
+    PlayerFlag(PlayerFlag),
+    PlayerHit(PlayerHit),
+    PlayerKill(PlayerKill),
+    PlayerType(PlayerType),
+    PlayerLevel(PlayerLevel),
+    PlayerReteam(PlayerReteam),
+    GameFlag(GameFlag),
+    GameSpectate(GameSpectate),
+    GamePlayersAlive(GamePlayersAlive),
+    GameFireWall(GameFireWall),
+    EventRepel(EventRepel),
+    EventBoost(EventBoost),
+    EventBounce(EventBounce),
+    EventStealth(EventStealth),
+    EventLeaveHorizon(EventLeaveHorizon),
+    MobUpdate(MobUpdate),
+    MobUpdateStationary(MobUpdateStationary),
+    ScoreUpdate(ScoreUpdate),
+    ScoreBoard(ScoreBoard),
+    ScoreDetailedFFA(ScoreDetailedFFA),
+    ScoreDetailedCTF(ScoreDetailedCTF),
+    ScoreDetailedBTR(ScoreDetailedBTR),
+    ChatTeam(ChatTeam),
+    ChatPublic(ChatPublic),
+    ChatSay(ChatSay),
+    ChatWhisper(ChatWhisper),
+    ChatVoteMutePassed(ChatVoteMutePassed),
+    ChatVoteMuted,
+    ServerMessage(ServerMessage),
+    ServerCustom(ServerCustom)
 }

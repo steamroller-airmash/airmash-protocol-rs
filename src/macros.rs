@@ -60,7 +60,7 @@ macro_rules! field_serialize {
     ($self:ident, $de:expr, $name:ident : $type:ident) => {
         field_serialize_2!($self, $de, $name : $type);
     };
-    ($self:ident, $de:expr, $name:ident : $type:ident $_:ty ) => {
+    ($self:ident, $de:expr, $name:ident : $type:ident $a:ty ) => {
         field_serialize_2!($self, $de, $name : $type);
     }
 }
@@ -115,7 +115,7 @@ macro_rules! field_deserialize {
     ($de:expr, $name:ident : $type:ident) => {
         field_deserialize_2!($de, $name : $type);
     };
-    ($de:expr, $name:ident : $type:ident + $_:ty ) => {
+    ($de:expr, $name:ident : $type:ident + $a:ty ) => {
         field_deserialize_2!($de, $name : $type);
     }
 }

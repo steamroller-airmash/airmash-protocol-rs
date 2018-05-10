@@ -3,14 +3,5 @@
 
 .vs
 .vscode
-
-protocol/.vs
-protocol/.vscode
-protocol/target
-protocol/Cargo.lock
-
-protocol-derive/.vs
-protocol-derive/.vscode
-protocol-derive/target
-protocol-derive/Cargo.lock
-
+target
+Cargo.lock
