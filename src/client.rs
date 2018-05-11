@@ -60,6 +60,10 @@ serde_decls! {
         pub text: text
     }
 
+    pub struct TeamChat {
+        pub text: text
+    }
+
     pub struct VoteMute {
         pub id: u16
     }
@@ -79,8 +83,11 @@ pub enum ClientPacket {
     Command(Command),
     ScoreDetailed,
     Chat(Chat),
+    TeamChat(TeamChat),
     Whisper(Whisper),
     Say(Say),
     VoteMute(VoteMute),
     LocalPing(LocalPing),
 }
+
+

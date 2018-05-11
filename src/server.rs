@@ -82,7 +82,7 @@ serde_decls! {
         pub speed_x: speed,
         pub speed_y: speed
     }
-
+    
     pub struct PlayerFireProjectile {
         pub id: u16,
         pub ty: u8,
@@ -103,6 +103,13 @@ serde_decls! {
         pub projectiles: arraysmall[PlayerFireProjectile]
     }
 
+    /// Note: exists within the game code,
+    /// but doesn't have a corresponding 
+    /// message code. This appears to be 
+    /// left over from an earlier version
+    /// of the airmash codebase, left here
+    /// in case it turns out to actually be
+    /// used.
     pub struct PlayerSay {
         pub id: u16,
         pub text: text
@@ -300,6 +307,11 @@ serde_decls! {
         pub pos_y: f32
     }
 
+    pub struct MobDespawn {
+        pub id: u16,
+        pub ty: u8
+    }
+
     pub struct MobDespawnCoords {
         pub id: u16,
         pub ty: u8,
@@ -415,6 +427,10 @@ serde_decls! {
         pub ty: u8,
         pub data: textbig
     }
+
+    pub struct Error {
+        pub error: u8
+    }
 }
 
 pub enum ServerPacket {
@@ -423,17 +439,19 @@ pub enum ServerPacket {
     Ping(Ping),
     PingResult(PingResult),
     Ack,
+    Error(Error),
     CommandReply(CommandReply),
     PlayerNew(PlayerNew),
     PlayerLeave(PlayerLeave),
     PlayerUpdate(PlayerUpdate),
     PlayerFire(PlayerFire),
-    PlayerSay(PlayerSay),
     PlayerRespawn(PlayerRespawn),
     PlayerFlag(PlayerFlag),
     PlayerHit(PlayerHit),
     PlayerKill(PlayerKill),
+    PlayerUpgrade(PlayerUpgrade),
     PlayerType(PlayerType),
+    PlayerPowerup(PlayerPowerup),
     PlayerLevel(PlayerLevel),
     PlayerReteam(PlayerReteam),
     GameFlag(GameFlag),
@@ -447,6 +465,8 @@ pub enum ServerPacket {
     EventLeaveHorizon(EventLeaveHorizon),
     MobUpdate(MobUpdate),
     MobUpdateStationary(MobUpdateStationary),
+    MobDespawn(MobDespawn),
+    MobDespawnCoords(MobDespawnCoords),
     ScoreUpdate(ScoreUpdate),
     ScoreBoard(ScoreBoard),
     ScoreDetailedFFA(ScoreDetailedFFA),
