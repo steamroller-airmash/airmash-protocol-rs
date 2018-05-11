@@ -8,7 +8,7 @@ serde_decls! {
         being aware of this will break things!
     */
 
-
+    #[derive(Default, Clone, Debug)]
     pub struct LoginPlayer {
         pub id: u16,
         pub status: u8,
@@ -23,6 +23,7 @@ serde_decls! {
         pub upgrades: u8
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct Login {
         pub success: bool,
         pub id: u16,
@@ -34,26 +35,32 @@ serde_decls! {
         pub players: array[LoginPlayer]
     }
 
+    #[derive(Default, Clone, Copy, Debug)]
     pub struct Backup {}
 
+    #[derive(Default, Clone, Copy, Debug)]
     pub struct Ping {
         pub clock: u32,
         pub num: u32
     }
 
+    #[derive(Default, Clone, Copy, Debug)]
     pub struct PingResult {
         pub ping: u16,
         pub players_total: u32,
         pub players_game: u32
     }
 
-    //pub struct Ack { }
+    #[derive(Default, Clone, Copy, Debug)]
+    pub struct Ack { }
 
+    #[derive(Default, Clone, Debug)]
     pub struct CommandReply {
         pub ty: u8,
         pub text: textbig
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct PlayerNew {
         pub id: u16,
         pub status: u8,
@@ -67,10 +74,12 @@ serde_decls! {
         pub upgrades: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerLeave {
         pub id: u16
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct PlayerUpdate {
         pub clock: u32,
         pub id: u16,
@@ -82,7 +91,8 @@ serde_decls! {
         pub speed_x: speed,
         pub speed_y: speed
     }
-    
+
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerFireProjectile {
         pub id: u16,
         pub ty: u8,
@@ -95,6 +105,7 @@ serde_decls! {
         pub max_speed: speed
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct PlayerFire {
         pub clock: u32,
         pub id: u16,
@@ -110,11 +121,13 @@ serde_decls! {
     /// of the airmash codebase, left here
     /// in case it turns out to actually be
     /// used.
+    #[derive(Default, Clone, Debug)]
     pub struct PlayerSay {
         pub id: u16,
         pub text: text
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerRespawn {
         pub id: u16,
         pub pos_x: coord24,
@@ -123,17 +136,20 @@ serde_decls! {
         pub upgrades: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerFlag {
         pub id: u16,
         pub flag: u16
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerHitPlayer {
         pub id: u16,
         pub health: healthnergy,
         pub health_regen: regen
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct PlayerHit {
         pub id: u16,
         pub ty: u8,
@@ -143,6 +159,7 @@ serde_decls! {
         pub players: arraysmall[PlayerHitPlayer]
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerKill {
         pub id: u16,
         pub killer: u16,
@@ -150,6 +167,7 @@ serde_decls! {
         pub pos_y: coordy
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerUpgrade {
         pub upgrades: u16,
         pub ty: u8,
@@ -159,31 +177,37 @@ serde_decls! {
         pub missile: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerType {
         pub id: u16,
         pub ty: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerPowerup {
         pub ty: u8,
         pub duration: u32
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerLevel {
         pub id: u16,
         pub ty: u8,
         pub level: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerReteamPlayer {
         pub id: u16,
         pub team: u16
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct PlayerReteam {
         pub players: array[PlayerReteamPlayer]
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct GameFlag {
         pub ty: u8,
         pub flag: u8,
@@ -194,14 +218,17 @@ serde_decls! {
         pub redteam: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct GameSpectate {
         pub id: u16
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct GamePlayersAlive {
         pub players: u16
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct GameFireWall {
         pub ty: u8,
         pub status: u8,
@@ -211,6 +238,7 @@ serde_decls! {
         pub speed: f32
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct EventRepelPlayer {
         pub id: u16,
         pub keystats: u8,
@@ -225,6 +253,7 @@ serde_decls! {
         pub player_health_regen: regen
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct EventRepelMobs {
         pub id: u16,
         pub ty: u8,
@@ -237,6 +266,7 @@ serde_decls! {
         pub max_speed: speed
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct EventRepel {
         pub clock: u32,
         pub id: u16,
@@ -251,6 +281,7 @@ serde_decls! {
         pub mobs: arraysmall[EventRepelMobs]
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct EventBoost {
         pub clock: u32,
         pub id: u16,
@@ -264,6 +295,7 @@ serde_decls! {
         pub energy_regen: regen
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct EventBounce {
         pub clock: u32,
         pub id: u16,
@@ -275,6 +307,7 @@ serde_decls! {
         pub speed_y: speed
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct EventStealth {
         pub id: u16,
         pub state: bool,
@@ -282,11 +315,13 @@ serde_decls! {
         pub energy_regen: regen
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct EventLeaveHorizon {
         pub ty: u8,
         pub id: u16
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct MobUpdate {
         pub clock: u32,
         pub id: u16,
@@ -300,6 +335,7 @@ serde_decls! {
         pub max_speed: speed
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct MobUpdateStationary {
         pub id: u16,
         pub ty: u8,
@@ -307,11 +343,13 @@ serde_decls! {
         pub pos_y: f32
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct MobDespawn {
         pub id: u16,
         pub ty: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct MobDespawnCoords {
         pub id: u16,
         pub ty: u8,
@@ -319,6 +357,7 @@ serde_decls! {
         pub pos_y: coordy
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ScoreUpdate {
         pub id: u16,
         pub score: u32,
@@ -328,23 +367,27 @@ serde_decls! {
         pub total_deaths: u32
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ScoreBoardData {
         pub id: u16,
         pub score: u32,
         pub level: u8
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ScoreBoardRankings {
         pub id: u16,
         pub x: u8,
         pub y: u8
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ScoreBoard {
         pub data: array[ScoreBoardData],
         pub rankings: array[ScoreBoardRankings]
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ScoreDetailedFFAScore {
         pub id: u16,
         pub level: u8,
@@ -355,10 +398,12 @@ serde_decls! {
         pub ping: u16
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ScoreDetailedFFA {
         pub scores: array[ScoreDetailedFFAScore]
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ScoreDetailedCTFScore {
         pub id: u16,
         pub level: u8,
@@ -370,10 +415,12 @@ serde_decls! {
         pub ping: u16
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ScoreDetailedCTF {
         pub scores: array[ScoreDetailedCTFScore]
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ScoreDetailedBTRScore {
         pub id: u16,
         pub level: u8,
@@ -386,53 +433,64 @@ serde_decls! {
         pub ping: u16
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ScoreDetailedBTR {
         pub scores: array[ScoreDetailedBTRScore]
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ChatTeam {
         pub id: u16,
         pub text: text
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ChatPublic {
         pub id: u16,
         pub text: text
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ChatSay {
         pub id: u16,
         pub text: text
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ChatWhisper {
         pub from: u16,
         pub to: u16,
         pub text: text
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct ChatVoteMutePassed {
         pub id: u16
     }
 
-    //pub struct ChatVoteMuted { }
+    #[derive(Default, Clone, Debug, Copy)]
+    pub struct ChatVoteMuted { }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ServerMessage {
         pub ty: u8,
         pub duration: u32,
         pub text: textbig
     }
 
+    #[derive(Default, Clone, Debug)]
     pub struct ServerCustom {
         pub ty: u8,
         pub data: textbig
     }
 
+    #[derive(Default, Clone, Debug, Copy)]
     pub struct Error {
         pub error: u8
     }
 }
 
+#[derive(Clone, Debug)]
 pub enum ServerPacket {
     Login(Login),
     Backup,
