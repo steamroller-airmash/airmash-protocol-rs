@@ -1,8 +1,6 @@
-extern crate airmash_protocol_serde;
-extern crate serde;
+extern crate airmash_protocol;
 
-use airmash_protocol_serde::*;
-use serde::{Deserialize, Serialize};
+use airmash_protocol::*;
 
 /*#[test]
 fn deserialize_u8() {

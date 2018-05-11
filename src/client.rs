@@ -1,7 +1,7 @@
 //! Messages sent from client to server
 
 serde_decls! {
-    /* READ BEFORE EDITING THIS FILE:
+    /* READ BEFORE EDITING THIS FILE!
         Serialization/Deserialization is done in
         the order that the fields are declared.
         Changing the order of the fields without

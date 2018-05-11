@@ -4,13 +4,16 @@ pub type SerResult<S> = Result<<S as Serializer>::Ok, <S as Serializer>::Error>;
 
 pub mod textbig {
     use field::*;
-    use serde::*;
 
     pub fn serialize<S>(val: &str, ser: &mut S) -> SerResult<S>
     where
         S: Serializer,
     {
         let bytes = val.as_bytes();
+
+        // This is a stopgap for now, returning an error
+        // would be a better idea
+        assert!(bytes.len() <= 0xFFFF);
 
         ser.serialize_u16(bytes.len() as u16)?;
         ser.serialize_bytes(bytes)
@@ -26,13 +29,15 @@ pub mod textbig {
 
 pub mod text {
     use field::*;
-    use serde::*;
 
     pub fn serialize<S>(val: &str, ser: &mut S) -> SerResult<S>
     where
         S: Serializer,
     {
         let bytes = val.as_bytes();
+
+        // Ensure that the length of the string is valid
+        assert!(bytes.len() <= 0xFF);
 
         ser.serialize_u8(bytes.len() as u8)?;
         ser.serialize_bytes(bytes)
@@ -48,7 +53,6 @@ pub mod text {
 
 pub mod array {
     use field::*;
-    use serde::*;
     use std::vec::Vec;
 
     pub fn serialize<S, T>(arr: &Vec<T>, ser: &mut S) -> SerResult<S>
@@ -56,6 +60,9 @@ pub mod array {
         S: Serializer,
         T: Serialize,
     {
+        // Require that array length is valid
+        assert!(arr.len() <= 0xFFFF);
+
         let s = ser.serialize_u16(arr.len() as u16)?;
 
         for val in arr {
@@ -82,13 +89,14 @@ pub mod array {
 
 pub mod arraysmall {
     use field::*;
-    use serde::*;
 
     pub fn serialize<S, T>(arr: &[T], ser: &mut S) -> SerResult<S>
     where
         S: Serializer,
         T: Serialize,
     {
+        assert!(arr.len() <= 0xFF);
+
         let s = ser.serialize_u8(arr.len() as u8)?;
 
         for val in arr {
@@ -115,7 +123,6 @@ pub mod arraysmall {
 
 pub mod rotation {
     use field::*;
-    use serde::*;
 
     const MULT: f32 = 6553.6;
 
@@ -135,7 +142,6 @@ pub mod rotation {
 
 pub mod healthnergy {
     use field::*;
-    use serde::*;
 
     const MULT: f32 = 255.0;
 
@@ -155,7 +161,6 @@ pub mod healthnergy {
 
 pub mod uint24 {
     use field::*;
-    use serde::*;
 
     pub fn serialize<S>(val: u32, ser: &mut S) -> SerResult<S>
     where
@@ -177,7 +182,6 @@ pub mod uint24 {
 
 pub mod coord24 {
     use field::*;
-    use serde::*;
 
     // Note: This assumes that f32 has enough precision,
     //       the client uses f64 as it is written in js
@@ -203,7 +207,6 @@ macro_rules! shift_mult_decode {
     ($name:ident, $shift:expr, $mult:expr) => {
         pub mod $name {
             use field::*;
-            use serde::*;
 
             // Note: This assumes that f32 has enough precision,
             //       the client uses f64 as it is written in js
