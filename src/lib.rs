@@ -12,6 +12,8 @@ mod impls;
 mod packet_impls;
 mod codes;
 
+mod field_tests;
+
 pub mod client;
 pub mod server;
 

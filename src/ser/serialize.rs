@@ -5,7 +5,7 @@ use std::mem;
 use std::vec::Vec;
 
 pub struct Serializer {
-    output: Vec<u8>,
+    pub output: Vec<u8>,
 }
 
 pub fn to_bytes<T>(value: &T) -> Result<Vec<u8>>
