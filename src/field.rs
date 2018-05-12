@@ -1,4 +1,5 @@
 use serde::*;
+use error::Error;
 
 pub type SerResult = Result<()>;
 
@@ -8,9 +9,9 @@ pub mod textbig {
     pub fn serialize(val: &str, ser: &mut Serializer) -> SerResult {
         let bytes = val.as_bytes();
 
-        // This is a stopgap for now, returning an error
-        // would be a better idea
-        assert!(bytes.len() <= 0xFFFF);
+        if bytes.len() > 0xFFFF {
+            return Err(Error::ArrayLengthTooBig);
+        }
 
         ser.serialize_u16(bytes.len() as u16)?;
         ser.serialize_bytes(bytes)
@@ -27,8 +28,9 @@ pub mod text {
     pub fn serialize(val: &str, ser: &mut Serializer) -> SerResult {
         let bytes = val.as_bytes();
 
-        // Ensure that the length of the string is valid
-        assert!(bytes.len() <= 0xFF);
+        if bytes.len() > 0xFF {
+            return Err(Error::ArrayLengthTooBig);
+        }
 
         ser.serialize_u8(bytes.len() as u8)?;
         ser.serialize_bytes(bytes)
@@ -47,8 +49,9 @@ pub mod array {
     where
         T: Serialize,
     {
-        // Require that array length is valid
-        assert!(arr.len() <= 0xFFFF);
+        if arr.len() > 0xFFFF {
+            return Err(Error::ArrayLengthTooBig);
+        }
 
         let s = ser.serialize_u16(arr.len() as u16)?;
 
@@ -80,7 +83,9 @@ pub mod arraysmall {
     where
         T: Serialize,
     {
-        assert!(arr.len() <= 0xFF);
+        if arr.len() > 0xFF {
+            return Err(Error::ArrayLengthTooBig);
+        }
 
         let s = ser.serialize_u8(arr.len() as u8)?;
 

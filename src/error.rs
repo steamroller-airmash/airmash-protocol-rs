@@ -7,17 +7,19 @@ pub enum Error {
     TrailingBytes,
     Utf8Error(Utf8Error),
     InvalidPacketType,
-    InvalidKeyCode(u8)
+    InvalidKeyCode(u8),
+    ArrayLengthTooBig
 }
 
 impl Error {
     pub(self) fn desc(&self) -> &str {
         match self {
-            &Error::Eof => "unexpected end of message reached",
-            &Error::TrailingBytes => "unexpected remaining bytes",
-            &Error::Utf8Error(_) => "invalid utf-8 in string",
-            &Error::InvalidPacketType => "invalid packet type",
-            &Error::InvalidKeyCode(_) => "invalid key code",
+            &Error::Eof => "Unexpected end of message reached.",
+            &Error::TrailingBytes => "Unexpected remaining bytes.",
+            &Error::Utf8Error(_) => "Invalid utf-8 in string.",
+            &Error::InvalidPacketType => "Invalid packet type.",
+            &Error::InvalidKeyCode(_) => "Invalid key code.",
+            &Error::ArrayLengthTooBig => "Array too large to be serialized, maybe textbig or array types should be used.",
             _ => unimplemented!()
         }
     }
