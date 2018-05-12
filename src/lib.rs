@@ -19,6 +19,7 @@ pub mod server;
 
 pub use ser::to_bytes;
 pub use de::from_bytes;
+pub use error::Error;
 
 pub use client::ClientPacket;
 pub use server::ServerPacket;

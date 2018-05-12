@@ -1,4 +1,4 @@
-//! Messages send from server to client
+//! Messages sent from server to client
 
 serde_decls! {
     /* READ BEFORE EDITING THIS FILE:
@@ -490,6 +490,17 @@ serde_decls! {
     }
 }
 
+/// All possible server packets.
+/// 
+/// This is an enum of all possible packet 
+/// message types. It can be serialized 
+/// and deserialized from byte buffers
+/// using [`from_bytes`](fn.from_bytes.html)
+/// and [`to_bytes`](fn.to_bytes.html).
+/// 
+/// Some packets do not contain any data
+/// and thus do not have any data within
+/// their enum variants.
 #[derive(Clone, Debug)]
 pub enum ServerPacket {
     Login(Login),

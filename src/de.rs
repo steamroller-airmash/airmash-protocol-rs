@@ -8,6 +8,50 @@ pub struct Deserializer<'a> {
     pub bytes: &'a [u8],
 }
 
+/// Deserializes a struct from a byte buffer,
+/// and returns an [`Error`](enum.error.html)
+/// when the bytes cannot be deserialized 
+/// to the given type. 
+/// 
+/// # Example
+/// ```
+/// # extern crate airmash_protocol;
+/// # use airmash_protocol::{from_bytes, ClientPacket};
+/// # fn main() {
+/// // Bytes representing an Ack packet
+/// let bytes = [ 5 ];
+/// 
+/// // Decode the packet
+/// let ack = from_bytes::<ClientPacket>(&bytes).unwrap();
+/// 
+/// // Do stuff with packet here...
+/// match ack {
+///     Ack => return,
+///     _ => panic!("This wasn't an ack packet!")
+/// }
+/// # }
+/// ```
+/// 
+/// # Error Example
+/// ```
+/// # extern crate airmash_protocol;
+/// # use airmash_protocol::{from_bytes, ServerPacket, Error};
+/// # use airmash_protocol::server::ChatPublic;
+/// # fn main() { // Need for extern crate to work
+/// // An incomplete ChatPublic packet.
+/// // In this case, the packet is too short.
+/// let bytes = [ 70 ];
+/// 
+/// // Try to decode the packet
+/// let result = from_bytes::<ChatPublic>(&bytes);
+/// 
+/// // Do something with the error here...
+/// match result {
+///     Ok(_) => panic!("Unexpected success!"),
+///     Err(err) => return
+/// }
+/// # }
+/// ```
 pub fn from_bytes<'a, T>(b: &'a [u8]) -> Result<T>
 where
     T: Deserialize<'a>,

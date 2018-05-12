@@ -31,6 +31,7 @@ serde_decls! {
         pub horizon_y: u16
     }
 
+    // Could include this, no point though
     //pub struct Ack { }
 
     #[derive(Default, Clone, Debug, Copy)]
@@ -85,6 +86,20 @@ serde_decls! {
     }
 }
 
+/// All possible client packets.
+/// 
+/// This contains all valid packets that
+/// the client can send to the server
+/// (in the current version of the airmash
+/// protocol). It can be serialized and 
+/// deserialized to/from byte buffers
+/// using [`to_bytes`](fn.to_bytes.html)
+/// and [`from_bytes`](fn.from_bytes.html).
+/// 
+/// Some packets don't contain any data, these
+/// packets do not have an associated struct
+/// and as such are just empty variants within
+/// this enum.
 #[derive(Clone, Debug)]
 pub enum ClientPacket {
     Login(Login),
