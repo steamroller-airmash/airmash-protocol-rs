@@ -1,6 +1,7 @@
 
 use std::result;
 use serde::*;
+use error::Error;
 
 #[derive(Debug, Copy, Clone)]
 pub enum KeyCode {
@@ -13,7 +14,7 @@ pub enum KeyCode {
 }
 
 impl KeyCode {
-    pub fn from_u8(code: u8) -> result::Result<KeyCode, ()> {
+    pub fn from_u8(code: u8) -> result::Result<KeyCode, u8> {
         match code {
             1 => Ok(KeyCode::Up),
             2 => Ok(KeyCode::Down),
@@ -21,7 +22,7 @@ impl KeyCode {
             4 => Ok(KeyCode::Right),
             5 => Ok(KeyCode::Fire),
             6 => Ok(KeyCode::Special),
-            _ => Err(())
+            _ => Err(code)
         }
     }
     pub fn to_u8(self) -> u8 {
@@ -44,7 +45,10 @@ impl Serialize for KeyCode {
 
 impl<'de> Deserialize<'de> for KeyCode {
     fn deserialize(de: &mut Deserializer<'de>) -> Result<KeyCode> {
-        Ok(KeyCode::from_u8(de.deserialize_u8()?).unwrap())
+        match KeyCode::from_u8(de.deserialize_u8()?) {
+            Ok(code) => Ok(code),
+            Err(e) => Err(Error::InvalidKeyCode(e))
+        }
     }
 }
 

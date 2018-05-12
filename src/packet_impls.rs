@@ -3,6 +3,7 @@ use client::ClientPacket;
 use server::ServerPacket;
 
 use serde::*;
+use error;
 
 fn ser_w_code<T>(code: u8, v: &T, ser: &mut Serializer) -> Result<()>
 where
@@ -54,7 +55,7 @@ impl<'de> Deserialize<'de> for ClientPacket {
             TEAMCHAT => ClientPacket::TeamChat(TeamChat::deserialize(de)?),
             VOTEMUTE => ClientPacket::VoteMute(VoteMute::deserialize(de)?),
             LOCALPING => ClientPacket::LocalPing(LocalPing::deserialize(de)?),
-            _ => panic!("Unknown packet type")
+            _ => return Err(error::Error::InvalidPacketType)
         })
     }
 }
@@ -166,7 +167,7 @@ impl<'de> Deserialize<'de> for ServerPacket {
             SCORE_DETAILED_BTR => ServerPacket::ScoreDetailedBTR(ScoreDetailedBTR::deserialize(de)?),
             SERVER_MESSAGE => ServerPacket::ServerMessage(ServerMessage::deserialize(de)?),
             SERVER_CUSTOM => ServerPacket::ServerCustom(ServerCustom::deserialize(de)?),
-            _ => panic!("Unknown message type")
+            _ => return Err(error::Error::InvalidPacketType)
         })
     }
 }

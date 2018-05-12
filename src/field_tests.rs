@@ -3,8 +3,7 @@
 #[cfg(test)]
 mod test {
     use field::*;
-    use ser::Serializer;
-    use de::Deserializer;
+    use serde::{Serializer, Deserializer};
     use std::vec::Vec;
 
     fn text_to_vec(val: &str) -> Vec<u8> {

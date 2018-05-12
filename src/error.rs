@@ -6,6 +6,8 @@ pub enum Error {
     Eof,
     TrailingBytes,
     Utf8Error(Utf8Error),
+    InvalidPacketType,
+    InvalidKeyCode(u8)
 }
 
 impl Error {
@@ -14,6 +16,9 @@ impl Error {
             &Error::Eof => "unexpected end of message reached",
             &Error::TrailingBytes => "unexpected remaining bytes",
             &Error::Utf8Error(_) => "invalid utf-8 in string",
+            &Error::InvalidPacketType => "invalid packet type",
+            &Error::InvalidKeyCode(_) => "invalid key code",
+            _ => unimplemented!()
         }
     }
 }

@@ -97,3 +97,5 @@ pub use error::Error;
 
 pub use client::ClientPacket;
 pub use server::ServerPacket;
+
+pub use datatypes::*;

@@ -1,5 +1,7 @@
 //! Messages sent from client to server
 
+use datatypes::*;
+
 serde_decls! {
     /* READ BEFORE EDITING THIS FILE!
         Serialization/Deserialization is done in
@@ -14,7 +16,7 @@ serde_decls! {
     /// 
     /// This is sent to the server 
     /// when the player first joins.
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct Login {
         /// The current protocol version.
         /// Should always be 5 as of the 
@@ -51,7 +53,7 @@ serde_decls! {
         pub flag: text
     }
 
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct Backup {
         pub token: text
     }
@@ -59,7 +61,7 @@ serde_decls! {
     /// In theory this should resize the horizon
     /// of the player. In practice the airmash
     /// server appears to ignore these packets.
-    #[derive(Default, Clone, Debug, Copy)]
+    #[derive(Clone, Debug, Copy)]
     pub struct Horizon {
         pub horizon_x: u16,
         pub horizon_y: u16
@@ -71,7 +73,7 @@ serde_decls! {
     /// Response packet to the server
     /// [`Ping`](../server/struct.ping.html)
     /// packet.
-    #[derive(Default, Clone, Debug, Copy)]
+    #[derive(Clone, Debug, Copy)]
     pub struct Pong {
         /// The ping number, should correspond 
         /// to the `num` field within in the 
@@ -81,22 +83,13 @@ serde_decls! {
     }
 
     /// Send keystate of client
-    #[derive(Default, Clone, Debug, Copy)]
+    #[derive(Clone, Debug, Copy)]
     pub struct Key {
         pub seq: u32,
-        /// Keycodes as follows:
-        /// 
-        /// - `UP: 1`
-        /// - `DOWN: 2`
-        /// - `LEFT: 3`
-        /// - `RIGHT: 4`
-        /// - `FIRE: 5`
-        /// - `SPECIAL: 6`
-        pub key: u8,
-        /// True for pressed, false for released
-        /// 
-        /// TODO: Verify this
-        pub state: bool
+        /// Key that was pressed
+        pub key: KeyCode,
+        /// New state of the key
+        pub state: KeyState
     }
 
     /// A free form command to be sent to the server.
@@ -174,7 +167,7 @@ serde_decls! {
     /// // Serialize and send to server here...
     /// # }
     /// 
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct Command {
         /// The command to send to the server,
         /// this can be one of `"spectate"`,
@@ -189,14 +182,14 @@ serde_decls! {
     //pub struct ScoreDetailed { }
 
     /// Say something in chat.
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct Chat {
         /// Text of the chat message.
         pub text: text
     }
 
     /// Send a whisper to a given player.
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct Whisper {
         /// The id of the player to send 
         /// the whisper to.
@@ -206,27 +199,27 @@ serde_decls! {
     }
 
     /// Say a message in a chat bubble.
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct Say {
         /// The text within the chat bubble.
         pub text: text
     }
 
     /// Send a message to your team.
-    #[derive(Default, Clone, Debug)]
+    #[derive(Clone, Debug)]
     pub struct TeamChat {
         /// The message text.
         pub text: text
     }
 
     /// Issue a vote to mute a player.
-    #[derive(Default, Clone, Debug, Copy)]
+    #[derive(Clone, Debug, Copy)]
     pub struct VoteMute {
         /// The id of the player to mute.
         pub id: u16
     }
 
-    #[derive(Default, Clone, Debug, Copy)]
+    #[derive(Clone, Debug, Copy)]
     pub struct LocalPing {
         pub auth: u32
     }
