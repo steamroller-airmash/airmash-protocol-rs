@@ -84,6 +84,8 @@ mod impls;
 mod packet_impls;
 mod codes;
 
+mod datatypes;
+
 mod field_tests;
 
 pub mod client;

@@ -1,14 +1,11 @@
 use serde::*;
 
-pub type SerResult<S> = Result<<S as Serializer>::Ok, <S as Serializer>::Error>;
+pub type SerResult = Result<()>;
 
 pub mod textbig {
     use field::*;
 
-    pub fn serialize<S>(val: &str, ser: &mut S) -> SerResult<S>
-    where
-        S: Serializer,
-    {
+    pub fn serialize(val: &str, ser: &mut Serializer) -> SerResult {
         let bytes = val.as_bytes();
 
         // This is a stopgap for now, returning an error
@@ -18,10 +15,7 @@ pub mod textbig {
         ser.serialize_u16(bytes.len() as u16)?;
         ser.serialize_bytes(bytes)
     }
-    pub fn deserialize<'de, D>(de: &mut D) -> Result<String, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
+    pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<String> {
         let len = de.deserialize_u16()?;
         Ok(de.deserialize_str(len as usize)?.to_string())
     }
@@ -30,10 +24,7 @@ pub mod textbig {
 pub mod text {
     use field::*;
 
-    pub fn serialize<S>(val: &str, ser: &mut S) -> SerResult<S>
-    where
-        S: Serializer,
-    {
+    pub fn serialize(val: &str, ser: &mut Serializer) -> SerResult {
         let bytes = val.as_bytes();
 
         // Ensure that the length of the string is valid
@@ -42,10 +33,7 @@ pub mod text {
         ser.serialize_u8(bytes.len() as u8)?;
         ser.serialize_bytes(bytes)
     }
-    pub fn deserialize<'de, D>(de: &mut D) -> Result<String, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
+    pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<String> {
         let len = de.deserialize_u8()?;
         Ok(de.deserialize_str(len as usize)?.to_string())
     }
@@ -55,9 +43,8 @@ pub mod array {
     use field::*;
     use std::vec::Vec;
 
-    pub fn serialize<S, T>(arr: &Vec<T>, ser: &mut S) -> SerResult<S>
+    pub fn serialize<T>(arr: &Vec<T>, ser: &mut Serializer) -> SerResult
     where
-        S: Serializer,
         T: Serialize,
     {
         // Require that array length is valid
@@ -71,9 +58,8 @@ pub mod array {
 
         Ok(s)
     }
-    pub fn deserialize<'de, D, T>(de: &mut D) -> Result<Vec<T>, D::Error>
+    pub fn deserialize<'de, T>(de: &mut Deserializer<'de>) -> Result<Vec<T>>
     where
-        D: Deserializer<'de>,
         T: Deserialize<'de>,
     {
         let len = de.deserialize_u16()?;
@@ -90,9 +76,8 @@ pub mod array {
 pub mod arraysmall {
     use field::*;
 
-    pub fn serialize<S, T>(arr: &[T], ser: &mut S) -> SerResult<S>
+    pub fn serialize<T>(arr: &[T], ser: &mut Serializer) -> SerResult
     where
-        S: Serializer,
         T: Serialize,
     {
         assert!(arr.len() <= 0xFF);
@@ -105,9 +90,8 @@ pub mod arraysmall {
 
         Ok(s)
     }
-    pub fn deserialize<'de, D, T>(de: &mut D) -> Result<Vec<T>, D::Error>
+    pub fn deserialize<'de, T>(de: &mut Deserializer<'de>) -> Result<Vec<T>>
     where
-        D: Deserializer<'de>,
         T: Deserialize<'de>,
     {
         let len = de.deserialize_u8()?;
@@ -126,16 +110,10 @@ pub mod rotation {
 
     const MULT: f32 = 6553.6;
 
-    pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
-    where
-        S: Serializer,
-    {
+    pub fn serialize(val: &f32, ser: &mut Serializer) -> SerResult {
         ser.serialize_u16((*val * MULT) as u16)
     }
-    pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
+    pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<f32> {
         Ok((de.deserialize_u16()? as f32) / MULT)
     }
 }
@@ -145,16 +123,10 @@ pub mod healthnergy {
 
     const MULT: f32 = 255.0;
 
-    pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
-    where
-        S: Serializer,
-    {
+    pub fn serialize(val: &f32, ser: &mut Serializer) -> SerResult {
         ser.serialize_u16((*val * MULT) as u16)
     }
-    pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
+    pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<f32> {
         Ok((de.deserialize_u16()? as f32) / MULT)
     }
 }
@@ -162,17 +134,11 @@ pub mod healthnergy {
 pub mod uint24 {
     use field::*;
 
-    pub fn serialize<S>(val: u32, ser: &mut S) -> SerResult<S>
-    where
-        S: Serializer,
-    {
+    pub fn serialize(val: u32, ser: &mut Serializer) -> SerResult {
         ser.serialize_u16((val >> 8) as u16)?;
         ser.serialize_u8(val as u8)
     }
-    pub fn deserialize<'de, D>(de: &mut D) -> Result<u32, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
+    pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<u32> {
         let hi = de.deserialize_u16()?;
         let lo = de.deserialize_u8()?;
 
@@ -189,16 +155,10 @@ pub mod coord24 {
     const SHIFT: i32 = 8388608;
     const MULT: f32 = 512.0;
 
-    pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
-    where
-        S: Serializer,
-    {
+    pub fn serialize(val: &f32, ser: &mut Serializer) -> SerResult  {
         uint24::serialize(((*val * MULT) as i32 + SHIFT) as u32, ser)
     }
-    pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
-    where
-        D: Deserializer<'de>,
-    {
+    pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<f32> {
         Ok((((uint24::deserialize(de)? as i32) - SHIFT) as f32) / MULT)
     }
 }
@@ -214,16 +174,10 @@ macro_rules! shift_mult_decode {
             const SHIFT: i32 = $shift;
             const MULT: f32 = $mult;
 
-            pub fn serialize<S>(val: &f32, ser: &mut S) -> SerResult<S>
-            where
-                S: Serializer,
-            {
+            pub fn serialize(val: &f32, ser: &mut Serializer) -> SerResult {
                 ser.serialize_u16(((*val * MULT) as i32 + SHIFT) as u16)
             }
-            pub fn deserialize<'de, D>(de: &mut D) -> Result<f32, D::Error>
-            where
-                D: Deserializer<'de>,
-            {
+            pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<f32> {
                 Ok((((de.deserialize_u16()? as i32) - SHIFT) as f32) / MULT)
             }
         }

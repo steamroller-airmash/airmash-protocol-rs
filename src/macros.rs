@@ -140,9 +140,7 @@ macro_rules! get_field_type {
 macro_rules! serde_decl {
     ($(#[$attr:meta])* struct $name:ident { $($( #[$fattr:meta] )* $field:ident : $type:tt $([ $targs:ty ])*),* }) => {
         impl ::serde::Serialize for $name {
-            fn serialize<S>(&self, ser: &mut S) -> Result<S::Ok, S::Error>
-                where S: ::serde::Serializer
-            {
+            fn serialize(&self, ser: &mut ::serde::Serializer) -> ::serde::Result<()> {
                 #[allow(unused_imports)]
                 use ::serde::*;
 
@@ -159,9 +157,7 @@ macro_rules! serde_decl {
         }
 
         impl<'de> ::serde::Deserialize<'de> for $name {
-            fn deserialize<D>(_de: &mut D) -> Result<Self, D::Error>
-                where D: ::serde::Deserializer<'de>
-            {
+            fn deserialize(_de: &mut ::serde::Deserializer<'de>) -> ::serde::Result<Self> {
                 #[allow(unused_imports)]
                 use ::serde::*;
 

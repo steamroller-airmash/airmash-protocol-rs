@@ -2,16 +2,10 @@
 use client::ClientPacket;
 use server::ServerPacket;
 
-use serde::{
-    Serialize, 
-    Deserialize,
-    Serializer, 
-    Deserializer
-};
+use serde::*;
 
-fn ser_w_code<S, T>(code: u8, v: &T, ser: &mut S) -> Result<S::Ok, S::Error>
+fn ser_w_code<T>(code: u8, v: &T, ser: &mut Serializer) -> Result<()>
 where
-    S: Serializer,
     T: Serialize
 {
     code.serialize(ser)?;
@@ -19,10 +13,7 @@ where
 }
 
 impl Serialize for ClientPacket {
-    fn serialize<S>(&self, ser: &mut S) -> Result<S::Ok, S::Error> 
-    where
-        S: Serializer
-    {
+    fn serialize(&self, ser: &mut Serializer) -> Result<()> {
         use codes::client::*;
 
         match self {
@@ -44,10 +35,7 @@ impl Serialize for ClientPacket {
     }
 }
 impl<'de> Deserialize<'de> for ClientPacket {
-    fn deserialize<D>(de: &mut D) -> Result<ClientPacket, D::Error>
-    where
-        D: Deserializer<'de>
-    {
+    fn deserialize(de: &mut Deserializer<'de>) -> Result<ClientPacket> {
         use codes::client::*;
         use client::*;
 
@@ -72,10 +60,7 @@ impl<'de> Deserialize<'de> for ClientPacket {
 }
 
 impl Serialize for ServerPacket {
-    fn serialize<S>(&self, ser: &mut S) -> Result<S::Ok, S::Error>
-    where
-        S: Serializer
-    {
+    fn serialize(&self, ser: &mut Serializer) -> Result<()> {
         use codes::server::*;
 
         match self {
@@ -129,10 +114,7 @@ impl Serialize for ServerPacket {
     }
 }
 impl<'de> Deserialize<'de> for ServerPacket {
-    fn deserialize<D>(de: &mut D) -> Result<ServerPacket, D::Error>
-    where
-        D: Deserializer<'de>
-    {
+    fn deserialize(de: &mut Deserializer<'de>) -> Result<ServerPacket> {
         use codes::server::*;
         use server::*;
         use server;
