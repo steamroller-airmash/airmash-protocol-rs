@@ -1,5 +1,0 @@
-
-//TODO
-enum Flag {
-
-}

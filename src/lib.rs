@@ -49,9 +49,6 @@
 //! 
 //! - Change plane types to an enum. (Currently a `u8`)
 //! - Change teams to an enum. (Currently a `u8`)
-//! - Remove all `panic!` invocations from serializatation
-//!   and deserialization code and replace them with 
-//!   error codes.
 //! - Document [`Error`](enum.error.html).
 //! - Complete packet field documentation/figure out
 //!   what all packet fields actually do.
@@ -65,9 +62,6 @@
 //! - More internal documentation on specific protocol data types.
 //!   This should probably go within 
 //!   [`field.rs`](../src/airmash_protocol/field.rs.html) too.
-//! - Change `key` and `state` within
-//!   [`Key`](client/struct.key.html) to be enums of their respective
-//!   values.
 //! 
 
 #[macro_use]
