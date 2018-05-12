@@ -63,7 +63,11 @@
 //! - Write unit tests for all serialization and deserialization
 //!   groups within [`field.rs`](../src/airmash_protocol/field.rs.html).
 //! - More internal documentation on specific protocol data types.
-//!   This should probably go within `fields.rs` too.
+//!   This should probably go within 
+//!   [`field.rs`](../src/airmash_protocol/field.rs.html) too.
+//! - Change `key` and `state` within
+//!   [`Key`](client/struct.key.html) to be enums of their respective
+//!   values.
 //! 
 
 #[macro_use]

@@ -80,10 +80,22 @@ serde_decls! {
         pub num: u32
     }
 
+    /// Send keystate of client
     #[derive(Default, Clone, Debug, Copy)]
     pub struct Key {
         pub seq: u32,
+        /// Keycodes as follows:
+        /// 
+        /// - `UP: 1`
+        /// - `DOWN: 2`
+        /// - `LEFT: 3`
+        /// - `RIGHT: 4`
+        /// - `FIRE: 5`
+        /// - `SPECIAL: 6`
         pub key: u8,
+        /// True for pressed, false for released
+        /// 
+        /// TODO: Verify this
         pub state: bool
     }
 
