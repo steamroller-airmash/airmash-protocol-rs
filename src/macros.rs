@@ -138,7 +138,7 @@ macro_rules! get_field_type {
 }
 
 macro_rules! serde_decl {
-    ($(#[$attr:meta])* struct $name:ident { $($field:ident : $type:tt $([ $targs:ty ])*),* }) => {
+    ($(#[$attr:meta])* struct $name:ident { $($( #[$fattr:meta] )* $field:ident : $type:tt $([ $targs:ty ])*),* }) => {
         impl ::serde::Serialize for $name {
             fn serialize<S>(&self, ser: &mut S) -> Result<S::Ok, S::Error>
                 where S: ::serde::Serializer
@@ -176,6 +176,7 @@ macro_rules! serde_decl {
         $(#[$attr])*
         pub struct $name {
             $(
+                $( #[$fattr] )*
                 pub $field: get_field_type!($type $([ $targs ])*),
             )*
         }
@@ -199,12 +200,12 @@ macro_rules! serde_decl {
 /// for more details on how these custom types are 
 /// serialized and deserialized.
 macro_rules! serde_decls {
-    {$($(#[$attr:meta])* pub struct $name:ident { $(pub $field:ident : $type:tt $([ $targs:ty ])*),* })*} => {
+    {$($(#[$attr:meta])* pub struct $name:ident { $($( #[$fattr:meta] )* pub $field:ident : $type:tt $([ $targs:ty ])*),* })*} => {
         $(
             serde_decl!{
                 $( #[$attr] )*
                 struct $name {
-                    $( $field : $type $([ $targs ])* ),*
+                    $( $( #[$fattr] )* $field : $type $([ $targs ])* ),*
                 }
             }
         )*
