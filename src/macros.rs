@@ -182,7 +182,22 @@ macro_rules! serde_decl {
     };
 }
 
-#[macro_export]
+/// Takes a series of of structs of the form
+/// ```no_test
+/// #[attr]...
+/// pub struct $StructName {
+///     pub $field: $type
+/// }
+/// ```
+/// where $type can be any serializable type, 
+/// or one of these extra identifiers: `text`,
+/// `textbig`, `array`, `arraysmall`, `coordx`,
+/// `coordy`, `speed`, `accel`, `regen`, 
+/// `healthnergy`, `rotation`, `coord24`, or
+/// `uint24`. See the documentation within
+/// [`fields.rs`](../../src/airmash_protocol/fields.rs.html)
+/// for more details on how these custom types are 
+/// serialized and deserialized.
 macro_rules! serde_decls {
     {$($(#[$attr:meta])* pub struct $name:ident { $(pub $field:ident : $type:tt $([ $targs:ty ])*),* })*} => {
         $(

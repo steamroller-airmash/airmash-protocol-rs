@@ -8,6 +8,26 @@ pub struct Serializer {
     pub output: Vec<u8>,
 }
 
+/// Serializes a struct to a byte vector, returning
+/// an [`Error`](enum.error.html) when the struct
+/// cannot be serialized.
+/// 
+/// # Example
+/// ```
+/// # extern crate airmash_protocol;
+/// # use airmash_protocol::{to_bytes, ClientPacket};
+/// # use airmash_protocol::client::TeamChat;
+/// # fn main() {
+/// // Create a packet to be sent to the server
+/// let packet = ClientPacket::TeamChat(TeamChat {
+///     text: "The enemy has our flag!".to_string()
+/// });
+/// 
+/// // Serialize the packet
+/// let bytes = to_bytes(&packet).unwrap();
+/// 
+/// // Send packet to server here...
+/// # }
 pub fn to_bytes<T>(value: &T) -> Result<Vec<u8>>
 where
     T: Serialize,

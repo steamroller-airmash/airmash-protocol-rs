@@ -51,8 +51,7 @@ serde_decls! {
         pub players_game: u32
     }
 
-    #[derive(Default, Clone, Copy, Debug)]
-    pub struct Ack { }
+    //pub struct Ack { }
 
     #[derive(Default, Clone, Debug)]
     pub struct CommandReply {
@@ -121,11 +120,11 @@ serde_decls! {
     /// of the airmash codebase, left here
     /// in case it turns out to actually be
     /// used.
-    #[derive(Default, Clone, Debug)]
-    pub struct PlayerSay {
-        pub id: u16,
-        pub text: text
-    }
+    //#[derive(Default, Clone, Debug)]
+    //pub struct PlayerSay {
+    //    pub id: u16,
+    //    pub text: text
+    //}
 
     #[derive(Default, Clone, Debug, Copy)]
     pub struct PlayerRespawn {
@@ -468,8 +467,7 @@ serde_decls! {
         pub id: u16
     }
 
-    #[derive(Default, Clone, Debug, Copy)]
-    pub struct ChatVoteMuted { }
+    //pub struct ChatVoteMuted { }
 
     #[derive(Default, Clone, Debug)]
     pub struct ServerMessage {
