@@ -47,7 +47,6 @@
 //! There is still a bunch of things that can be 
 //! improved within the library:
 //! 
-//! - Change plane types to an enum. (Currently a `u8`)
 //! - Change teams to an enum. (Currently a `u8`)
 //! - Document [`Error`](enum.error.html).
 //! - Complete packet field documentation/figure out
