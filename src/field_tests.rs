@@ -3,7 +3,7 @@
 #[cfg(test)]
 mod test {
     use field::*;
-    use serde::{Serializer, Deserializer};
+    use serde_am::{Serializer, Deserializer};
     use std::vec::Vec;
     use ::from_bytes;
 
