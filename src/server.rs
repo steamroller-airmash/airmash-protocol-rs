@@ -793,3 +793,60 @@ pub enum ServerPacket {
     ServerMessage(ServerMessage),
     ServerCustom(ServerCustom),
 }
+
+impl ServerPacket {
+    /// Gets the id of the packet associated
+    /// with the current packet type.
+    pub fn variant_id(&self) -> u8 {
+        use codes::server::*;
+
+        match self {
+            &ServerPacket::Login(_) => LOGIN,
+            &ServerPacket::Backup => BACKUP,
+            &ServerPacket::Ping(_) => PING,
+            &ServerPacket::PingResult(_) => PING_RESULT,
+            &ServerPacket::Ack => ACK,
+            &ServerPacket::Error(_) => ERROR,
+            &ServerPacket::CommandReply(_) => COMMAND_REPLY,
+            &ServerPacket::PlayerNew(_) => PLAYER_NEW,
+            &ServerPacket::PlayerLeave(_) => PLAYER_LEAVE,
+            &ServerPacket::PlayerUpdate(_) => PLAYER_UPDATE,
+            &ServerPacket::PlayerFire(_) => PLAYER_FIRE,
+            &ServerPacket::PlayerHit(_) => PLAYER_HIT,
+            &ServerPacket::PlayerRespawn(_) => PLAYER_RESPAWN,
+            &ServerPacket::PlayerFlag(_) => PLAYER_FLAG,
+            &ServerPacket::PlayerKill(_) => PLAYER_KILL,
+            &ServerPacket::PlayerUpgrade(_) => PLAYER_UPGRADE,
+            &ServerPacket::PlayerType(_) => PLAYER_TYPE,
+            &ServerPacket::PlayerPowerup(_) => PLAYER_POWERUP,
+            &ServerPacket::PlayerLevel(_) => PLAYER_LEVEL,
+            &ServerPacket::PlayerReteam(_) => PLAYER_RETEAM,
+            &ServerPacket::GameFlag(_) => GAME_FLAG,
+            &ServerPacket::GameSpectate(_) => GAME_SPECTATE,
+            &ServerPacket::GamePlayersAlive(_) => GAME_PLAYERSALIVE,
+            &ServerPacket::GameFireWall(_) => GAME_FIREWALL,
+            &ServerPacket::EventRepel(_) => EVENT_REPEL,
+            &ServerPacket::EventBoost(_) => EVENT_BOOST,
+            &ServerPacket::EventBounce(_) => EVENT_BOUNCE,
+            &ServerPacket::EventStealth(_) => EVENT_STEALTH,
+            &ServerPacket::EventLeaveHorizon(_) => EVENT_LEAVEHORIZON,
+            &ServerPacket::MobUpdate(_) => MOB_UPDATE,
+            &ServerPacket::MobUpdateStationary(_) => MOB_UPDATE_STATIONARY,
+            &ServerPacket::MobDespawn(_) => MOB_DESPAWN,
+            &ServerPacket::MobDespawnCoords(_) => MOB_DESPAWN_COORDS,
+            &ServerPacket::ChatPublic(_) => CHAT_PUBLIC,
+            &ServerPacket::ChatTeam(_) => CHAT_TEAM,
+            &ServerPacket::ChatSay(_) => CHAT_SAY,
+            &ServerPacket::ChatWhisper(_) => CHAT_WHISPER,
+            &ServerPacket::ChatVoteMutePassed(_) => CHAT_VOTEMUTEPASSED,
+            &ServerPacket::ChatVoteMuted => CHAT_VOTEMUTED,
+            &ServerPacket::ScoreUpdate(_) => SCORE_UPDATE,
+            &ServerPacket::ScoreBoard(_) => SCORE_BOARD,
+            &ServerPacket::ScoreDetailedFFA(_) => SCORE_DETAILED_FFA,
+            &ServerPacket::ScoreDetailedCTF(_) => SCORE_DETAILED_CTF,
+            &ServerPacket::ScoreDetailedBTR(_) => SCORE_DETAILED_BTR,
+            &ServerPacket::ServerMessage(_) => SERVER_MESSAGE,
+            &ServerPacket::ServerCustom(_) => SERVER_CUSTOM
+        }
+    }
+}
