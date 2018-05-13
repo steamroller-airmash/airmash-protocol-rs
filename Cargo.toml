@@ -1,6 +1,0 @@
-[package]
-name = "airmash-protocol"
-version = "0.0.2"
-authors = ["STEAMROLLER"]
-
-[dependencies]

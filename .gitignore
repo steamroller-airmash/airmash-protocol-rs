@@ -1,7 +1,0 @@
-
-**/*.rs.bk
-
-.vs
-.vscode
-target
-Cargo.lock
