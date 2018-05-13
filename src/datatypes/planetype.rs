@@ -1,5 +1,5 @@
 
-use serde::*;
+use serde_am::*;
 use error::Error;
 use std::result;
 

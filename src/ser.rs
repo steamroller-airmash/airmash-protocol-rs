@@ -1,5 +1,5 @@
 use error::{Result};
-use serde::{Serialize};
+use serde_am::{Serialize};
 
 use std::mem;
 use std::vec::Vec;

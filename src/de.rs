@@ -2,7 +2,7 @@ use std::mem;
 use std::str;
 
 use error::{Error, Result};
-use serde::{Deserialize};
+use serde_am::{Deserialize};
 
 pub struct Deserializer<'a> {
     pub bytes: &'a [u8],

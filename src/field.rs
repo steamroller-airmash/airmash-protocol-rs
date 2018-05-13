@@ -1,4 +1,4 @@
-use serde::*;
+use serde_am::*;
 use error::Error;
 
 pub type SerResult = Result<()>;

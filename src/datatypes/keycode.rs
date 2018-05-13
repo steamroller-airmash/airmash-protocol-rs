@@ -1,6 +1,6 @@
 
 use std::result;
-use serde::*;
+use serde_am::*;
 use error::Error;
 
 #[derive(Debug, Copy, Clone)]

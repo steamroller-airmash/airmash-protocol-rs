@@ -1,5 +1,5 @@
 
-use serde::*;
+use serde_am::*;
 
 #[derive(Debug, Copy, Clone)]
 pub enum KeyState {

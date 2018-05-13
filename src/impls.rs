@@ -1,4 +1,4 @@
-use serde::*;
+use serde_am::*;
 
 impl Serialize for u8 {
     fn serialize(&self, ser: &mut Serializer) -> Result<()> {

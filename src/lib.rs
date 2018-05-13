@@ -66,7 +66,7 @@
 #[macro_use]
 mod macros;
 
-mod serde;
+mod serde_am;
 
 mod de;
 mod error;

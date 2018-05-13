@@ -2,7 +2,7 @@
 use client::ClientPacket;
 use server::ServerPacket;
 
-use serde::*;
+use serde_am::*;
 use error;
 
 fn ser_w_code<T>(code: u8, v: &T, ser: &mut Serializer) -> Result<()>
