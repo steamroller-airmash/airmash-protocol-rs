@@ -19,10 +19,10 @@ fn test_serialize() {
 #[test]
 fn test_deserialize() {
     let bytes = [
-        0xAB,
         0xCD,
+        0xAB,
+        0x34,
         0x12,
-        0x34
     ];
 
     let result = from_bytes::<Horizon>(&bytes).unwrap();

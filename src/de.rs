@@ -96,20 +96,20 @@ impl<'de> Deserializer<'de> {
         Ok(b)
     }
     pub fn deserialize_u16(&mut self) -> Result<u16> {
-        let hi = self.deserialize_u8()?;
         let lo = self.deserialize_u8()?;
+        let hi = self.deserialize_u8()?;
 
         Ok(((hi as u16) << 8) | (lo as u16))
     }
     pub fn deserialize_u32(&mut self) -> Result<u32> {
-        let hi = self.deserialize_u16()?;
         let lo = self.deserialize_u16()?;
+        let hi = self.deserialize_u16()?;
 
         Ok(((hi as u32) << 16) | (lo as u32))
     }
     pub fn deserialize_u64(&mut self) -> Result<u64> {
-        let hi = self.deserialize_u32()?;
         let lo = self.deserialize_u32()?;
+        let hi = self.deserialize_u32()?;
 
         Ok(((hi as u64) << 32) | (lo as u64))
     }

@@ -5,6 +5,7 @@ mod test {
     use field::*;
     use serde::{Serializer, Deserializer};
     use std::vec::Vec;
+    use ::from_bytes;
 
     fn text_to_vec(val: &str) -> Vec<u8> {
         let mut bytes = vec![ val.len() as u8 ];
@@ -39,5 +40,29 @@ mod test {
         let val = text::deserialize(&mut de).unwrap();
 
         assert_eq!(text, &val);
+    }
+
+    #[test]
+    fn u16_little_endian() {
+        let bytes = [ 0xAA, 0xBB ];
+        let val = from_bytes::<u16>(&bytes).unwrap();
+
+        assert_eq!(val, 0xBBAA);
+    }
+    
+    #[test]
+    fn u32_little_endian() {
+        let bytes = [ 0xAA, 0xBB, 0xCC, 0xDD ];
+        let val = from_bytes::<u32>(&bytes).unwrap();
+
+        assert_eq!(val, 0xDDCCBBAA);
+    }
+    
+    #[test]
+    fn u64_little_endian() {
+        let bytes = [ 0xAA, 0xBB, 0xCC, 0xDD, 0x11, 0x22, 0x33, 0x44 ];
+        let val = from_bytes::<u64>(&bytes).unwrap();
+
+        assert_eq!(val, 0x44332211DDCCBBAA);
     }
 }

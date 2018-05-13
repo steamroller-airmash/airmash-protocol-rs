@@ -56,16 +56,16 @@ impl Serializer {
         Ok(())
     }
     pub fn serialize_u16(&mut self, v: u16) -> Result<()> {
-        self.serialize_u8((v >> 8) as u8)?;
-        self.serialize_u8(v as u8)
+        self.serialize_u8(v as u8)?;
+        self.serialize_u8((v >> 8) as u8)
     }
     pub fn serialize_u32(&mut self, v: u32) -> Result<()> {
-        self.serialize_u16((v >> 16) as u16)?;
-        self.serialize_u16(v as u16)
+        self.serialize_u16(v as u16)?;
+        self.serialize_u16((v >> 16) as u16)
     }
     pub fn serialize_u64(&mut self, v: u64) -> Result<()> {
-        self.serialize_u32((v >> 32) as u32)?;
-        self.serialize_u32(v as u32)
+        self.serialize_u32(v as u32)?;
+        self.serialize_u32((v >> 32) as u32)
     }
 
     pub fn serialize_f32(&mut self, v: f32) -> Result<()> {
