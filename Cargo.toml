@@ -9,7 +9,7 @@ keywords = ["protocol", "games"]
 license = "MIT"
 
 [badges]
-circle-ci = { repository = "https://github.com/steamroller-airmash/airmash-protocol-rs" }
+circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
 maintenance = { status = "experimental" }
 
 
