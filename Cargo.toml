@@ -9,7 +9,7 @@ license = "MIT"
 
 [badges]
 circle-ci = { repository = "https://github.com/steamroller-airmash/airmash-protocol-rs" }
-maintnance = { status = "experimental" }
+maintenance = { status = "experimental" }
 
 
 [dependencies]
