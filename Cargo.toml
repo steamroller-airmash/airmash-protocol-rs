@@ -12,5 +12,5 @@ license = "MIT"
 circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
 maintenance = { status = "experimental" }
 
-
 [dependencies]
+serde = { version = "*", features = [ "derive" ], optional = true }

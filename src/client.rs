@@ -17,6 +17,7 @@ serde_decls! {
     /// This is sent to the server 
     /// when the player first joins.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Login {
         /// The current protocol version.
         /// Should always be 5 as of the 
@@ -54,6 +55,7 @@ serde_decls! {
     }
 
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Backup {
         pub token: text
     }
@@ -62,6 +64,7 @@ serde_decls! {
     /// of the player. In practice the airmash
     /// server appears to ignore these packets.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Horizon {
         pub horizon_x: u16,
         pub horizon_y: u16
@@ -74,6 +77,7 @@ serde_decls! {
     /// [`Ping`](../server/struct.ping.html)
     /// packet.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Pong {
         /// The ping number, should correspond 
         /// to the `num` field within in the 
@@ -84,6 +88,7 @@ serde_decls! {
 
     /// Send keystate of client
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Key {
         pub seq: u32,
         /// Key that was pressed
@@ -168,6 +173,7 @@ serde_decls! {
     /// # }
     /// 
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Command {
         /// The command to send to the server,
         /// this can be one of `"spectate"`,
@@ -183,6 +189,7 @@ serde_decls! {
 
     /// Say something in chat.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Chat {
         /// Text of the chat message.
         pub text: text
@@ -190,6 +197,7 @@ serde_decls! {
 
     /// Send a whisper to a given player.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Whisper {
         /// The id of the player to send 
         /// the whisper to.
@@ -200,6 +208,7 @@ serde_decls! {
 
     /// Say a message in a chat bubble.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Say {
         /// The text within the chat bubble.
         pub text: text
@@ -207,6 +216,7 @@ serde_decls! {
 
     /// Send a message to your team.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct TeamChat {
         /// The message text.
         pub text: text
@@ -214,12 +224,14 @@ serde_decls! {
 
     /// Issue a vote to mute a player.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct VoteMute {
         /// The id of the player to mute.
         pub id: u16
     }
 
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct LocalPing {
         pub auth: u32
     }
@@ -240,6 +252,7 @@ serde_decls! {
 /// and as such are just empty variants within
 /// this enum.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum ClientPacket {
     Login(Login),
     Backup(Backup),

@@ -2,6 +2,7 @@
 use serde_am::*;
 
 #[derive(Debug, Copy, Clone)]
+#[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum KeyState {
     Pressed,
     Released

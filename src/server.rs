@@ -18,6 +18,7 @@ serde_decls! {
     /// [`Login`](struct.login.html)
     /// packet.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct LoginPlayer {
         /// The id of the player.
         pub id: u16,
@@ -47,6 +48,7 @@ serde_decls! {
 
     /// Initial login packet sent to the server.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Login {
         /// Whether the login was successful.
         pub success: bool,
@@ -82,6 +84,7 @@ serde_decls! {
     /// not do this, the client will be
     /// disconnected by the server.
     #[derive(Clone, Copy, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Ping {
         /// Current server clock.
         pub clock: u32,
@@ -92,6 +95,7 @@ serde_decls! {
     /// Resulting ping data sent back
     /// from the server.
     #[derive(Clone, Copy, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PingResult {
         /// Ping of the current player.
         pub ping: u16,
@@ -106,6 +110,7 @@ serde_decls! {
     /// Reply to a
     /// [`Command`](client/struct.command.html).
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct CommandReply {
         pub ty: u8,
         pub text: textbig
@@ -113,6 +118,7 @@ serde_decls! {
 
     /// Data for a newly-arrived player.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerNew {
         /// The id of the new player.
         pub id: u16,
@@ -136,12 +142,14 @@ serde_decls! {
 
     /// Packet sent when a player leaves the room.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerLeave {
         pub id: u16
     }
 
     /// Movement update for a player.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerUpdate {
         /// Server clock
         pub clock: u32,
@@ -169,6 +177,7 @@ serde_decls! {
     /// [`PlayerFire`](struct.playerfire.html)
     /// packet.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerFireProjectile {
         /// Projectile id
         pub id: u16,
@@ -193,6 +202,7 @@ serde_decls! {
 
     /// Packet indicating that a player has fired projectiles.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerFire {
         /// Current server clock
         pub clock: u32,
@@ -206,24 +216,9 @@ serde_decls! {
         pub projectiles: arraysmall[PlayerFireProjectile]
     }
 
-    // TODO: Remove this?
-    /// Note: exists within the game code,
-    /// but doesn't have a corresponding 
-    /// message code. This appears to be 
-    /// left over from an earlier version
-    /// of the airmash codebase, left here
-    /// in case it turns out to actually be
-    /// used. However, it appears to be 
-    /// identical to ChatSay.
-    #[doc(hidden)]
-    #[derive(Clone, Debug)]
-    pub struct PlayerSay {
-        pub id: u16,
-        pub text: text
-    }
-
     /// Event fired when a player respawns
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerRespawn {
         /// Id of respawning player
         pub id: u16,
@@ -239,6 +234,7 @@ serde_decls! {
     /// Event indicating the a player has 
     /// changed their flag.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerFlag {
         /// Id of player
         pub id: u16,
@@ -250,6 +246,7 @@ serde_decls! {
     /// hit by a shot fired by another 
     /// player.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerHitPlayer {
         /// Id of player
         pub id: u16,
@@ -262,6 +259,7 @@ serde_decls! {
     /// Event for when players have been
     /// hit by a projectile.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerHit {
         /// Projectile id
         pub id: u16,
@@ -279,6 +277,7 @@ serde_decls! {
 
     /// Event for when a player has been killed.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerKill {
         /// Id of killed player
         pub id: u16,
@@ -293,6 +292,7 @@ serde_decls! {
     /// Event fired when a player upgrades 
     /// themself.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerUpgrade {
         pub upgrades: u16,
         pub ty: u8,
@@ -305,6 +305,7 @@ serde_decls! {
     /// Event fired when a player changes
     /// their plane.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerType {
         /// Player id
         pub id: u16,
@@ -315,6 +316,7 @@ serde_decls! {
     /// Event fired when a player picks
     /// up a powerup.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerPowerup {
         /// The type of the powerup
         pub ty: u8,
@@ -325,6 +327,7 @@ serde_decls! {
     /// Event fired when a player's level
     /// changes.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerLevel {
         /// Id of player
         pub id: u16,
@@ -336,6 +339,7 @@ serde_decls! {
     /// Data an a player that has changed 
     /// teams.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerReteamPlayer {
         /// Player id
         pub id: u16,
@@ -345,6 +349,7 @@ serde_decls! {
 
     /// Event fired when players change teams.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct PlayerReteam {
         /// List of players that have changed
         /// teams. Note that this does not 
@@ -355,6 +360,7 @@ serde_decls! {
 
     /// Flag position update.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct GameFlag {
         pub ty: u8,
         /// Which team's flag is being updated
@@ -373,6 +379,7 @@ serde_decls! {
     /// Event indicating which 
     /// player is now being spectated.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct GameSpectate {
         /// Id of player being spectated
         pub id: u16
@@ -381,6 +388,7 @@ serde_decls! {
     /// Packet indicating how many players 
     /// are alive.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct GamePlayersAlive {
         /// Number of players currently alive
         pub players: u16
@@ -388,6 +396,7 @@ serde_decls! {
 
     /// Update of the "Ring of Fire" in BTR
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct GameFireWall {
         pub ty: u8,
         pub status: u8,
@@ -400,6 +409,7 @@ serde_decls! {
     /// Data about players repelled by a goliath
     /// deflect.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventRepelPlayer {
         pub id: u16,
         pub keystats: u8,
@@ -417,6 +427,7 @@ serde_decls! {
     /// Data about projectiles deflected by a 
     /// goliath repel.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventRepelMobs {
         pub id: u16,
         pub ty: u8,
@@ -433,6 +444,7 @@ serde_decls! {
     /// (players or projectiles) is deflected
     /// by a goliath repel.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventRepel {
         pub clock: u32,
         pub id: u16,
@@ -449,6 +461,7 @@ serde_decls! {
 
     /// Event for when a predator begins boosting.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventBoost {
         pub clock: u32,
         pub id: u16,
@@ -464,6 +477,7 @@ serde_decls! {
 
     /// Event for when a player runs into a wall.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventBounce {
         pub clock: u32,
         pub id: u16,
@@ -477,6 +491,7 @@ serde_decls! {
 
     /// Event for when a prowler goes into stealth.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventStealth {
         pub id: u16,
         pub state: bool,
@@ -492,6 +507,7 @@ serde_decls! {
     /// outside the horizon once this packet
     /// has been sent.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct EventLeaveHorizon {
         pub ty: u8,
         pub id: u16
@@ -499,6 +515,7 @@ serde_decls! {
 
     /// Update of missile or powerup
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobUpdate {
         pub clock: u32,
         pub id: u16,
@@ -514,6 +531,7 @@ serde_decls! {
 
     /// Update of non-moving mob (powerups)
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobUpdateStationary {
         pub id: u16,
         pub ty: u8,
@@ -523,6 +541,7 @@ serde_decls! {
 
     /// Event for missile destruction
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobDespawn {
         pub id: u16,
         pub ty: u8
@@ -531,6 +550,7 @@ serde_decls! {
     /// Event indicating a mob despawned 
     /// at a particular location.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobDespawnCoords {
         pub id: u16,
         pub ty: u8,
@@ -541,6 +561,7 @@ serde_decls! {
     /// Packet indicating stats for the 
     /// current player.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreUpdate {
         pub id: u16,
         pub score: u32,
@@ -554,6 +575,7 @@ serde_decls! {
     /// [`ScoreBoard`](struct.scoreboard.html)
     /// packet.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreBoardData {
         pub id: u16,
         pub score: u32,
@@ -564,6 +586,7 @@ serde_decls! {
     /// [`ScoreBoard`](struct.scoreboard.html)
     /// packet.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreBoardRankings {
         pub id: u16,
         pub x: u8,
@@ -576,6 +599,7 @@ serde_decls! {
     /// server and is used by the client to
     /// update the leaderboard and minimap.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreBoard {
         pub data: array[ScoreBoardData],
         pub rankings: array[ScoreBoardRankings]
@@ -584,6 +608,7 @@ serde_decls! {
     /// Per-player data for detailed 
     /// (tab) menu in FFA.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreDetailedFFAScore {
         pub id: u16,
         pub level: u8,
@@ -596,6 +621,7 @@ serde_decls! {
 
     /// Detailed menu (tab) data for FFA.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreDetailedFFA {
         pub scores: array[ScoreDetailedFFAScore]
     }
@@ -603,6 +629,7 @@ serde_decls! {
     /// Per-player data for detailed (tab)
     /// menu in CTF.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreDetailedCTFScore {
         pub id: u16,
         pub level: u8,
@@ -616,6 +643,7 @@ serde_decls! {
 
     /// Detailed menu (tab) data for CTF.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreDetailedCTF {
         pub scores: array[ScoreDetailedCTFScore]
     }
@@ -623,6 +651,7 @@ serde_decls! {
     /// Per-player data for detailed (tab) menu
     /// in BTR.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreDetailedBTRScore {
         pub id: u16,
         pub level: u8,
@@ -637,6 +666,7 @@ serde_decls! {
 
     /// Detailed menu (tab) data for BTR.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreDetailedBTR {
         pub scores: array[ScoreDetailedBTRScore]
     }
@@ -644,6 +674,7 @@ serde_decls! {
     /// Event for when a team chat has been 
     /// received.
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ChatTeam {
         /// Id of chatting player
         pub id: u16,
@@ -653,6 +684,7 @@ serde_decls! {
 
     /// Event for a public chat
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ChatPublic {
         /// Id of chatting player
         pub id: u16,
@@ -662,6 +694,7 @@ serde_decls! {
 
     /// Event for a speech bubble by a player
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ChatSay {
         /// Id of speaking player
         pub id: u16,
@@ -672,6 +705,7 @@ serde_decls! {
     /// Event for a whisper message involving
     /// the current player
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ChatWhisper {
         /// The player that sent the whisper.
         pub from: u16,
@@ -684,6 +718,7 @@ serde_decls! {
     /// Event indicating that a player has 
     /// been votemuted.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ChatVoteMutePassed {
         /// Id of votemuted player
         pub id: u16
@@ -693,6 +728,7 @@ serde_decls! {
 
     /// Banner message sent by the server
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ServerMessage {
         pub ty: u8,
         /// Duration that banner message
@@ -718,6 +754,7 @@ serde_decls! {
     /// # BTR
     /// TODO
     #[derive(Clone, Debug)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ServerCustom {
         pub ty: u8,
         pub data: textbig
@@ -726,6 +763,7 @@ serde_decls! {
     /// The client has done an invalid operation or
     /// has been ratelimited or banned.
     #[derive(Clone, Debug, Copy)]
+    #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct Error {
         /// Error code indicating which error
         /// it is.
@@ -745,6 +783,7 @@ serde_decls! {
 /// and thus do not have any data within
 /// their enum variants.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum ServerPacket {
     Login(Login),
     Backup,

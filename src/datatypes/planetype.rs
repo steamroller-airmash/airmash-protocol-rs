@@ -4,6 +4,7 @@ use error::Error;
 use std::result;
 
 #[derive(Clone, Copy, Debug)]
+#[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum PlaneType {
     Predator,
     Tornado,

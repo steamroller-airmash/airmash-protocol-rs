@@ -63,6 +63,10 @@
 //!   [`field.rs`](../src/airmash_protocol/field.rs.html) too.
 //! 
 
+#[cfg_attr(feature="serde", macro_use)]
+#[cfg(feature="serde")]
+extern crate serde;
+
 #[macro_use]
 mod macros;
 
