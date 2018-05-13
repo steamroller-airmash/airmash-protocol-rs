@@ -129,10 +129,10 @@ pub mod healthnergy {
     const MULT: f32 = 255.0;
 
     pub fn serialize(val: &f32, ser: &mut Serializer) -> SerResult {
-        ser.serialize_u16((*val * MULT) as u16)
+        ser.serialize_u8((*val * MULT) as u8)
     }
     pub fn deserialize<'de>(de: &mut Deserializer<'de>) -> Result<f32> {
-        Ok((de.deserialize_u16()? as f32) / MULT)
+        Ok((de.deserialize_u8()? as f32) / MULT)
     }
 }
 

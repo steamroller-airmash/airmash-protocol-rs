@@ -65,4 +65,13 @@ mod test {
 
         assert_eq!(val, 0x44332211DDCCBBAA);
     }
+
+    #[test]
+    fn healthnergy_is_u8() {
+        let bytes = [ 0x52 ];
+        let mut de = Deserializer::from_bytes(&bytes);
+        let val = healthnergy::deserialize(&mut de);
+
+        assert!(val.is_ok());
+    }
 }
