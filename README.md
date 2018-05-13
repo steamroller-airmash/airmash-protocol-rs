@@ -1,7 +1,7 @@
 
 # Airmash Rust Protocol Library
 
-[badge](https://docs.rs/airmash-protocol/badge.svg)
+[!badge](https://docs.rs/airmash-protocol/badge.svg)
 
 This library allows for communicating with the 
 [airmash](https://airma.sh) server or for communicating
