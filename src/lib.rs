@@ -54,8 +54,6 @@
 //! - Complete documentation of BTR 
 //!   [`ServerCustom`](server/struct.servercustom.html)
 //!   data format.
-//! - Add feature-gated serde derivations for all packet
-//!   types and enums.
 //! - Write unit tests for all serialization and deserialization
 //!   groups within [`field.rs`](../src/airmash_protocol/field.rs.html).
 //! - More internal documentation on specific protocol data types.
