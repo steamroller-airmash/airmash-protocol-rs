@@ -16,7 +16,7 @@ with clients using the same protocol.
 
 To use this library, just add 
 ```
-airmash-protocol = "^0.1.0"
+airmash-protocol = "^0.1"
 ```
 to your `Cargo.toml`. This will give you the
 latest version of the library.
