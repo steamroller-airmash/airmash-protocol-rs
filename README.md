@@ -1,7 +1,10 @@
 
 # Airmash Rust Protocol Library
 
-![badge](https://docs.rs/airmash-protocol/badge.svg)
+[Latest Version]: https://img.shields.io/crates/v/airmash-protocol.svg
+[crates.io]: https://crates.io/crates/airmash-protocol
+[Documentation]: https://docs.rs/airmash-protocol/badge.svg
+[CircleCI Build]: https://circleci.com/gh/steamroller-airmash/airmash-protocol-rs.svg?style=shield
 
 This library allows for communicating with the 
 [airmash](https://airma.sh) server or for communicating
