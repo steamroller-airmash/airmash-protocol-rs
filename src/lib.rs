@@ -43,23 +43,31 @@
 //! and will be serializing
 //! [`ClientPacket`](client/enum.clientpacket.html)s.
 //! 
-//! # TODOs
-//! There is still a bunch of things that can be 
-//! improved within the library:
+//! # Use with Serde
+//! All protocol types are able to be serialized and 
+//! deserialized using serde. This is not enabled
+//! by default, but can be enabled by turning on
+//! the feature `"serde"`. Note that serde is not 
+//! required for regular use of the library.
 //! 
-//! - Change teams to an enum. (Currently a `u8`)
-//! - Document [`Error`](enum.error.html).
-//! - Complete packet field documentation/figure out
-//!   what all packet fields actually do.
-//! - Complete documentation of BTR 
-//!   [`ServerCustom`](server/struct.servercustom.html)
-//!   data format.
-//! - Write unit tests for all serialization and deserialization
-//!   groups within [`field.rs`](../src/airmash_protocol/field.rs.html).
-//! - More internal documentation on specific protocol data types.
-//!   This should probably go within 
-//!   [`field.rs`](../src/airmash_protocol/field.rs.html) too.
-//! 
+
+
+// # TODOs
+// There is still a bunch of things that can be 
+// improved within the library:
+// 
+// - Change teams to an enum. (Currently a `u8`)
+// - Complete packet field documentation/figure out
+//   what all packet fields actually do.
+// - Complete documentation of BTR 
+//   [`ServerCustom`](server/struct.servercustom.html)
+//   data format.
+// - Write unit tests for all serialization and deserialization
+//   groups within [`field.rs`](../src/airmash_protocol/field.rs.html).
+// - More internal documentation on specific protocol data types.
+//   This should probably go within 
+//   [`field.rs`](../src/airmash_protocol/field.rs.html) too.
+// 
 
 #[cfg_attr(feature="serde", macro_use)]
 #[cfg(feature="serde")]
