@@ -64,6 +64,7 @@
 #[cfg_attr(feature="serde", macro_use)]
 #[cfg(feature="serde")]
 extern crate serde;
+extern crate phf;
 
 #[macro_use]
 mod macros;

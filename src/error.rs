@@ -9,7 +9,8 @@ pub enum Error {
     InvalidPacketType,
     InvalidKeyCode(u8),
     ArrayLengthTooBig,
-    InvalidPlaneType(u8)
+    InvalidPlaneType(u8),
+    InvalidFlag(u16)
 }
 
 impl Error {
@@ -21,7 +22,8 @@ impl Error {
             &Error::InvalidPacketType => "Invalid packet type.",
             &Error::InvalidKeyCode(_) => "Invalid key code.",
             &Error::ArrayLengthTooBig => "Array too large to be serialized, maybe textbig or array types should be used.",
-            &Error::InvalidPlaneType(_) => "Invalid plane type"
+            &Error::InvalidPlaneType(_) => "Invalid plane type",
+            &Error::InvalidFlag(_) => "Invalid flag code"
         }
     }
 }

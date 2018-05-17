@@ -42,7 +42,7 @@ serde_decls! {
         /// The player's current rotation.
         pub rot: rotation,
         /// The current flag of the player.
-        pub flag: u16,
+        pub flag: FlagCode,
         pub upgrades: u8
     }
 
@@ -136,7 +136,7 @@ serde_decls! {
         /// Rotation of the new player.
         pub rot: rotation,
         /// Flag of the newly-arrived player.
-        pub flag: u16,
+        pub flag: FlagCode,
         pub upgrades: u8
     }
 
@@ -239,7 +239,7 @@ serde_decls! {
         /// Id of player
         pub id: u16,
         /// Id of new flag
-        pub flag: u16
+        pub flag: FlagCode
     }
 
     /// Data on a player that has been
