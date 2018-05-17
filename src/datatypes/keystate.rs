@@ -1,6 +1,7 @@
 
 use serde_am::*;
 
+/// The current state of a key
 #[derive(Debug, Copy, Clone)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum KeyState {
@@ -9,9 +10,13 @@ pub enum KeyState {
 }
 
 impl KeyState {
+    /// Get the keystate from the boolean value
+    /// associated with it.
     pub fn from_bool(v: bool) -> KeyState {
         if v { KeyState::Pressed } else { KeyState::Released }
     }
+    /// Convert the keystate back to the associated
+    /// boolean value.
     pub fn to_bool(self) -> bool {
         match self {
             KeyState::Pressed => true,

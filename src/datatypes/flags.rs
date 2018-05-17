@@ -134,6 +134,8 @@ const COUNTRY_CODES: [Option<&'static str>; 126] = [
 // Pull in the PHF table
 include!(concat!(env!("OUT_DIR"), "/flags-phf.rs"));
 
+/// All the current flags present within the airmash
+/// server.
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum FlagCode {

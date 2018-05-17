@@ -1,8 +1,8 @@
 
 use serde_am::*;
 use error::Error;
-use std::result;
 
+/// All plane types present within airmash.
 #[derive(Clone, Copy, Debug)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum PlaneType {
@@ -20,6 +20,7 @@ const TORNADO: u8 = 4;
 const PROWLER: u8 = 5;
 
 impl PlaneType {
+    /// Get the associated numerical value
     pub fn to_u8(self) -> u8 {
         match self {
             PlaneType::Predator => PREDATOR,
@@ -30,14 +31,16 @@ impl PlaneType {
         }
     }
 
-    pub fn from_u8(v: u8) -> result::Result<Self, u8> {
-        Ok(match v {
+    /// Get the plane associated with a numerical
+    /// value, or `None` otherwise.
+    pub fn from_u8(v: u8) -> Option<Self> {
+        Some(match v {
             PREDATOR => PlaneType::Predator,
             TORNADO  => PlaneType::Tornado,
             MOHAWK   => PlaneType::Mohawk,
             GOLIATH  => PlaneType::Goliath,
             PROWLER  => PlaneType::Prowler,
-            _ => return Err(v)
+            _ => return None
         })
     }
 }
@@ -49,9 +52,10 @@ impl Serialize for PlaneType {
 }
 impl<'de> Deserialize<'de> for PlaneType {
     fn deserialize(de: &mut Deserializer<'de>) -> Result<Self> {
-        match Self::from_u8(de.deserialize_u8()?) {
-            Ok(v) => Ok(v),
-            Err(e) => Err(Error::InvalidPlaneType(e))
+        let ival = de.deserialize_u8()?;
+        match Self::from_u8(ival) {
+            Some(v) => Ok(v),
+            None => Err(Error::InvalidPlaneType(ival))
         }
     }
 }
