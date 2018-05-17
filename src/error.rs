@@ -1,6 +1,9 @@
 use std;
 use std::str::Utf8Error;
 
+/// All the errors that can occur 
+/// when serializing or deserializing
+/// messages within the airmash protocol.
 #[derive(Debug, Clone)]
 pub enum Error {
     Eof,

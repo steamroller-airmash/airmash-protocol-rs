@@ -136,7 +136,7 @@ include!(concat!(env!("OUT_DIR"), "/flags-phf.rs"));
 
 /// All the current flags present within the airmash
 /// server.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum FlagCode {
 	SyrianArabRepublic,

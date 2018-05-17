@@ -4,7 +4,7 @@ use error::Error;
 
 /// All the keys that are sent from the client
 /// to the server.
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum KeyCode {
     Up,
