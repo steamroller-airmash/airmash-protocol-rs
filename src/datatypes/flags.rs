@@ -556,7 +556,7 @@ impl FlagCode {
     /// ISO-2 country code. (or special codes
     /// for non-country flags).
     pub fn from_str(v: &str) -> Option<Self> {
-        FLAG_MAP.get(v).map(|x| *x)
+        FLAG_MAP.get::<str>(&v.to_uppercase()).map(|x| *x)
     }
 }
 
