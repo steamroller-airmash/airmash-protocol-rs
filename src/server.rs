@@ -587,7 +587,7 @@ serde_decls! {
     /// packet.
     #[derive(Clone, Debug, Copy)]
     #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
-    pub struct ScoreBoardRankings {
+    pub struct ScoreBoardRanking {
         pub id: u16,
         pub x: u8,
         pub y: u8
@@ -602,7 +602,7 @@ serde_decls! {
     #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct ScoreBoard {
         pub data: array[ScoreBoardData],
-        pub rankings: array[ScoreBoardRankings]
+        pub rankings: array[ScoreBoardRanking]
     }
 
     /// Per-player data for detailed 
@@ -770,6 +770,10 @@ serde_decls! {
         pub error: u8
     }
 }
+
+/// Typoed type, use [`ScoreBoardRanking`] instead
+#[deprecated]
+pub type ScoreBoardRankings = ScoreBoardRanking;
 
 /// All possible server packets.
 /// 
