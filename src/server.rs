@@ -331,7 +331,7 @@ serde_decls! {
     pub struct PlayerLevel {
         /// Id of player
         pub id: u16,
-        pub ty: u8,
+        pub ty: PlayerLevelType,
         /// Player's new level
         pub level: u8
     }
