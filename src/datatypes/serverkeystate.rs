@@ -22,22 +22,11 @@ fn get_index(key: KeyCode) -> usize {
 
 impl ServerKeyState {
 	pub fn get(&self, key: KeyCode) -> KeyState {
-		let bit = self.0.get_bit(get_index(key));
-		if bit {
-			KeyState::Pressed
-		}
-		else {
-			KeyState::Released
-		}
+		self.0.get_bit(get_index(key))
 	}
 
 	pub fn set(&mut self, key: KeyCode, state: KeyState) {
-		let bit = match state { 
-			KeyState::Pressed => true, 
-			KeyState::Released => false
-		};
-
-		self.0.set_bit(get_index(key), bit);
+		self.0.set_bit(get_index(key), state);
 	}
 }
 
