@@ -156,7 +156,7 @@ serde_decls! {
         /// Player id
         pub id: u16,
         /// Keys pressed by a player
-        pub keystate: u8,
+        pub keystate: ServerKeyState,
         pub upgrades: u8,
         /// X position of player
         pub pos_x: coord24,

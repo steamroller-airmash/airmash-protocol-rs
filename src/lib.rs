@@ -73,6 +73,7 @@
 #[cfg(feature="serde")]
 extern crate serde;
 extern crate phf;
+extern crate bit_field;
 
 #[macro_use]
 mod macros;
