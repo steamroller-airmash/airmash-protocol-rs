@@ -9,14 +9,14 @@ use bit_field::BitField;
 pub struct ServerKeyState(pub u8);
 
 impl ServerKeyState {
-	const UP:        usize = 0;
-	const DOWN:      usize = 1;
-	const LEFT:      usize = 2;
-	const RIGHT:     usize = 3;
-	const BOOST:     usize = 4;
-	const STRAFE:    usize = 5;
-	const STEALTH:   usize = 6;
-	const FLAGSPEED: usize = 7;
+	pub const UP:        usize = 0;
+	pub const DOWN:      usize = 1;
+	pub const LEFT:      usize = 2;
+	pub const RIGHT:     usize = 3;
+	pub const BOOST:     usize = 4;
+	pub const STRAFE:    usize = 5;
+	pub const STEALTH:   usize = 6;
+	pub const FLAGSPEED: usize = 7;
 
 	pub fn up(&self) -> bool {
 		self.0.get_bit(Self::UP)

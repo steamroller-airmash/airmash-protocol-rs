@@ -9,8 +9,8 @@ use bit_field::BitField;
 pub struct Upgrades(pub u8);
 
 impl Upgrades {
-	const SHIELD: usize = 3;
-	const INFERNO: usize = 4;
+	pub const SHIELD: usize = 3;
+	pub const INFERNO: usize = 4;
 
 	/// The number of speed upgrades
 	pub fn speed(&self) -> u8 {
