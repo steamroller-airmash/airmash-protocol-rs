@@ -15,6 +15,7 @@ pub enum Error {
     InvalidPlaneType(u8),
     InvalidFlag(u16),
     InvalidLevelType(u8),
+    InvalidMobType(u8)
 }
 
 impl Error {
@@ -28,7 +29,8 @@ impl Error {
             &Error::ArrayLengthTooBig => "Array too large to be serialized, maybe textbig or array types should be used.",
             &Error::InvalidPlaneType(_) => "Invalid plane type",
             &Error::InvalidFlag(_) => "Invalid flag code",
-            &Error::InvalidLevelType(_) => "Invalid level type"
+            &Error::InvalidLevelType(_) => "Invalid level type",
+            &Error::InvalidMobType(_) => "Invalid mob type"
         }
     }
 }

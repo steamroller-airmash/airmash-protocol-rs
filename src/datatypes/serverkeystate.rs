@@ -1,6 +1,5 @@
 
 use serde_am::*;
-use datatypes::{KeyCode, KeyState};
 
 use bit_field::BitField;
 
@@ -9,24 +8,46 @@ use bit_field::BitField;
 #[cfg_attr(features="serde", derive(Serialize, Deserialize))]
 pub struct ServerKeyState(pub u8);
 
-fn get_index(key: KeyCode) -> usize {
-	match key {
-		KeyCode::Special => 5,
-		KeyCode::Fire    => 4,
-		KeyCode::Right   => 3,
-		KeyCode::Left    => 2,
-		KeyCode::Down    => 1,
-		KeyCode::Up      => 0,
-	}
-}
-
 impl ServerKeyState {
-	pub fn get(&self, key: KeyCode) -> KeyState {
-		self.0.get_bit(get_index(key))
+	const UP:        usize = 0;
+	const DOWN:      usize = 1;
+	const LEFT:      usize = 2;
+	const RIGHT:     usize = 3;
+	const BOOST:     usize = 4;
+	const STRAFE:    usize = 5;
+	const STEALTH:   usize = 6;
+	const FLAGSPEED: usize = 7;
+
+	pub fn up(&self) -> bool {
+		self.0.get_bit(Self::UP)
+	}
+	pub fn down(&self) -> bool {
+		self.0.get_bit(Self::DOWN)
+	}
+	pub fn left(&self) -> bool {
+		self.0.get_bit(Self::LEFT)
+	}
+	pub fn right(&self) -> bool {
+		self.0.get_bit(Self::RIGHT)
+	}
+	pub fn boost(&self) -> bool {
+		self.0.get_bit(Self::BOOST)
+	}
+	pub fn strafe(&self) -> bool {
+		self.0.get_bit(Self::STRAFE)
+	}
+	pub fn stealthed(&self) -> bool {
+		self.0.get_bit(Self::STEALTH)
+	}
+	pub fn flagspeed(&self) -> bool {
+		self.0.get_bit(Self::FLAGSPEED)
 	}
 
-	pub fn set(&mut self, key: KeyCode, state: KeyState) {
-		self.0.set_bit(get_index(key), state);
+	pub fn set(&mut self, bit: usize, state: bool) {
+		self.0.set_bit(bit, state);
+	}
+	pub fn get(&mut self, bit: usize) -> bool {
+		self.0.get_bit(bit)
 	}
 }
 
