@@ -2,7 +2,7 @@
 use error::Error;
 use serde_am::*;
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum PlayerLevelType {
 	Login,

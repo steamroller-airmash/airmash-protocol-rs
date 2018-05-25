@@ -6,7 +6,7 @@ use serde_am::*;
 /// This may be converted back to a `bool`
 /// in future versions if it turns out not
 /// to be worth it.
-#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum KeyState {
     Pressed,

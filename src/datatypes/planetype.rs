@@ -3,7 +3,7 @@ use serde_am::*;
 use error::Error;
 
 /// All plane types present within airmash.
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
 pub enum PlaneType {
     Predator,
