@@ -6,6 +6,7 @@ mod flags;
 mod level_ty;
 mod mobtype;
 mod upgrades;
+mod status;
 mod serverkeystate;
 
 pub use self::keycode::*;
@@ -15,4 +16,5 @@ pub use self::flags::*;
 pub use self::level_ty::*;
 pub use self::mobtype::*;
 pub use self::upgrades::*;
+pub use self::status::*;
 pub use self::serverkeystate::*;

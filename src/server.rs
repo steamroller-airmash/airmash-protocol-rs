@@ -22,7 +22,7 @@ serde_decls! {
     pub struct LoginPlayer {
         /// The id of the player.
         pub id: u16,
-        pub status: u8,
+        pub status: PlayerStatus,
         /// The level of the player.
         pub level: u8,
         /// The player's name. This may
@@ -43,7 +43,7 @@ serde_decls! {
         pub rot: rotation,
         /// The current flag of the player.
         pub flag: FlagCode,
-        pub upgrades: u8
+        pub upgrades: Upgrades
     }
 
     /// Initial login packet sent to the server.
@@ -122,7 +122,7 @@ serde_decls! {
     pub struct PlayerNew {
         /// The id of the new player.
         pub id: u16,
-        pub status: u8,
+        pub status: PlayerStatus,
         /// The name of the new player.
         pub name: text,
         /// Plane of the new player.
@@ -137,7 +137,7 @@ serde_decls! {
         pub rot: rotation,
         /// Flag of the newly-arrived player.
         pub flag: FlagCode,
-        pub upgrades: u8
+        pub upgrades: Upgrades
     }
 
     /// Packet sent when a player leaves the room.
@@ -157,7 +157,7 @@ serde_decls! {
         pub id: u16,
         /// Keys pressed by a player
         pub keystate: ServerKeyState,
-        pub upgrades: u8,
+        pub upgrades: Upgrades,
         /// X position of player
         pub pos_x: coord24,
         /// Y position of player
@@ -228,7 +228,7 @@ serde_decls! {
         pub pos_y: coord24,
         /// Player rotation
         pub rot: rotation,
-        pub upgrades: u8
+        pub upgrades: Upgrades
     }
 
     /// Event indicating the a player has 

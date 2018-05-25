@@ -15,7 +15,8 @@ pub enum Error {
     InvalidPlaneType(u8),
     InvalidFlag(u16),
     InvalidLevelType(u8),
-    InvalidMobType(u8)
+    InvalidMobType(u8),
+    InvalidPlayerStatus(u8)
 }
 
 impl Error {
@@ -30,7 +31,8 @@ impl Error {
             &Error::InvalidPlaneType(_) => "Invalid plane type",
             &Error::InvalidFlag(_) => "Invalid flag code",
             &Error::InvalidLevelType(_) => "Invalid level type",
-            &Error::InvalidMobType(_) => "Invalid mob type"
+            &Error::InvalidMobType(_) => "Invalid mob type",
+            &Error::InvalidPlayerStatus(_) => "Invalid player status"
         }
     }
 }
