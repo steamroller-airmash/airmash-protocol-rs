@@ -11,7 +11,7 @@ pub enum PlayerStatus {
 
 impl PlayerStatus {
 	pub fn to_u8(&self) -> u8 {
-		match self {
+		match *self {
 			PlayerStatus::Alive => 0,
 			PlayerStatus::Dead => 1,
 		}
