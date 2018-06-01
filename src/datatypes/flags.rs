@@ -560,6 +560,12 @@ impl FlagCode {
     }
 }
 
+impl Default for FlagCode {
+    fn default() -> Self {
+        return FlagCode::UnitedNations;
+    }
+}
+
 impl Serialize for FlagCode {
     fn serialize(&self, ser: &mut Serializer) -> Result<()> {
         ser.serialize_u16(self.to_u16())

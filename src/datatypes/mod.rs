@@ -9,6 +9,9 @@ mod upgrades;
 mod status;
 mod serverkeystate;
 
+#[cfg(feature = "specs")]
+mod specs_impls;
+
 pub use self::keycode::*;
 pub use self::keystate::*;
 pub use self::planetype::*;
