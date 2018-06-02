@@ -481,7 +481,7 @@ serde_decls! {
     pub struct EventBounce {
         pub clock: u32,
         pub id: u16,
-        pub keystate: u8,
+        pub keystate: ServerKeyState,
         pub pos_x: coord24,
         pub pos_y: coord24,
         pub rot: rotation,
