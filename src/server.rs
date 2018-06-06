@@ -182,7 +182,7 @@ serde_decls! {
         /// Projectile id
         pub id: u16,
         /// Projectile type
-        pub ty: u8,
+        pub ty: MobType,
         /// Current projectile X position
         pub pos_x: coordx,
         /// Current projectile Y position
