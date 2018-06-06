@@ -519,7 +519,7 @@ serde_decls! {
     pub struct MobUpdate {
         pub clock: u32,
         pub id: u16,
-        pub ty: u8,
+        pub ty: MobType,
         pub pos_x: coordx,
         pub pos_y: coordy,
         pub speed_x: speed,
@@ -534,7 +534,7 @@ serde_decls! {
     #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobUpdateStationary {
         pub id: u16,
-        pub ty: u8,
+        pub ty: MobType,
         pub pos_x: f32,
         pub pos_y: f32
     }
@@ -544,7 +544,7 @@ serde_decls! {
     #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobDespawn {
         pub id: u16,
-        pub ty: u8
+        pub ty: MobType
     }
 
     /// Event indicating a mob despawned 
@@ -553,7 +553,7 @@ serde_decls! {
     #[cfg_attr(feature="serde", derive(Serialize, Deserialize))]
     pub struct MobDespawnCoords {
         pub id: u16,
-        pub ty: u8,
+        pub ty: MobType,
         pub pos_x: coordx,
         pub pos_y: coordy
     }
