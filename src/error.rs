@@ -10,14 +10,3 @@ impl From<TryFromIntError> for EntityIdOutOfRangeError {
 		Self {}
 	}
 }
-impl From<!> for EntityIdOutOfRangeError {
-	fn from(never: !) -> Self {
-		never
-	}
-}
-
-impl<T> From<!> for EnumValueOutOfRangeError<T> {
-	fn from(never: !) -> Self {
-		never
-	}
-}
