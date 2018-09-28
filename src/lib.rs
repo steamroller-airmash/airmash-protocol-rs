@@ -1,6 +1,5 @@
 #![feature(
 	try_from,
-	macro_at_most_once_rep,
 	never_type,
 	optin_builtin_traits
 )]
