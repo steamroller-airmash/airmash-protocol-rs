@@ -1,0 +1,17 @@
+
+.git/
+
+server/target/
+server/.vscode/
+
+specgen/target/
+specgen/.vscode/
+
+ctf/target/
+ctf/.vscode/
+
+base/target/
+base/.vscode/
+
+target/
+.vscode/

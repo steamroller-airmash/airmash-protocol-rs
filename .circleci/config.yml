@@ -4,7 +4,7 @@ version: 2
 jobs:
   formatting:
     docker:
-      - image: abronan/rust-circleci:latest
+      - image: rustlang/rust:nightly
     
     steps:
         - checkout
@@ -14,7 +14,7 @@ jobs:
 
   nightly_build:
     docker:
-      - image: abronan/rust-circleci:latest
+      - image: rustlang/rust:nightly
     
     steps:
         - checkout
@@ -31,7 +31,7 @@ jobs:
 
   stable_build:
     docker:
-      - image: abronan/rust-circleci:latest
+      - image: rustlang/rust:nightly
     
     steps:
         - checkout
