@@ -12,11 +12,14 @@ This library allows for communicating with the
 [airmash](https://airma.sh) server or for communicating
 with clients using the same protocol.
 
+At the moment, this library only supports rust nightly due
+to the use of a few nightly-only features.
+
 ## Getting the library
 
 To use this library, just add 
 ```
-airmash-protocol = "^0.1"
+airmash-protocol = "^0.2"
 ```
 to your `Cargo.toml`. This will give you the
 latest version of the library.
