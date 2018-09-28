@@ -20,8 +20,3 @@ airmash-protocol = "^0.1"
 ```
 to your `Cargo.toml`. This will give you the
 latest version of the library.
-
-## Examples
-
-Examples using this library can be found 
-[here](https://github.com/steamroller-airmash/airmash-protocol-examples).
