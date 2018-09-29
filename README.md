@@ -10,7 +10,9 @@
 
 This library allows for communicating with the 
 [airmash](https://airma.sh) server or for communicating
-with clients using the same protocol.
+with clients using the same protocol. It is meant to be used
+with a protocol backend such as the
+[protocol-v5](https://crates.io/crate/airmash-protocol-v5) crate.
 
 At the moment, this library only supports rust nightly due
 to the use of a few nightly-only features.
