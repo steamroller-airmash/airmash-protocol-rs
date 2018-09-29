@@ -1,12 +1,12 @@
 [package]
 name = "airmash-protocol"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["STEAMROLLER"]
 readme = "README.md"
 description = "Protocol library for airma.sh"
 repository = "https://github.com/steamroller-airmash/airmash-protocol-rs"
 keywords = ["protocol", "games"]
-license = "MIT"
+license = "Apache-2.0 OR MIT"
 
 [badges]
 circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
