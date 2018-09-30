@@ -2,7 +2,7 @@
 use specs::DenseVecStorage;
 
 /// Type-safe Level identifier
-#[derive(Copy, Clone, Eq, Hash, Debug, PartialEq, From, Into, Add, Sub, Constructor)]
+#[derive(Copy, Clone, Eq, Hash, Debug, PartialEq, From, Into, Add, Sub, Constructor, AddAssign)]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Level(pub u8);
 

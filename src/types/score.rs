@@ -19,6 +19,7 @@ use specs::DenseVecStorage;
 	Add,
 	Sub,
 	Constructor,
+	AddAssign,
 )]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Score(pub u32);
