@@ -2,7 +2,7 @@
 use specs::DenseVecStorage;
 
 /// Type-safe team identifier
-#[derive(Copy, Clone, Eq, Hash, Debug, PartialEq, From, Into, Constructor)]
+#[derive(Copy, Clone, Eq, Hash, Debug, Default, PartialEq, From, Into, Constructor)]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Team(pub u16);
 
