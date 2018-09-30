@@ -27,3 +27,9 @@ impl_try_from_enum! {
 		BTR = 3,
 	}
 }
+
+impl Default for GameType {
+	fn default() -> Self {
+		GameType::FFA
+	}
+}

@@ -166,3 +166,9 @@ impl FromStr for FlagCode {
 		Self::try_from(s)
 	}
 }
+
+impl Default for FlagCode {
+	fn default() -> Self {
+		FlagCode::UnitedNations
+	}
+}
