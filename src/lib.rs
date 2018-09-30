@@ -1,13 +1,12 @@
-#![feature(
-	try_from,
-	optin_builtin_traits
-)]
+#![feature(try_from, optin_builtin_traits)]
 
 #[macro_use]
 extern crate lazy_static;
 extern crate fnv;
 #[macro_use]
 extern crate dimensioned;
+#[macro_use]
+extern crate derive_more;
 
 #[cfg(feature = "serde")]
 #[cfg_attr(feature = "serde", macro_use)]

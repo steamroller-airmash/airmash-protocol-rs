@@ -2,7 +2,7 @@
 use specs::DenseVecStorage;
 
 /// A mob (missile, upgrade, or powerup) ID
-#[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Hash)]
+#[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Hash, From, Into, Constructor)]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Mob(pub u16);
 

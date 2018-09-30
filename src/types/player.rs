@@ -2,7 +2,7 @@
 use specs::DenseVecStorage;
 
 /// A player ID
-#[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Hash)]
+#[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Hash, From, Into, Constructor)]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Player(pub u16);
 
