@@ -2,7 +2,7 @@
 use specs::DenseVecStorage;
 
 /// All possible "keys" that a player can have activated.
-#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
+#[derive(Copy, Clone, Debug, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct ServerKeyState {
