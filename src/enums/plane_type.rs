@@ -17,3 +17,9 @@ impl_try_from_enum! {
 		Prowler = 5,
 	}
 }
+
+impl Default for PlaneType {
+	fn default() -> Self {
+		PlaneType::Predator
+	}
+}

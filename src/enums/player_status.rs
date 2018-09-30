@@ -19,3 +19,9 @@ impl_try_from_enum! {
 		Dead = 1,
 	}
 }
+
+impl Default for PlayerStatus {
+	fn default() -> Self {
+		PlayerStatus::Alive
+	}
+}

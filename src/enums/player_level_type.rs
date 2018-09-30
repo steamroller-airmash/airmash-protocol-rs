@@ -12,3 +12,9 @@ impl_try_from_enum! {
 		LevelUp = 1,
 	}
 }
+
+impl Default for PlayerLevelType {
+	fn default() -> Self {
+		PlayerLevelType::Login
+	}
+}

@@ -12,3 +12,9 @@ impl_try_from_enum! {
 		Inferno = 2,
 	}
 }
+
+impl Default for PowerupType {
+	fn default() -> Self {
+		PowerupType::Shield
+	}
+}
