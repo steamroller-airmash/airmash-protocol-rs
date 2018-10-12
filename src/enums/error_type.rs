@@ -1,3 +1,4 @@
+#[cfg(feature = "specs")]
 use specs::DenseVecStorage;
 
 impl_try_from_enum!{
