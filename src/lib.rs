@@ -29,6 +29,8 @@ mod types;
 mod client_packet;
 mod server_packet;
 
+#[cfg(feature = "serde")]
+pub mod custom;
 pub mod error;
 
 pub use self::client_packet::*;

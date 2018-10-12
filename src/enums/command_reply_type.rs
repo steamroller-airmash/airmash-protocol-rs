@@ -1,3 +1,4 @@
+#[cfg(feature = "specs")]
 use specs::DenseVecStorage;
 
 use std::convert::From;
