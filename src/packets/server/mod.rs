@@ -1,3 +1,5 @@
+//! Packets that the server sends to the client.
+
 mod chat_public;
 mod chat_say;
 mod chat_team;
