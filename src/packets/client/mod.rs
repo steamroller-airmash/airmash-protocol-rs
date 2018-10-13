@@ -1,6 +1,5 @@
 //! Packets that the client sends to the server.
 
-
 mod backup;
 mod chat;
 mod command;
