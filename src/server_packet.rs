@@ -8,6 +8,16 @@ use server::*;
 /// Some packets do not contain any data
 /// and thus do not have any data within
 /// their enum variants.
+/// 
+/// The [`From`][0] trait has been implemented
+/// for all the structs that correspond to the
+/// variants of this enum. This means that instead
+/// of directly constructing an instance of 
+/// `ServerPacket`, [`into()`][1] can be called
+/// instead.
+/// 
+/// [0]: https://doc.rust-lang.org/std/convert/trait.From.html
+/// [1]: https://doc.rust-lang.org/std/convert/trait.Into.html#tymethod.into
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum ServerPacket {
