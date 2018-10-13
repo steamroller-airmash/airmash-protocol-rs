@@ -15,6 +15,15 @@ use specs;
 pub auto trait NotVec {}
 impl<T> !NotVec for Vector2<T> {}
 
+/// A 2D Vector that works with unit conversions.
+/// 
+/// **Note:** [`Position`][0], [`Velocity`][1], 
+/// and [`Accel`][2] are all instances of this struct
+/// with different units.
+/// 
+/// [0]: type.Position.html
+/// [1]: type.Velocity.html
+/// [2]: type.Accel.html
 #[derive(Default, Clone, Copy, PartialEq, Debug)]
 pub struct Vector2<T> {
 	pub x: T,
@@ -22,6 +31,22 @@ pub struct Vector2<T> {
 }
 
 impl<T> Vector2<T> {
+	/// Create a new vector with components that convert
+	/// into the vectors types. 
+	/// 
+	/// This is easier to use when creating a vector
+	/// from components, but it may prevent type inference
+	/// when the vector type is not specified.
+	/// 
+	/// # Example
+	/// ```
+	/// # extern crate airmash_protocol;
+	/// # use airmash_protocol::*;
+	/// # fn main() {
+	/// // Note that this is the same as Position
+	/// let vec: Vector2<Distance> = Vector2::new(0.0, 0.0);
+	/// # }
+	/// ```
 	pub fn new<X>(x: X, y: X) -> Self
 	where
 		X: Into<T>,
@@ -32,6 +57,25 @@ impl<T> Vector2<T> {
 		}
 	}
 
+	/// Take the dot product of two vectors.
+	/// 
+	/// The dot product for a 2D vector is defined
+	/// (given two vectors `a` and `b`) as:
+	/// `a.x * b.x + a.y * b.x`.
+	/// 
+	/// # Example
+	/// ```
+	/// # extern crate airmash_protocol;
+	/// # use airmash_protocol::*;
+	/// # fn main() {
+	/// let a: Vector2<i32> = Vector2::new(1, 2);
+	/// let b: Vector2<i32> = Vector2::new(3, 4);
+	/// 
+	/// let c = Vector2::dot(a, b);
+	/// 
+	/// assert_eq!(c, 11);
+	/// # }
+	/// ```
 	pub fn dot<U>(self, rhs: Vector2<U>) -> <<T as Mul<U>>::Output as Add>::Output
 	where
 		T: Mul<U>,
@@ -40,6 +84,24 @@ impl<T> Vector2<T> {
 		self.x * rhs.x + self.y * rhs.y
 	}
 
+	/// Calculate the magnitude of the vector.
+	/// 
+	/// # Examples
+	/// Calculate the distance between two points.
+	/// ```
+	/// # extern crate airmash_protocol;
+	/// # use airmash_protocol::*;
+	/// # fn main() {
+	/// let a: Vector2<f32> = Vector2::new(4.0, 0.0);
+	/// let b: Vector2<f32> = Vector2::new(-4.0, 0.0);
+	/// 
+	/// // The distance is length of the vector going
+	/// // from b to a
+	/// let dist = (a - b).length();
+	/// 
+	/// # // This case should be ok for exact comparisons
+	/// assert_eq!(dist, 8.0);
+	/// # }
 	pub fn length(self) -> <<<T as Mul>::Output as Add>::Output as Sqrt>::Output
 	where
 		Self: Clone,
@@ -47,9 +109,10 @@ impl<T> Vector2<T> {
 		T::Output: Add,
 		<T::Output as Add>::Output: Sqrt,
 	{
-		Self::dot(self.clone(), self).sqrt()
+		self.length2().sqrt()
 	}
 
+	/// Calculate the length squared.
 	pub fn length2(self) -> <<T as Mul>::Output as Add>::Output
 	where
 		Self: Clone,
@@ -59,6 +122,11 @@ impl<T> Vector2<T> {
 		Self::dot(self.clone(), self)
 	}
 
+	/// Return a vector pointing in the same direction as this one
+	/// but with a magniture of 1.
+	/// 
+	/// ## Note
+	/// When used with units this will always return a dimensionless vector.
 	pub fn normalized(
 		self,
 	) -> Vector2<<T as Div<<<<T as Mul>::Output as Add>::Output as Sqrt>::Output>>::Output>
