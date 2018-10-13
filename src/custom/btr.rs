@@ -3,8 +3,8 @@ use std::time::Duration;
 
 use super::utils::*;
 
-/// Serde serialization declaration for [`ServerCustom`][0]
-/// data for BTR.
+/// Serde serialization declaration for BTR [`ServerCustom`][0]
+/// data.
 ///
 /// This struct will serialize from/deserialize to the JSON
 /// representation used in the `data` field of `ServerCustom`.

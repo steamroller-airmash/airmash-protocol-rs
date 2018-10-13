@@ -3,8 +3,8 @@ use Team;
 
 use super::utils::*;
 
-/// Serde serialization declaration for [`ServerCustom`][0]
-/// data for CTF.
+/// Serde serialization declaration for CTF [`ServerCustom`][0]
+/// data.
 ///
 /// This struct will serialize from/deserialize to the JSON
 /// representation used in the `data` field of `ServerCustom`.
