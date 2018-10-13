@@ -11,6 +11,16 @@ use client::*;
 /// packets do not have an associated struct
 /// and as such are just empty variants within
 /// this enum.
+/// 
+/// The [`From`][0] trait has been implemented
+/// for all the structs that correspond to the
+/// variants of this enum. This means that instead
+/// of directly constructing an instance of 
+/// `ClientPacket`, [`into()`][1] can be called
+/// instead.
+/// 
+/// [0]: https://doc.rust-lang.org/std/convert/trait.From.html
+/// [1]: https://doc.rust-lang.org/std/convert/trait.Into.html#tymethod.into
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum ClientPacket {
