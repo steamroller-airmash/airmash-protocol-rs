@@ -6,6 +6,30 @@ use std::str::FromStr;
 impl_try_from_enum! {
 	/// All player flags currently available within
 	/// the game.
+	/// 
+	/// This enum can be determined from a flag code
+	/// string using the [`FromStr`][0] or 
+	/// [`TryFrom`][1] implementations. Usually the
+	/// server will parse invalid flag code strings
+	/// into the [`UnitedNations`][2] variant, but 
+	/// this is left up to the user. 
+	/// 
+	/// # Restricted Flags
+	/// In the official server the following flags are
+	/// restricted to players level 4 and above:
+	/// - [`JollyRogers`](#variant.JollyRogers)
+	/// - [`Communist`](#variant.Communist)
+	/// - [`ImperialJapan`](#variant.ImperialJapan)
+	/// - [`Confederate`](#variant.Confederate)
+	/// - [`Rainbow`](#variant.Rainbow)
+	/// 
+	/// Changing flags in-game are restricted to those
+	/// level 2 and above, although any (non-restricted)
+	/// flag can be chosen when logging in.
+	/// 
+	/// [0]: https://doc.rust-lang.org/std/str/trait.FromStr.html
+	/// [1]: https://doc.rust-lang.org/std/convert/trait.TryFrom.html
+	/// [2]: #variant.UnitedNations
 	#[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
 	#[cfg_attr(feature = "specs", derive(Component))]
 	#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
@@ -139,9 +163,9 @@ impl_try_from_enum! {
 }
 
 impl<'a> TryFrom<&'a str> for FlagCode {
-	type Error = ();
+	type Error = <Self as TryFrom<String>>::Error;
 
-	fn try_from(s: &'a str) -> Result<Self, ()> {
+	fn try_from(s: &'a str) -> Result<Self, Self::Error> {
 		Self::try_from(s.to_owned())
 	}
 }
@@ -161,9 +185,9 @@ impl TryFrom<String> for FlagCode {
 }
 
 impl FromStr for FlagCode {
-	type Err = ();
+	type Err = <Self as TryFrom<String>>::Error;
 
-	fn from_str(s: &str) -> Result<Self, ()> {
+	fn from_str(s: &str) -> Result<Self, Self::Err> {
 		Self::try_from(s)
 	}
 }
