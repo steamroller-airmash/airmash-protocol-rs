@@ -134,3 +134,17 @@ lazy_static! {
 		map
 	};
 }
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+	use test::{Bencher, black_box};
+
+	#[bench]
+	fn bench_str_to_flag_lookup(b: &mut Bencher) {
+		b.iter(|| {
+			let s = black_box("CA");
+			STR_TO_FLAG[s]
+		})
+	}
+}
