@@ -5,6 +5,12 @@ use specs::{Component, VecStorage};
 
 use std::time::Duration;
 
+/// Inner type used for all unit type declarations.
+/// 
+/// All units can be converted into this type by
+/// calling the [`inner()`][0] method.
+/// 
+/// [0]: struct.AirmashUnits.html#method.inner
 pub type BaseType = f32;
 
 make_units! {
@@ -35,27 +41,47 @@ make_units! {
 }
 
 impl<T: Clone, U> AirmashUnits<T, U> {
+	/// Access the inner type of the unit.
 	pub fn inner(&self) -> T {
 		self.value_unsafe.clone()
 	}
 }
 
 impl<U> AirmashUnits<BaseType, U> {
+	/// Absolute value
 	pub fn abs(self) -> Self {
 		Self::new(self.inner().abs())
 	}
+	/// Get the sign of the inner value of the unit.
 	pub fn signum(self) -> BaseType {
 		self.inner().signum()
 	}
 
+	/// Combined sin and cos, can be done more
+	/// efficiently then doing both calculations
+	/// on their own.
 	pub fn sin_cos(self) -> (BaseType, BaseType) {
 		self.inner().sin_cos()
 	}
+	/// Calculate the max of two values with the same
+	/// units.
 	pub fn max(self, o: Self) -> Self {
 		Self::new(self.inner().max(o.inner()))
 	}
+	/// Calculate the min of two values with the same
+	/// units.
 	pub fn min(self, o: Self) -> Self {
 		Self::new(self.inner().min(o.inner()))
+	}
+	
+	pub fn sin(&self) -> BaseType {
+		self.inner().sin()
+	}
+	pub fn cos(&self) -> BaseType {
+		self.inner().cos()
+	}
+	pub fn tan(&self) -> BaseType {
+		self.inner().tan()
 	}
 }
 
@@ -111,15 +137,10 @@ impl From<Duration> for Time<BaseType> {
 		Time::new(dt.as_secs() as BaseType + 1.0e-9 * (dt.subsec_nanos() as BaseType)) * 60.0
 	}
 }
-
-impl Rotation<BaseType> {
-	pub fn sin(&self) -> BaseType {
-		self.inner().sin()
-	}
-	pub fn cos(&self) -> BaseType {
-		self.inner().cos()
-	}
-	pub fn tan(&self) -> BaseType {
-		self.inner().tan()
+impl Into<Duration> for Time<BaseType> {
+	fn into(self) -> Duration {
+		Duration::from_nanos(
+			(self.inner() * (1.0e9 / 60.0)) as u64
+		)
 	}
 }
