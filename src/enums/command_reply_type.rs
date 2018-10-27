@@ -3,15 +3,18 @@ use specs::DenseVecStorage;
 
 use std::convert::From;
 
-/// TODO: Reverse engineer
+/// Specifies whether the debug reply to a command should
+/// open a popup or be displayed in the chat window.
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "specs", derive(Component))]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum CommandReplyType {
 	ShowInConsole = 0,
-	/// Technically this should be any value other than 0,
-	/// the from integer implementation for this enum deals
+	/// Technically this should be any value other than `0`,
+	/// the [`From`][0] integer implementation for this enum deals
 	/// with that.
+	/// 
+	/// [0]: https://doc.rust-lang.org/std/convert/trait.From.html
 	ShowInPopup = 1,
 }
 
@@ -37,3 +40,4 @@ macro_rules! decl_from {
 decl_from!(u8);
 decl_from!(u16);
 decl_from!(u32);
+decl_from!(u64);
