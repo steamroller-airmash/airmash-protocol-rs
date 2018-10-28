@@ -20,9 +20,23 @@ use specs::DenseVecStorage;
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Upgrades {
+	/// The number of speed upgrades that the player currently
+	/// has equipped.
+	/// 
 	/// Note that only the first 3 bits of this are used
-	/// in protocol-v5
+	/// in protocol-v5. Any values greater than 7 will be
+	/// mangled.
 	pub speed: u8,
+	/// Whether the player has a shield.
+	/// 
+	/// While both this and [`inferno`] can be
+	/// set at the same time, that doesn't make
+	/// sense within the framework of the game.
 	pub shield: bool,
+	/// Whether the player has an inferno.
+	/// 
+	/// While both this and [`shield`] can be
+	/// set at the same time, that doesn't make
+	/// sense within the framework of the game.
 	pub inferno: bool,
 }

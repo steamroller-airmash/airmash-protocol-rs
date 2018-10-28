@@ -57,12 +57,6 @@ impl<U> AirmashUnits<BaseType, U> {
 		self.inner().signum()
 	}
 
-	/// Combined sin and cos, can be done more
-	/// efficiently then doing both calculations
-	/// on their own.
-	pub fn sin_cos(self) -> (BaseType, BaseType) {
-		self.inner().sin_cos()
-	}
 	/// Calculate the max of two values with the same
 	/// units.
 	pub fn max(self, o: Self) -> Self {
@@ -74,12 +68,21 @@ impl<U> AirmashUnits<BaseType, U> {
 		Self::new(self.inner().min(o.inner()))
 	}
 	
+	/// Combined sin and cos, can be done more
+	/// efficiently then doing both calculations
+	/// on their own.
+	pub fn sin_cos(self) -> (BaseType, BaseType) {
+		self.inner().sin_cos()
+	}
+	/// Calculate the sine of the inner value.
 	pub fn sin(&self) -> BaseType {
 		self.inner().sin()
 	}
+	/// Calculate the cosine of the inner value.
 	pub fn cos(&self) -> BaseType {
 		self.inner().cos()
 	}
+	/// Calculate the tangent of the inner value.
 	pub fn tan(&self) -> BaseType {
 		self.inner().tan()
 	}

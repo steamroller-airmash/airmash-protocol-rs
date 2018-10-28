@@ -6,7 +6,23 @@ type ServerPacketIterator = Box<Iterator<Item = Vec<u8>>>;
 
 /// Interface to implement for all protocols.
 pub trait Protocol: Sync + Send {
+	/// Error for when a packet fails to serialize.
+	/// 
+	/// This should be broad enough to be able to deal
+	/// with failures for both [`ClientPacket`][0] and
+	/// [`ServerPacket`][1].
+	/// 
+	/// [0]: enum.ClientPacket.html
+	/// [1]: enum.ServerPacket.html
 	type SerializeError: Error;
+	/// Error for when a packet fails to deserialize.
+	/// 
+	/// This should be broad enough to be able to deal
+	/// with failures for both [`ClientPacket`][0] and
+	/// [`ServerPacket`][1].
+	/// 
+	/// [0]: enum.ClientPacket.html
+	/// [1]: enum.ServerPacket.html
 	type DeserializeError: Error;
 
 	/// Unique version number for the protocol.
@@ -99,10 +115,22 @@ pub trait Protocol: Sync + Send {
 /// [2]: #tymethod.serialize
 /// [3]: #tymethod.deserialize
 pub trait ProtocolSerializationExt<T>: Protocol {
+	/// Serialize a packet. This can be either a
+	/// [`ClientPacket`][1] or a [`ServerPacket`][0]
+	/// depending on the instantiation of this trait.
+	/// 
+	/// [0]: enum.ServerPacket.html
+	/// [1]: enum.ClientPacket.html
 	fn serialize<U>(&self, packet: U) -> Result<ServerPacketIterator, Self::SerializeError>
 	where
 		U: Into<T>;
 
+	/// Deserialize a packet. This can be either a
+	/// [`ClientPacket`][1] or a [`ServerPacket`][0]
+	/// depending on the instantiation of this trait.
+	/// 
+	/// [0]: enum.ServerPacket.html
+	/// [1]: enum.ClientPacket.html
 	fn deserialize(&self, data: &[u8]) -> Result<T, Self::DeserializeError>;
 }
 
