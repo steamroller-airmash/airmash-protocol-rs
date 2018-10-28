@@ -29,14 +29,18 @@ pub struct Upgrades {
 	pub speed: u8,
 	/// Whether the player has a shield.
 	/// 
-	/// While both this and [`inferno`] can be
+	/// While both this and [`inferno`][0] can be
 	/// set at the same time, that doesn't make
 	/// sense within the framework of the game.
+	/// 
+	/// [0]: #structfield.inferno
 	pub shield: bool,
 	/// Whether the player has an inferno.
 	/// 
-	/// While both this and [`shield`] can be
+	/// While both this and [`shield`][0] can be
 	/// set at the same time, that doesn't make
 	/// sense within the framework of the game.
+	/// 
+	/// [0]: #structfield.shield
 	pub inferno: bool,
 }
