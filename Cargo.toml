@@ -1,6 +1,6 @@
 [package]
 name = "airmash-protocol"
-version = "0.2.4"
+version = "0.2.5"
 authors = ["STEAMROLLER"]
 readme = "README.md"
 description = "Protocol library for airma.sh"
@@ -21,10 +21,10 @@ lazy_static = "1.0"
 fnv = "1.0"
 dimensioned = "0.7"
 specs-derive = "0.2"
-derive_more = "0.14"
+derive_more = "0.12"
 
 [dependencies.specs]
-version = "0.12"
+version = "0.14"
 optional = true
 
 [dependencies.serde_json]
