@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 
 /// Type-safe score identifier
 ///

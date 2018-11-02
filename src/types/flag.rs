@@ -1,7 +1,7 @@
 use types::Team;
 
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 
 /// A flag ID
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Hash, From, Into, Constructor)]

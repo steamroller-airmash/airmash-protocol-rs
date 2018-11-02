@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 
 /// Upgrade info that a client needs to know about to
 /// calculate movement. This also includes the shielded

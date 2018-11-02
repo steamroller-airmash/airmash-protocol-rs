@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 
 impl_try_from_enum! {
 	/// Indicate whether a player levelled up, or has

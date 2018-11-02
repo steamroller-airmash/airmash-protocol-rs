@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 use std::convert::TryFrom;
 use std::str::FromStr;
 

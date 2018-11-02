@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 
 /// Type-safe team identifier
 #[derive(Copy, Clone, Eq, Hash, Debug, Default, PartialEq, From, Into, Constructor)]

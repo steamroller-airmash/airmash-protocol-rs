@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::DenseVecStorage;
+use specs::{DenseVecStorage, Component};
 
 /// All possible "keys" that a player can have activated.
 #[derive(Copy, Clone, Debug, Default, Hash, Eq, PartialEq)]
