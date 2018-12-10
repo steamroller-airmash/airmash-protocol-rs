@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::{DenseVecStorage, Component};
+use specs::{Component, DenseVecStorage};
 
 use std::convert::From;
 
@@ -13,7 +13,7 @@ pub enum CommandReplyType {
 	/// Technically this should be any value other than `0`,
 	/// the [`From`][0] integer implementation for this enum deals
 	/// with that.
-	/// 
+	///
 	/// [0]: https://doc.rust-lang.org/std/convert/trait.From.html
 	ShowInPopup = 1,
 }

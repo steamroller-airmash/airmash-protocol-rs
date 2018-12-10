@@ -1,19 +1,19 @@
 #[cfg(feature = "specs")]
-use specs::{DenseVecStorage, Component};
+use specs::{Component, DenseVecStorage};
 use std::convert::TryFrom;
 use std::str::FromStr;
 
 impl_try_from_enum! {
 	/// All player flags currently available within
 	/// the game.
-	/// 
+	///
 	/// This enum can be determined from a flag code
-	/// string using the [`FromStr`][0] or 
+	/// string using the [`FromStr`][0] or
 	/// [`TryFrom`][1] implementations. Usually the
 	/// server will parse invalid flag code strings
-	/// into the [`UnitedNations`][2] variant, but 
-	/// this is left up to the user. 
-	/// 
+	/// into the [`UnitedNations`][2] variant, but
+	/// this is left up to the user.
+	///
 	/// # Restricted Flags
 	/// In the official server the following flags are
 	/// restricted to players level 4 and above:
@@ -22,11 +22,11 @@ impl_try_from_enum! {
 	/// - [`ImperialJapan`](#variant.ImperialJapan)
 	/// - [`Confederate`](#variant.Confederate)
 	/// - [`Rainbow`](#variant.Rainbow)
-	/// 
+	///
 	/// Changing flags in-game are restricted to those
 	/// level 2 and above, although any (non-restricted)
 	/// flag can be chosen when logging in.
-	/// 
+	///
 	/// [0]: https://doc.rust-lang.org/std/str/trait.FromStr.html
 	/// [1]: https://doc.rust-lang.org/std/convert/trait.TryFrom.html
 	/// [2]: #variant.UnitedNations

@@ -5,13 +5,13 @@
 //! a strongly typed interface for communicating with an airmash server.
 //! Since there can (in the future) be multiple protocol versions, this
 //! crate must be used with another crate such as [airmash-protocol-v5][1]
-//! that provides a serialization layer. 
-//! 
+//! that provides a serialization layer.
+//!
 //! # Library Usage
 //! Once you have gotten an instance of [`Protocol`][2], it can be used to
 //! serialize and deserialize to and from the wire representation of that
 //! protocol version.
-//! 
+//!
 //! ```
 //! # extern crate airmash_protocol;
 //! # use airmash_protocol::*;
@@ -30,18 +30,18 @@
 //! # let bytes_from_elsewhere: Vec<u8> = unsafe{ mem::uninitialized() };
 //! let protocol = protocol_from_elsewhere;
 //! let bytes = bytes_from_elsewhere;
-//! 
+//!
 //! // To deserialize a packet from the server
 //! let packet: ServerPacket = protocol.deserialize_server(&bytes)?;
-//! 
+//!
 //! // To deserialize a packet from a client
 //! let packet: ClientPacket = protocol.deserialize_client(&bytes)?;
 //! # }
 //! ```
-//! 
+//!
 //! The [`ProtocolSerializationExt`][3] trait is also provided to allow
 //! for less typing when doing lots of serialization or deserialization.
-//! 
+//!
 //! [0]: https://airma.sh
 //! [1]: https://crates.io/crates/airmash-protocol-v5
 //! [2]: trait.Protocol.html

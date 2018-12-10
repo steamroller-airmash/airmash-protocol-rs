@@ -6,10 +6,10 @@ use specs::{Component, VecStorage};
 use std::time::Duration;
 
 /// Inner type used for all unit type declarations.
-/// 
+///
 /// All units can be converted into this type by
 /// calling the [`inner()`][0] method.
-/// 
+///
 /// [0]: struct.AirmashUnits.html#method.inner
 pub type BaseType = f32;
 
@@ -67,7 +67,7 @@ impl<U> AirmashUnits<BaseType, U> {
 	pub fn min(self, o: Self) -> Self {
 		Self::new(self.inner().min(o.inner()))
 	}
-	
+
 	/// Combined sin and cos, can be done more
 	/// efficiently then doing both calculations
 	/// on their own.
@@ -142,8 +142,6 @@ impl From<Duration> for Time<BaseType> {
 }
 impl Into<Duration> for Time<BaseType> {
 	fn into(self) -> Duration {
-		Duration::from_nanos(
-			(self.inner() * (1.0e9 / 60.0)) as u64
-		)
+		Duration::from_nanos((self.inner() * (1.0e9 / 60.0)) as u64)
 	}
 }

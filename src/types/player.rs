@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::{DenseVecStorage, Component};
+use specs::{Component, DenseVecStorage};
 
 /// A player ID
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Hash, From, Into, Constructor)]

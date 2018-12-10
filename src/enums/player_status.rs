@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::{DenseVecStorage, Component};
+use specs::{Component, DenseVecStorage};
 
 impl_try_from_enum! {
 	/// Flag for indicating whether a player is

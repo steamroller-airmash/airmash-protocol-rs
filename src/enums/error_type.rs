@@ -1,7 +1,7 @@
 #[cfg(feature = "specs")]
-use specs::{DenseVecStorage, Component};
+use specs::{Component, DenseVecStorage};
 
-impl_try_from_enum!{
+impl_try_from_enum! {
 
 /// All error codes that can be sent to the client.
 ///

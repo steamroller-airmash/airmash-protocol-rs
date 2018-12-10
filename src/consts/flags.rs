@@ -138,7 +138,7 @@ lazy_static! {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use test::{Bencher, black_box};
+	use test::{black_box, Bencher};
 
 	#[bench]
 	fn bench_str_to_flag_lookup(b: &mut Bencher) {

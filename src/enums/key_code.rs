@@ -1,5 +1,5 @@
 #[cfg(feature = "specs")]
-use specs::{DenseVecStorage, Component};
+use specs::{Component, DenseVecStorage};
 
 impl_try_from_enum! {
 	/// The key that's had it's state changed.

@@ -5,7 +5,7 @@ use types::Upgrades;
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerUpgrade {
-	pub upgrades: Upgrades,
+	pub upgrades: u16,
 	/// Is this actually PlaneType?
 	#[cfg_attr(feature = "serde", serde(rename = "type"))]
 	pub ty: UpgradeType,
