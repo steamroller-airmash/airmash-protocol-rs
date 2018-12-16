@@ -1,5 +1,4 @@
 use enums::UpgradeType;
-use types::Upgrades;
 
 /// A player has upgraded themselves.
 #[derive(Copy, Clone, Debug)]
