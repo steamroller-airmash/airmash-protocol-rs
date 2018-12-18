@@ -14,7 +14,7 @@ impl_try_from_enum! {
 	#[cfg_attr(feature = "specs", derive(Component))]
 	#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 	pub enum MobType {
-		_UnknownMustDeterming = 0,
+		Unknown = 0,
 		PredatorMissile = 1,
 		GoliathMissile = 2,
 		MohawkMissile = 3,
