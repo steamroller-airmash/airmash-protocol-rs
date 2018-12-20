@@ -331,3 +331,10 @@ impl<'a> From<FlagCode> for &'a str {
 		}
 	}
 }
+
+impl From<FlagCode> for String {
+	fn from(code: FlagCode) -> String {
+		let s: &'static str = code.into();
+		s.to_owned()
+	}
+}
