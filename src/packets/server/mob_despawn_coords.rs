@@ -1,4 +1,4 @@
-use enums::MobType;
+use enums::DespawnMobType;
 use types::{Mob, Position};
 
 /// A missile despawned with an explosion
@@ -10,6 +10,6 @@ use types::{Mob, Position};
 pub struct MobDespawnCoords {
 	pub id: Mob,
 	#[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: MobType,
+	pub ty: DespawnMobType,
 	pub pos: Position,
 }

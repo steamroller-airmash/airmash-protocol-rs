@@ -1,4 +1,4 @@
-use enums::MobType;
+use enums::DespawnMobType;
 use types::Mob;
 
 /// A mob despawned
@@ -11,5 +11,5 @@ use types::Mob;
 pub struct MobDespawn {
 	pub id: Mob,
 	#[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: MobType,
+	pub ty: DespawnMobType,
 }

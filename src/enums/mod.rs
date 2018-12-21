@@ -1,4 +1,5 @@
 mod command_reply_type;
+mod despawn_mob_type;
 mod error_type;
 mod firewall_status;
 mod firewall_update_type;
@@ -17,6 +18,7 @@ mod server_message_type;
 mod upgrade_type;
 
 pub use self::command_reply_type::*;
+pub use self::despawn_mob_type::*;
 pub use self::error_type::*;
 pub use self::firewall_status::*;
 pub use self::firewall_update_type::*;
