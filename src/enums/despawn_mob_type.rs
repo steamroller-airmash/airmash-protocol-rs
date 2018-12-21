@@ -14,9 +14,21 @@ impl_try_from_enum! {
 	#[cfg_attr(feature = "specs", derive(Component))]
 	#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 	pub enum DespawnMobType {
-		Missile = 0,
+        MissileLifetimeEnded = 0,
+        MobCollided = 1,
+        MaybeGoliMissile = 2,
+        IDK_A = 3,
+        IDK_B = 4,
+        IDK_C = 5,
+        IDK_D = 6,
+        IDK_E = 7,
+        // Need to investigate more here
+        ShieldDespawned = 8,
+        IDK_F = 9,
+        IDK_G = 10,
+		//Missile = 0,
 		// Also includes upgrades
-		Powerup = 1,
+		//Powerup = 1,
 	}
 }
 
