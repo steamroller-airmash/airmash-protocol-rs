@@ -10,6 +10,8 @@ mod server_key_state;
 mod team;
 mod upgrades;
 
+pub use dimensioned::Sqrt;
+
 pub use self::units::*;
 pub use self::vector2::Vector2;
 
