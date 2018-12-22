@@ -13,7 +13,7 @@ mod upgrades;
 pub use dimensioned::Sqrt;
 
 pub use self::units::*;
-pub use self::vector2::Vector2;
+pub use self::vector2::{NotVec, Vector2};
 
 pub use self::flag::Flag;
 pub use self::level::Level;
