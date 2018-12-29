@@ -57,6 +57,9 @@ extern crate fnv;
 extern crate dimensioned;
 #[macro_use]
 extern crate derive_more;
+#[macro_use]
+extern crate enum_primitive_derive;
+extern crate num_traits;
 
 #[cfg(feature = "serde")]
 #[cfg_attr(feature = "serde", macro_use)]

@@ -42,100 +42,40 @@ macro_rules! impl_from_empty_inner {
 	};
 }
 
-macro_rules! impl_try_from_enum_inner1 {
-	{
-		enum $name:ident : $base:ty {
-			$(
-				$case:ident,
-			)*
-		}
-	} => {
-		impl ::std::convert::TryFrom<$base> for $name {
-			type Error = ::error::EnumValueOutOfRangeError<$base>;
+macro_rules! impl_try_from2_inner {
+	($enum:ty, $val:ident, $from:ident, $to:ident) => {
+		impl std::convert::TryFrom<$val> for $enum {
+			type Error = ::error::EnumValueOutOfRangeError<$val>;
 
-			#[allow(non_upper_case_globals, unreachable_code)]
-			fn try_from(v: $base) -> Result<Self, Self::Error> {
-				$(
-					const $case: $base = $name::$case as $base;
-				)*
+			fn try_from(v: $val) -> Result<Self, Self::Error> {
+				use num_traits::FromPrimitive;
 
-				Ok(match v {
-					$(
-						$case => $name::$case,
-					)*
-					x => return Err(::error::EnumValueOutOfRangeError(x))
-				})
-			}
-		}
-
-		impl From<$name> for $base {
-			#[allow(unreachable_code)]
-			fn from(v: $name) -> Self {
-				match v {
-					$(
-						$name::$case => $name::$case as $base,
-					)*
+				match Self::$from(v) {
+					Some(x) => Ok(x),
+					None => Err(::error::EnumValueOutOfRangeError(v)),
 				}
 			}
 		}
-	}
+
+		impl From<$enum> for $val {
+			fn from(v: $enum) -> Self {
+				use num_traits::ToPrimitive;
+
+				v.$to().expect("Failed to convert enum to value")
+			}
+		}
+	};
 }
 
-macro_rules! impl_try_from_enum {
-	{
-		$(
-			#[$attr:meta]
-		)*
-		pub enum $name:ident {
-			$(
-				$(
-					#[$caseattr:meta]
-				)*
-				$case:ident = $val:expr,
-			)*
-		}
-	} => {
-		$(
-			#[$attr]
-		)*
-		pub enum $name {
-			$(
-				$(
-					#[$caseattr]
-				)*
-				$case = $val,
-			)*
-		}
-
-		impl_try_from_enum_inner1! {
-			enum $name : u8 {
-				$( $case, )*
-			}
-		}
-		impl_try_from_enum_inner1! {
-			enum $name : u16 {
-				$( $case, )*
-			}
-		}
-		impl_try_from_enum_inner1! {
-			enum $name : u32 {
-				$( $case, )*
-			}
-		}
-		impl_try_from_enum_inner1! {
-			enum $name : i8 {
-				$( $case, )*
-			}
-		}
-		impl_try_from_enum_inner1! {
-			enum $name : i16 {
-				$( $case, )*
-			}
-		}
-		impl_try_from_enum_inner1! {
-			enum $name : i32 {
-				$( $case, )*
-			}
-		}
-	}
+macro_rules! impl_try_from2 {
+	($enum:ty) => {
+		impl_try_from2_inner!($enum, u8, from_u8, to_u8);
+		impl_try_from2_inner!($enum, u16, from_u16, to_u16);
+		impl_try_from2_inner!($enum, u32, from_u32, to_u32);
+		impl_try_from2_inner!($enum, u64, from_u64, to_u64);
+		impl_try_from2_inner!($enum, i8, from_i8, to_i8);
+		impl_try_from2_inner!($enum, i16, from_i16, to_i16);
+		impl_try_from2_inner!($enum, i32, from_i32, to_i32);
+		impl_try_from2_inner!($enum, i64, from_i64, to_i64);
+	};
 }
