@@ -1,5 +1,3 @@
-#![allow(deprecated)]
-
 #[cfg(feature = "specs")]
 use specs::{Component, DenseVecStorage};
 

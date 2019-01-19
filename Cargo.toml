@@ -20,10 +20,10 @@ custom_data = ["serde", "serde_json"]
 lazy_static = "1.0"
 fnv = "1.0"
 dimensioned = "0.7"
-specs-derive = "0.3"
+specs-derive = "0.4"
 derive_more = "0.13"
 enum-primitive-derive = "0.1"
-num-traits = "0.1"
+num-traits = "0.2"
 
 [dependencies.specs]
 version = "0.14"
