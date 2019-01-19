@@ -1,6 +1,6 @@
 [package]
 name = "airmash-protocol"
-version = "0.2.6"
+version = "0.3.0"
 authors = ["STEAMROLLER"]
 readme = "README.md"
 description = "Protocol library for airma.sh"
