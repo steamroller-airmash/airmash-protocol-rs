@@ -131,13 +131,20 @@ impl<T> Vector2<T> {
 		self,
 	) -> Vector2<<T as Div<<<<T as Mul>::Output as Add>::Output as Sqrt>::Output>>::Output>
 	where
-		Self: Clone,
+		Self: Clone + Eq + Default,
 		T: Mul + Div<<<<T as Mul>::Output as Add>::Output as Sqrt>::Output>,
 		<T as Mul>::Output: Add,
 		<<T as Mul>::Output as Add>::Output: Sqrt,
 		<<<T as Mul>::Output as Add>::Output as Sqrt>::Output: Clone + NotVec,
+		<T as Div<<<<T as Mul>::Output as Add>::Output as Sqrt>::Output>>::Output: Default,
 	{
-		self.clone() / self.length()
+		// Avoid returning NaN when using floating point operands
+		// and self == (0.0, 0.0)
+		if self == Self::default() {
+			Default::default()
+		} else {
+			self.clone() / self.length()
+		}
 	}
 }
 

@@ -2,7 +2,7 @@ use {ClientPacket, ServerPacket};
 
 use std::error::Error;
 
-type ServerPacketIterator = Box<Iterator<Item = Vec<u8>>>;
+type ServerPacketIterator = Box<dyn Iterator<Item = Vec<u8>>>;
 
 /// Interface to implement for all protocols.
 pub trait Protocol: Sync + Send {
