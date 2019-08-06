@@ -131,7 +131,7 @@ impl<T> Vector2<T> {
 		self,
 	) -> Vector2<<T as Div<<<<T as Mul>::Output as Add>::Output as Sqrt>::Output>>::Output>
 	where
-		Self: Clone + Eq + Default,
+		Self: Clone + PartialEq + Default,
 		T: Mul + Div<<<<T as Mul>::Output as Add>::Output as Sqrt>::Output>,
 		<T as Mul>::Output: Add,
 		<<T as Mul>::Output as Add>::Output: Sqrt,
