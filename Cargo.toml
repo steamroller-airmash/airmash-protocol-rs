@@ -13,27 +13,28 @@ circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
 maintenance = { status = "experimental" }
 
 [features]
+serde = [ "serde-feature-hack", "serde_json" ]
 default = ["custom_data"]
-custom_data = ["serde", "serde_json"]
+custom_data = ["serde"]
 
 [dependencies]
 lazy_static = "1.0"
 fnv = "1.0"
 dimensioned = "0.7"
 specs-derive = "0.4"
-derive_more = "0.13"
+derive_more = "0.15"
 enum-primitive-derive = "0.1"
 num-traits = "0.2"
 
 [dependencies.specs]
-version = "0.14"
+version = "0.15"
 optional = true
 
 [dependencies.serde_json]
 version = "1.0"
 optional = true
 
-[dependencies.serde]
-version = "1.0"
+[dependencies.serde-feature-hack]
+version = "0.2"
 features = ["derive"]
 optional = true
