@@ -1,4 +1,4 @@
-use enums::LeaveHorizonType;
+use crate::enums::LeaveHorizonType;
 
 /// Event for when a player goes beyond the
 /// event horizon.

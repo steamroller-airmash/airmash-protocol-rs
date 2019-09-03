@@ -1,4 +1,4 @@
-use types::{Player, Score};
+use crate::types::{Player, Score};
 
 /// Stats for the current player
 #[derive(Copy, Clone, Debug)]

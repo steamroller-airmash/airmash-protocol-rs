@@ -1,4 +1,4 @@
-use {ClientPacket, ServerPacket};
+use crate::{ClientPacket, ServerPacket};
 
 use std::error::Error;
 

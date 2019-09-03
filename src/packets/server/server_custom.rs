@@ -1,4 +1,4 @@
-use enums::ServerCustomType;
+use crate::enums::ServerCustomType;
 
 /// End of game packet for CTF and BTR.
 ///

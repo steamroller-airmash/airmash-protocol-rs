@@ -174,7 +174,7 @@ impl TryFrom<String> for FlagCode {
 	type Error = ();
 
 	fn try_from(s: String) -> Result<Self, ()> {
-		use consts::flags::STR_TO_FLAG;
+		use crate::consts::flags::STR_TO_FLAG;
 		let ref_str: &str = &s.to_uppercase();
 
 		match STR_TO_FLAG.get(ref_str) {

@@ -1,4 +1,4 @@
-use enums::ErrorType;
+use crate::enums::ErrorType;
 
 /// The client has carried out an invalid action,
 /// been ratelimited, or is banned.

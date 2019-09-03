@@ -1,4 +1,4 @@
-use types::{Player, Position, Rotation, Upgrades};
+use crate::types::{Player, Position, Rotation, Upgrades};
 
 /// Packet for when a player respawns.
 #[derive(Copy, Clone, Debug)]

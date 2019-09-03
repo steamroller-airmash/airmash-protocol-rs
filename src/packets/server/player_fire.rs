@@ -1,5 +1,5 @@
-use enums::MobType;
-use types::{Accel, Energy, EnergyRegen, Mob, Player, Position, Speed, Velocity};
+use crate::enums::MobType;
+use crate::types::{Accel, Energy, EnergyRegen, Mob, Player, Position, Speed, Velocity};
 
 /// Data on a projectile fired by a plane.
 ///

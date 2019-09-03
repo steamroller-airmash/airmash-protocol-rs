@@ -1,4 +1,4 @@
-use types::{Player, Position, Rotation, ServerKeyState, Velocity};
+use crate::types::{Player, Position, Rotation, ServerKeyState, Velocity};
 
 /// A player has run into a wall
 #[derive(Copy, Clone, Debug)]

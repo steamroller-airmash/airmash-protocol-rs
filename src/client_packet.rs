@@ -1,4 +1,4 @@
-use client::*;
+use crate::client::*;
 
 /// All possible client packets.
 ///

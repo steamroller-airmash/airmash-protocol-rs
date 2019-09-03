@@ -1,4 +1,4 @@
-use types::Player;
+use crate::types::Player;
 
 /// Update which player the client is spectating.
 #[derive(Copy, Clone, Debug)]

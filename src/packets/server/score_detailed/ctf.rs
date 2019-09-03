@@ -1,4 +1,4 @@
-use types::{Level, Player, Score};
+use crate::types::{Level, Player, Score};
 
 /// Per-player data for detailed (tab) menu in CTF.
 #[derive(Copy, Clone, Debug)]

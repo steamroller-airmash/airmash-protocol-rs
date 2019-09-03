@@ -1,4 +1,4 @@
-use types::Player;
+use crate::types::Player;
 
 /// A player has been votemuted
 #[derive(Copy, Clone, Debug)]

@@ -1,4 +1,4 @@
-use enums::ServerMessageType;
+use crate::enums::ServerMessageType;
 
 /// Server banned message
 #[derive(Clone, Debug)]

@@ -1,5 +1,5 @@
-use enums::{FirewallStatus, FirewallUpdateType};
-use types::Position;
+use crate::enums::{FirewallStatus, FirewallUpdateType};
+use crate::types::Position;
 
 /// Update the "Wall of Fire" in BTR
 #[derive(Copy, Clone, Debug)]

@@ -1,4 +1,4 @@
-use types::{Energy, EnergyRegen, Player};
+use crate::types::{Energy, EnergyRegen, Player};
 
 /// A prowler has entered/exited stealth mode
 #[derive(Copy, Clone, Debug)]

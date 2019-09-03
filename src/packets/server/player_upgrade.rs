@@ -1,4 +1,4 @@
-use enums::UpgradeType;
+use crate::enums::UpgradeType;
 
 /// A player has upgraded themselves.
 #[derive(Copy, Clone, Debug)]

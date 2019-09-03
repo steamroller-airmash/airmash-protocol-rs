@@ -1,4 +1,4 @@
-use enums::CommandReplyType;
+use crate::enums::CommandReplyType;
 
 /// Reply to a [`Command`](../client/struct.command.html).
 #[derive(Clone, Debug)]

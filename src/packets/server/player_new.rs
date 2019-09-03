@@ -1,5 +1,5 @@
-use enums::{FlagCode, PlaneType, PlayerStatus};
-use types::{Player, Position, Rotation, Team, Upgrades};
+use crate::enums::{FlagCode, PlaneType, PlayerStatus};
+use crate::types::{Player, Position, Rotation, Team, Upgrades};
 
 /// Data for a newly-joined player.
 #[derive(Clone, Debug)]

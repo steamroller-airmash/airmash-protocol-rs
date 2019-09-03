@@ -1,4 +1,4 @@
-use types::{Level, Player, Position, Score};
+use crate::types::{Level, Player, Position, Score};
 
 /// Leaderboard data, part of the [`ScoreBoard`] packet.
 #[derive(Copy, Clone, Debug)]

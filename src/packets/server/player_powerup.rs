@@ -1,4 +1,4 @@
-use enums::PowerupType;
+use crate::enums::PowerupType;
 
 /// The current player picked up a powerup.
 #[derive(Copy, Clone, Debug)]

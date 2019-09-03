@@ -1,4 +1,4 @@
-use types::{Player, Position};
+use crate::types::{Player, Position};
 
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

@@ -1,5 +1,5 @@
-use enums::MobType;
-use types::{Accel, Mob, Position, Speed, Velocity};
+use crate::enums::MobType;
+use crate::types::{Accel, Mob, Position, Speed, Velocity};
 
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]

@@ -1,4 +1,4 @@
-use types::{Player, Position, Rotation, ServerKeyState, Upgrades, Velocity};
+use crate::types::{Player, Position, Rotation, ServerKeyState, Upgrades, Velocity};
 
 /// Movement update for a player.
 #[derive(Copy, Clone, Debug)]

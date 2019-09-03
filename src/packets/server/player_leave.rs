@@ -1,4 +1,4 @@
-use types::Player;
+use crate::types::Player;
 
 /// Packet for when a player leaves.
 #[derive(Copy, Clone, Debug)]

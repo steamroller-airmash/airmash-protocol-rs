@@ -1,4 +1,4 @@
-use server::*;
+use crate::server::*;
 
 /// All possible server packets.
 ///

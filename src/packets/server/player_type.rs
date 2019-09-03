@@ -1,5 +1,5 @@
-use enums::PlaneType;
-use types::Player;
+use crate::enums::PlaneType;
+use crate::types::Player;
 
 /// A player has switched planes.
 #[derive(Copy, Clone, Debug)]

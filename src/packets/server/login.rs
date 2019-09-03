@@ -1,5 +1,5 @@
-use enums::{FlagCode, GameType, PlaneType, PlayerStatus};
-use types::{Level, Player, Position, Rotation, Team, Upgrades};
+use crate::enums::{FlagCode, GameType, PlaneType, PlayerStatus};
+use crate::types::{Level, Player, Position, Rotation, Team, Upgrades};
 
 /// Initial data passed in for a
 /// player when the server starts.

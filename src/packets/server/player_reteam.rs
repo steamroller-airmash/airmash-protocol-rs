@@ -1,4 +1,4 @@
-use types::{Player, Team};
+use crate::types::{Player, Team};
 
 /// Details about a player that has switched teams.
 #[derive(Copy, Clone, Debug)]

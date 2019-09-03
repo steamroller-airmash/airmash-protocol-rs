@@ -45,14 +45,14 @@ macro_rules! impl_from_empty_inner {
 macro_rules! impl_try_from2_inner {
 	($enum:ty, $val:ident, $from:ident, $to:ident) => {
 		impl std::convert::TryFrom<$val> for $enum {
-			type Error = ::error::EnumValueOutOfRangeError<$val>;
+			type Error = crate::error::EnumValueOutOfRangeError<$val>;
 
 			fn try_from(v: $val) -> Result<Self, Self::Error> {
 				use num_traits::FromPrimitive;
 
 				match Self::$from(v) {
 					Some(x) => Ok(x),
-					None => Err(::error::EnumValueOutOfRangeError(v)),
+					None => Err(crate::error::EnumValueOutOfRangeError(v)),
 				}
 			}
 		}

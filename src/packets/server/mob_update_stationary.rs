@@ -1,5 +1,5 @@
-use enums::MobType;
-use types::{Mob, Position};
+use crate::enums::MobType;
+use crate::types::{Mob, Position};
 
 /// Update for powerups
 #[derive(Copy, Clone, Debug)]

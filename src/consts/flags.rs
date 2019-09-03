@@ -1,4 +1,4 @@
-use enums::FlagCode;
+use crate::enums::FlagCode;
 use fnv::FnvHashMap;
 
 lazy_static! {

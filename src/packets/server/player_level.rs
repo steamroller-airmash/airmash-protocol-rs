@@ -1,5 +1,5 @@
-use enums::PlayerLevelType;
-use types::{Level, Player};
+use crate::enums::PlayerLevelType;
+use crate::types::{Level, Player};
 
 /// Assign a level to a player. Either the player
 /// levelled up, or the server is updating their

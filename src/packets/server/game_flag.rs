@@ -1,5 +1,5 @@
-use enums::FlagUpdateType;
-use types::{Flag, Player, Position};
+use crate::enums::FlagUpdateType;
+use crate::types::{Flag, Player, Position};
 
 /// Update position of flag in CTF
 #[derive(Copy, Clone, Debug)]

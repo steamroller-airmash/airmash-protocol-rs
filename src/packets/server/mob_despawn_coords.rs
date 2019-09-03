@@ -1,5 +1,5 @@
-use enums::MobType;
-use types::{Mob, Position};
+use crate::enums::MobType;
+use crate::types::{Mob, Position};
 
 /// A missile despawned with an explosion
 /// This is used when a missile

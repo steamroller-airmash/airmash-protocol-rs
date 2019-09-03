@@ -1,5 +1,5 @@
-use enums::DespawnType;
-use types::Mob;
+use crate::enums::DespawnType;
+use crate::types::Mob;
 
 /// A mob despawned
 /// This is used when a powerup despawns

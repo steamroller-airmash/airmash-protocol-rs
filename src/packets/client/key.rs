@@ -1,4 +1,4 @@
-use enums::KeyCode;
+use crate::enums::KeyCode;
 
 /// Send a key update for the client.
 ///

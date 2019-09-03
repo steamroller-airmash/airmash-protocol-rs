@@ -1,5 +1,5 @@
+use crate::Team;
 use std::time::Duration;
-use Team;
 
 use super::utils::*;
 

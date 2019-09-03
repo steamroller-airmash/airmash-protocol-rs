@@ -1,5 +1,5 @@
 pub(crate) mod flag_code {
-	use enums::FlagCode;
+	use crate::enums::FlagCode;
 	use serde::*;
 	use std::convert::TryInto;
 

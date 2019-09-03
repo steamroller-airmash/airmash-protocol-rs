@@ -1,5 +1,5 @@
-use enums::FlagCode;
-use types::Player;
+use crate::enums::FlagCode;
+use crate::types::Player;
 
 /// Packet for when a player changes their flag.
 #[derive(Copy, Clone, Debug)]

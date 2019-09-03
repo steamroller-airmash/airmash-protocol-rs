@@ -1,4 +1,4 @@
-use types::Player;
+use crate::types::Player;
 
 /// Send a whisper to another player.
 #[derive(Clone, Debug)]

@@ -1,4 +1,4 @@
-use types::Player;
+use crate::types::Player;
 
 /// Vote to mute a player
 #[derive(Copy, Clone, Debug)]

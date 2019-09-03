@@ -1,4 +1,4 @@
-use types::{Energy, EnergyRegen, Player, Position, Rotation, Velocity};
+use crate::types::{Energy, EnergyRegen, Player, Position, Rotation, Velocity};
 
 /// A predator has begun/stopped boosting
 #[derive(Copy, Clone, Debug)]

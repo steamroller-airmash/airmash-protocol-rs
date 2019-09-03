@@ -1,4 +1,4 @@
-use types::Team;
+use crate::types::Team;
 
 #[cfg(feature = "specs")]
 use specs::{Component, DenseVecStorage};

@@ -1,5 +1,5 @@
-use enums::MobType;
-use types::{
+use crate::enums::MobType;
+use crate::types::{
 	Accel, Energy, EnergyRegen, Health, HealthRegen, Mob, Player, Position, Rotation,
 	ServerKeyState, Speed, Velocity,
 };
