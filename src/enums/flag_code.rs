@@ -31,7 +31,6 @@ use std::str::FromStr;
 /// [2]: #variant.UnitedNations
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Primitive)]
 #[cfg_attr(feature = "specs", derive(Component))]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum FlagCode {
 	SyrianArabRepublic = 1,
 	Thailand = 2,

@@ -16,18 +16,19 @@ use super::utils::*;
 ///
 /// [0]: ../packets/client/struct.ServerCustom.html
 /// [1]: ../enum.FlagCode.html#variant.UnitedNations
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct BTRData {
-	#[serde(rename = "p")]
+	#[cfg_attr(feature = "serde", serde(rename = "p"))]
 	pub player: String,
-	#[serde(rename = "b")]
+	#[cfg_attr(feature = "serde", serde(rename = "b"))]
 	pub bounty: u32,
-	#[serde(rename = "f")]
-	#[serde(with = "flag_code")]
+	#[cfg_attr(feature = "serde", serde(rename = "f"))]
+	#[cfg_attr(feature = "serde", serde(with = "flag_code"))]
 	pub flag: FlagCode,
-	#[serde(rename = "k")]
+	#[cfg_attr(feature = "serde", serde(rename = "k"))]
 	pub kills: u32,
-	#[serde(rename = "t")]
-	#[serde(with = "duration")]
+	#[cfg_attr(feature = "serde", serde(rename = "t"))]
+	#[cfg_attr(feature = "serde", serde(with = "duration"))]
 	pub duration: Duration,
 }
