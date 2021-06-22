@@ -10,7 +10,6 @@ use specs::{Component, DenseVecStorage};
 /// relying upon them.
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Primitive)]
 #[cfg_attr(feature = "specs", derive(Component))]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum LeaveHorizonType {
 	Player = 0,
 	Mob = 1,

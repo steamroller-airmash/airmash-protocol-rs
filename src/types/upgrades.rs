@@ -17,7 +17,6 @@ use specs::{Component, DenseVecStorage};
 /// - [`PlayerRespawn`](server/struct.PlayerRespawn.html)
 /// - [`PlayerUpgrade`](server/struct.PlayerUpgrade.html)
 #[derive(Copy, Clone, Debug, Default, Hash, Eq, PartialEq)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Upgrades {
 	/// The number of speed upgrades that the player currently

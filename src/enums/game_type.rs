@@ -20,7 +20,6 @@ use specs::{Component, DenseVecStorage};
 /// [2]: server/struct.ScoreDetailedBTR.html
 #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq, Primitive)]
 #[cfg_attr(feature = "specs", derive(Component))]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub enum GameType {
 	FFA = 1,
 	CTF = 2,
