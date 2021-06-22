@@ -21,9 +21,8 @@ use crate::enums::ServerCustomType;
 /// - `f`: The flag id of the winning player.
 /// - `b`: The bounty given to the winning player.
 /// - `k`: The number of kills that the winning player has.
-/// - `t`: The time (in seconds) that the banner should
-///        remain on the screen before closing (unless
-///        closed by the player.)
+/// - `t`: The time (in seconds) that the banner should remain on the screen
+///   before closing (unless closed by the player.)
 #[derive(Clone, Debug)]
 pub struct ServerCustom {
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
