@@ -8,29 +8,29 @@ use crate::types::{Level, Player, Position, Rotation, Team, Upgrades};
 /// array within the [`Login`] packet.
 #[derive(Clone, Debug)]
 pub struct LoginPlayer {
-	pub id: Player,
-	pub status: PlayerStatus,
-	pub level: Level,
-	pub name: String,
-	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: PlaneType,
-	pub team: Team,
-	pub pos: Position,
-	pub rot: Rotation,
-	pub flag: FlagCode,
-	pub upgrades: Upgrades,
+  pub id: Player,
+  pub status: PlayerStatus,
+  pub level: Level,
+  pub name: String,
+  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  pub ty: PlaneType,
+  pub team: Team,
+  pub pos: Position,
+  pub rot: Rotation,
+  pub flag: FlagCode,
+  pub upgrades: Upgrades,
 }
 
 /// Initial Login packet sent to the server
 #[derive(Clone, Debug)]
 pub struct Login {
-	pub success: bool,
-	pub id: Player,
-	pub team: Team,
-	pub clock: u32,
-	pub token: String,
-	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: GameType,
-	pub room: String,
-	pub players: Vec<LoginPlayer>,
+  pub success: bool,
+  pub id: Player,
+  pub team: Team,
+  pub clock: u32,
+  pub token: String,
+  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  pub ty: GameType,
+  pub room: String,
+  pub players: Vec<LoginPlayer>,
 }

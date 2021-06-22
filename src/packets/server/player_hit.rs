@@ -5,18 +5,18 @@ use crate::types::{Health, HealthRegen, Mob, Player, Position};
 /// fired by another player.
 #[derive(Copy, Clone, Debug)]
 pub struct PlayerHitPlayer {
-	pub id: Player,
-	pub health: Health,
-	pub health_regen: HealthRegen,
+  pub id: Player,
+  pub health: Health,
+  pub health_regen: HealthRegen,
 }
 
 /// Event for when players have been hit by a missile.
 #[derive(Clone, Debug)]
 pub struct PlayerHit {
-	pub id: Mob,
-	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: MobType,
-	pub pos: Position,
-	pub owner: Player,
-	pub players: Vec<PlayerHitPlayer>,
+  pub id: Mob,
+  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  pub ty: MobType,
+  pub pos: Position,
+  pub owner: Player,
+  pub players: Vec<PlayerHitPlayer>,
 }

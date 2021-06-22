@@ -23,32 +23,32 @@ use crate::client::*;
 /// [1]: https://doc.rust-lang.org/std/convert/trait.Into.html#tymethod.into
 #[derive(Clone, Debug)]
 pub enum ClientPacket {
-	Login(Login),
-	Backup(Backup),
-	Horizon(Horizon),
-	Ack,
-	Pong(Pong),
-	Key(Key),
-	Command(Command),
-	ScoreDetailed,
-	Chat(Chat),
-	TeamChat(TeamChat),
-	Whisper(Whisper),
-	Say(Say),
-	VoteMute(VoteMute),
-	LocalPing(LocalPing),
+  Login(Login),
+  Backup(Backup),
+  Horizon(Horizon),
+  Ack,
+  Pong(Pong),
+  Key(Key),
+  Command(Command),
+  ScoreDetailed,
+  Chat(Chat),
+  TeamChat(TeamChat),
+  Whisper(Whisper),
+  Say(Say),
+  VoteMute(VoteMute),
+  LocalPing(LocalPing),
 }
 
 macro_rules! impl_from_newtype {
-	($type:tt) => {
-		impl_from_newtype_inner!(ClientPacket, $type);
-	};
+  ($type:tt) => {
+    impl_from_newtype_inner!(ClientPacket, $type);
+  };
 }
 
 macro_rules! impl_from_empty {
-	($type:tt) => {
-		impl_from_empty_inner!(ClientPacket, $type);
-	};
+  ($type:tt) => {
+    impl_from_empty_inner!(ClientPacket, $type);
+  };
 }
 
 impl_from_newtype!(Login);

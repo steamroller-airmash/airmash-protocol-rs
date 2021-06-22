@@ -19,16 +19,16 @@ use super::utils::*;
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct BTRData {
-	#[cfg_attr(feature = "serde", serde(rename = "p"))]
-	pub player: String,
-	#[cfg_attr(feature = "serde", serde(rename = "b"))]
-	pub bounty: u32,
-	#[cfg_attr(feature = "serde", serde(rename = "f"))]
-	#[cfg_attr(feature = "serde", serde(with = "flag_code"))]
-	pub flag: FlagCode,
-	#[cfg_attr(feature = "serde", serde(rename = "k"))]
-	pub kills: u32,
-	#[cfg_attr(feature = "serde", serde(rename = "t"))]
-	#[cfg_attr(feature = "serde", serde(with = "duration"))]
-	pub duration: Duration,
+  #[cfg_attr(feature = "serde", serde(rename = "p"))]
+  pub player: String,
+  #[cfg_attr(feature = "serde", serde(rename = "b"))]
+  pub bounty: u32,
+  #[cfg_attr(feature = "serde", serde(rename = "f"))]
+  #[cfg_attr(feature = "serde", serde(with = "flag_code"))]
+  pub flag: FlagCode,
+  #[cfg_attr(feature = "serde", serde(rename = "k"))]
+  pub kills: u32,
+  #[cfg_attr(feature = "serde", serde(rename = "t"))]
+  #[cfg_attr(feature = "serde", serde(with = "duration"))]
+  pub duration: Duration,
 }

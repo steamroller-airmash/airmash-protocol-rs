@@ -6,8 +6,8 @@ use crate::types::{Level, Player};
 /// level for all clients.
 #[derive(Copy, Clone, Debug)]
 pub struct PlayerLevel {
-	pub id: Player,
-	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: PlayerLevelType,
-	pub level: Level,
+  pub id: Player,
+  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  pub ty: PlayerLevelType,
+  pub level: Level,
 }

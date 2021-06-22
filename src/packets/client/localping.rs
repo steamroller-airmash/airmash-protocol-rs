@@ -2,5 +2,5 @@
 /// used in the official client.
 #[derive(Copy, Clone, Debug)]
 pub struct LocalPing {
-	pub auth: u32,
+  pub auth: u32,
 }

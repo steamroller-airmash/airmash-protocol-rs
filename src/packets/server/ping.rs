@@ -8,6 +8,6 @@
 /// disconnected by the server.
 #[derive(Copy, Clone, Debug)]
 pub struct Ping {
-	pub clock: u32,
-	pub num: u32,
+  pub clock: u32,
+  pub num: u32,
 }

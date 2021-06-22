@@ -16,11 +16,11 @@ use super::utils::*;
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CTFData {
-	#[cfg_attr(feature = "serde", serde(rename = "w"))]
-	pub winner: Team,
-	#[cfg_attr(feature = "serde", serde(rename = "b"))]
-	pub bounty: u32,
-	#[cfg_attr(feature = "serde", serde(rename = "t"))]
-	#[cfg_attr(feature = "serde", serde(with = "duration"))]
-	pub duration: Duration,
+  #[cfg_attr(feature = "serde", serde(rename = "w"))]
+  pub winner: Team,
+  #[cfg_attr(feature = "serde", serde(rename = "b"))]
+  pub bounty: u32,
+  #[cfg_attr(feature = "serde", serde(rename = "t"))]
+  #[cfg_attr(feature = "serde", serde(with = "duration"))]
+  pub duration: Duration,
 }
