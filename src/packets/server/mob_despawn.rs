@@ -8,7 +8,7 @@ use crate::types::Mob;
 /// an explosion to be shown at the location.
 #[derive(Copy, Clone, Debug)]
 pub struct MobDespawn {
-	pub id: Mob,
-	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: DespawnType,
+  pub id: Mob,
+  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  pub ty: DespawnType,
 }

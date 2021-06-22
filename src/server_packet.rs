@@ -20,64 +20,64 @@ use crate::server::*;
 /// [1]: https://doc.rust-lang.org/std/convert/trait.Into.html#tymethod.into
 #[derive(Clone, Debug)]
 pub enum ServerPacket {
-	Login(Login),
-	Backup,
-	Ping(Ping),
-	PingResult(PingResult),
-	Ack,
-	Error(Error),
-	CommandReply(CommandReply),
-	PlayerNew(PlayerNew),
-	PlayerLeave(PlayerLeave),
-	PlayerUpdate(PlayerUpdate),
-	PlayerFire(PlayerFire),
-	PlayerRespawn(PlayerRespawn),
-	PlayerFlag(PlayerFlag),
-	PlayerHit(PlayerHit),
-	PlayerKill(PlayerKill),
-	PlayerUpgrade(PlayerUpgrade),
-	PlayerType(PlayerType),
-	PlayerPowerup(PlayerPowerup),
-	PlayerLevel(PlayerLevel),
-	PlayerReteam(PlayerReteam),
-	GameFlag(GameFlag),
-	GameSpectate(GameSpectate),
-	GamePlayersAlive(GamePlayersAlive),
-	GameFirewall(GameFirewall),
-	EventRepel(EventRepel),
-	EventBoost(EventBoost),
-	EventBounce(EventBounce),
-	EventStealth(EventStealth),
-	EventLeaveHorizon(EventLeaveHorizon),
-	MobUpdate(MobUpdate),
-	MobUpdateStationary(MobUpdateStationary),
-	MobDespawn(MobDespawn),
-	MobDespawnCoords(MobDespawnCoords),
-	ScoreUpdate(ScoreUpdate),
-	ScoreBoard(ScoreBoard),
-	ScoreDetailedFFA(ScoreDetailedFFA),
-	ScoreDetailedCTF(ScoreDetailedCTF),
-	ScoreDetailedBTR(ScoreDetailedBTR),
-	ChatTeam(ChatTeam),
-	ChatPublic(ChatPublic),
-	ChatSay(ChatSay),
-	ChatWhisper(ChatWhisper),
-	ChatVoteMutePassed(ChatVoteMutePassed),
-	ChatVoteMuted,
-	ServerMessage(ServerMessage),
-	ServerCustom(ServerCustom),
+  Login(Login),
+  Backup,
+  Ping(Ping),
+  PingResult(PingResult),
+  Ack,
+  Error(Error),
+  CommandReply(CommandReply),
+  PlayerNew(PlayerNew),
+  PlayerLeave(PlayerLeave),
+  PlayerUpdate(PlayerUpdate),
+  PlayerFire(PlayerFire),
+  PlayerRespawn(PlayerRespawn),
+  PlayerFlag(PlayerFlag),
+  PlayerHit(PlayerHit),
+  PlayerKill(PlayerKill),
+  PlayerUpgrade(PlayerUpgrade),
+  PlayerType(PlayerType),
+  PlayerPowerup(PlayerPowerup),
+  PlayerLevel(PlayerLevel),
+  PlayerReteam(PlayerReteam),
+  GameFlag(GameFlag),
+  GameSpectate(GameSpectate),
+  GamePlayersAlive(GamePlayersAlive),
+  GameFirewall(GameFirewall),
+  EventRepel(EventRepel),
+  EventBoost(EventBoost),
+  EventBounce(EventBounce),
+  EventStealth(EventStealth),
+  EventLeaveHorizon(EventLeaveHorizon),
+  MobUpdate(MobUpdate),
+  MobUpdateStationary(MobUpdateStationary),
+  MobDespawn(MobDespawn),
+  MobDespawnCoords(MobDespawnCoords),
+  ScoreUpdate(ScoreUpdate),
+  ScoreBoard(ScoreBoard),
+  ScoreDetailedFFA(ScoreDetailedFFA),
+  ScoreDetailedCTF(ScoreDetailedCTF),
+  ScoreDetailedBTR(ScoreDetailedBTR),
+  ChatTeam(ChatTeam),
+  ChatPublic(ChatPublic),
+  ChatSay(ChatSay),
+  ChatWhisper(ChatWhisper),
+  ChatVoteMutePassed(ChatVoteMutePassed),
+  ChatVoteMuted,
+  ServerMessage(ServerMessage),
+  ServerCustom(ServerCustom),
 }
 
 macro_rules! impl_from_newtype {
-	($type:tt) => {
-		impl_from_newtype_inner!(ServerPacket, $type);
-	};
+  ($type:tt) => {
+    impl_from_newtype_inner!(ServerPacket, $type);
+  };
 }
 
 macro_rules! impl_from_empty {
-	($type:tt) => {
-		impl_from_empty_inner!(ServerPacket, $type);
-	};
+  ($type:tt) => {
+    impl_from_empty_inner!(ServerPacket, $type);
+  };
 }
 
 impl_from_newtype!(Login);

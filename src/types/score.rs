@@ -5,21 +5,21 @@ use specs::{Component, DenseVecStorage};
 ///
 /// TODO: Implement arithmetic operations
 #[derive(
-	Copy,
-	Clone,
-	Eq,
-	Hash,
-	Debug,
-	Default,
-	PartialEq,
-	Ord,
-	PartialOrd,
-	From,
-	Into,
-	Add,
-	Sub,
-	Constructor,
-	AddAssign,
+  Copy,
+  Clone,
+  Eq,
+  Hash,
+  Debug,
+  Default,
+  PartialEq,
+  Ord,
+  PartialOrd,
+  From,
+  Into,
+  Add,
+  Sub,
+  Constructor,
+  AddAssign,
 )]
 #[cfg_attr(feature = "specs", derive(Component))]
 pub struct Score(pub u32);

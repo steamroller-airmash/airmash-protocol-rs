@@ -9,9 +9,9 @@ use crate::enums::LeaveHorizonType;
 /// event horizon.
 #[derive(Copy, Clone, Debug)]
 pub struct EventLeaveHorizon {
-	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
-	pub ty: LeaveHorizonType,
-	/// This could be either a player or a mob
-	/// TODO: Create Entity type
-	pub id: u16,
+  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  pub ty: LeaveHorizonType,
+  /// This could be either a player or a mob
+  /// TODO: Create Entity type
+  pub id: u16,
 }

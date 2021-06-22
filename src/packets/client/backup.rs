@@ -13,5 +13,5 @@
 /// in head of line blocking.
 #[derive(Clone, Debug)]
 pub struct Backup {
-	pub token: String,
+  pub token: String,
 }

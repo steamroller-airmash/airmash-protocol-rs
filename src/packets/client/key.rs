@@ -8,7 +8,7 @@ use crate::enums::KeyCode;
 /// - `state`: `true` -> pressed, `false` -> released.
 #[derive(Copy, Clone, Debug)]
 pub struct Key {
-	pub seq: u32,
-	pub key: KeyCode,
-	pub state: bool,
+  pub seq: u32,
+  pub key: KeyCode,
+  pub state: bool,
 }

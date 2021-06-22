@@ -4,5 +4,5 @@ use crate::enums::ErrorType;
 /// been ratelimited, or is banned.
 #[derive(Copy, Clone, Debug)]
 pub struct Error {
-	pub error: ErrorType,
+  pub error: ErrorType,
 }
