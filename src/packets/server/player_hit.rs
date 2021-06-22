@@ -1,8 +1,7 @@
 use crate::enums::MobType;
 use crate::types::{Health, HealthRegen, Mob, Player, Position};
 
-/// Data on a player that has been hit by a shot
-/// fired by another player.
+/// Data on a player that has been hit by a shot fired by another player.
 #[derive(Copy, Clone, Debug)]
 pub struct PlayerHitPlayer {
   pub id: Player,

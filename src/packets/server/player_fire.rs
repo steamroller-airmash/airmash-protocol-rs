@@ -3,8 +3,7 @@ use crate::types::{Accel, Energy, EnergyRegen, Mob, Player, Position, Speed, Vel
 
 /// Data on a projectile fired by a plane.
 ///
-/// This is used in the `projectiles` array
-/// of the [`PlayerFire`] packet.
+/// This is used in the `projectiles` array of the [`PlayerFire`] packet.
 #[derive(Copy, Clone, Debug)]
 pub struct PlayerFireProjectile {
   pub id: Mob,
