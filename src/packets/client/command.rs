@@ -74,7 +74,6 @@
 /// # }
 ///
 #[derive(Clone, Debug)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Command {
 	/// The command to send to the server. The
 	/// official server recognizes the commands

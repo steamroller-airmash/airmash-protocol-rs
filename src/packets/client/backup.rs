@@ -12,7 +12,6 @@
 /// this channel, allowing for some reduction
 /// in head of line blocking.
 #[derive(Clone, Debug)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Backup {
 	pub token: String,
 }
