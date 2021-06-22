@@ -1,5 +1,4 @@
 mod units;
-mod vector2;
 
 mod flag;
 mod level;
@@ -13,7 +12,7 @@ mod upgrades;
 pub use dimensioned::Sqrt;
 
 pub use self::units::*;
-pub use self::vector2::{NotVec, Vector2};
+pub use nalgebra::Vector2;
 
 pub use self::flag::Flag;
 pub use self::level::Level;
