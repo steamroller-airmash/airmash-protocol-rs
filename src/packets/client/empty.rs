@@ -1,4 +1,5 @@
-/// TODO: Figure out what this is for.
+/// Sent periodically by the client to indicate that it is still alive to the
+/// server.
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Ack;
 
