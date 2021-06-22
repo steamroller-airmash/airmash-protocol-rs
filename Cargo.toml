@@ -27,6 +27,8 @@ derive_more = "0.15"
 enum-primitive-derive = "0.1"
 num-traits = "0.2"
 
+bstr = "0.2.16"
+smallvec = "1.6.1"
 nalgebra = "0.27.1"
 phf = { version = "0.9", features=["macros"] }
 
