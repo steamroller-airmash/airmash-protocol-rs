@@ -1,7 +1,8 @@
 //! Packets that the client sends to the server.
 
+mod v5;
+
 use crate::enums::KeyCode;
-use crate::types::Player;
 
 /// Opening packet for opening a second server connection for the same client.
 ///
@@ -198,12 +199,12 @@ pub struct TeamChat {
 /// Vote to mute a player
 #[derive(Copy, Clone, Debug)]
 pub struct VoteMute {
-  pub id: Player,
+  pub id: u16,
 }
 
 /// Send a whisper to another player.
 #[derive(Clone, Debug)]
 pub struct Whisper {
-  pub id: Player,
+  pub id: u16,
   pub text: String,
 }
