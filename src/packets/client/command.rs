@@ -1,6 +1,5 @@
-/// A free form command to be sent to the server.
-/// This is used for changing flags, respawning,
-/// spectating players, and selecting upgrades.
+/// A free form command to be sent to the server. This is used for changing
+/// flags, respawning, spectating players, and selecting upgrades.
 ///
 /// # Changing a flag
 /// ```
