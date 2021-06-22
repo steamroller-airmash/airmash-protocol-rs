@@ -5,12 +5,10 @@
 ///
 /// [0]: ../client/struct.backup.html
 #[derive(Copy, Clone, Debug, Default)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Backup;
 
 /// TODO: Figure out what this does.
 #[derive(Copy, Clone, Debug, Default)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Ack;
 
 /// The current player has been votemuted.
@@ -20,5 +18,4 @@ pub struct Ack;
 ///
 /// [0]: ../client/struct.VoteMute.html
 #[derive(Copy, Clone, Debug, Default)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ChatVoteMuted;

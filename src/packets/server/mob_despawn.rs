@@ -7,9 +7,8 @@ use crate::types::Mob;
 /// hitting anything. It does not cause
 /// an explosion to be shown at the location.
 #[derive(Copy, Clone, Debug)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobDespawn {
 	pub id: Mob,
-	#[cfg_attr(feature = "serde", serde(rename = "type"))]
+	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
 	pub ty: DespawnType,
 }

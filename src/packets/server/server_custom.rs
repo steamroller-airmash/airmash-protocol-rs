@@ -25,9 +25,8 @@ use crate::enums::ServerCustomType;
 ///        remain on the screen before closing (unless
 ///        closed by the player.)
 #[derive(Clone, Debug)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ServerCustom {
-	#[cfg_attr(feature = "serde", serde(rename = "type"))]
+	// #[cfg_attr(feature = "serde", serde(rename = "type"))]
 	pub ty: ServerCustomType,
 	pub data: String,
 }

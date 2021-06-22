@@ -2,7 +2,6 @@ use crate::types::{Level, Player, Score};
 
 /// Per-player data for detailed (tab) menu in BTR.
 #[derive(Copy, Clone, Debug)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ScoreDetailedBTREntry {
 	pub id: Player,
 	pub level: Level,
@@ -16,7 +15,6 @@ pub struct ScoreDetailedBTREntry {
 }
 
 #[derive(Clone, Debug)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ScoreDetailedBTR {
 	pub scores: Vec<ScoreDetailedBTREntry>,
 }

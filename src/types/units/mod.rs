@@ -10,7 +10,7 @@ use crate::types::Vector2;
 /// of coordinates on the map is limited to the
 /// ranges `[-16384, 16384]` for `x` coordiantes and
 /// `[-8192, 8192]` for `y` coordinates.
-pub type Distance = self::base::Distance<BaseType>;
+pub type Distance = f32; //self::base::Distance<BaseType>;
 /// Time unit. (1 unit of time ~= 16.667ms)
 ///
 /// Usually you will want [`Duration`][0] instead
@@ -21,44 +21,44 @@ pub type Distance = self::base::Distance<BaseType>;
 ///
 /// [0]: https://doc.rust-lang.org/std/time/struct.Duration.html
 /// [1]: https://doc.rust-lang.org/std/convert/trait.From.html
-pub type Time = self::base::Time<BaseType>;
+pub type Time = f32; // self::base::Time<BaseType>;
 /// Health unit.
 ///
 /// This is used to represent the health of all players.
 /// While this unit can represent any floating point
 /// value, the only values that are valid when sent to
 /// the client are in the range `[0, 1]`.
-pub type Health = self::base::Health<BaseType>;
+pub type Health = f32; // self::base::Health<BaseType>;
 /// Energy unit.
 ///
 /// Used to represent the energy of all players.
 /// While this unit can represent any floating point
 /// value, only values in the range `[0, 1]` are valid
 /// when sent to the client.
-pub type Energy = self::base::Energy<BaseType>;
+pub type Energy = f32; // self::base::Energy<BaseType>;
 /// Unit for rotations (in radians).
 ///
 /// While this unit can represent any floating point
 /// value, only values in the range `[0, ~10)` will
 /// be sent properly to the client.
-pub type Rotation = self::base::Rotation<BaseType>;
+pub type Rotation = f32; // self::base::Rotation<BaseType>;
 
 /// Unit of `Health / Time`.
 ///
 /// Represents how fast a plane regenerates lost health.
-pub type HealthRegen = self::base::HealthRegen<BaseType>;
+pub type HealthRegen = f32; // self::base::HealthRegen<BaseType>;
 /// Unit of `Energy / Time`.
 ///
 /// Represents how fast a plane regenerates used energy.
-pub type EnergyRegen = self::base::EnergyRegen<BaseType>;
+pub type EnergyRegen = f32; // self::base::EnergyRegen<BaseType>;
 /// Unit of velocity: `Distance / Time`.
 ///
 /// Represents how fast a plane is moving.
-pub type Speed = self::base::Speed<BaseType>;
+pub type Speed = f32; // self::base::Speed<BaseType>;
 /// Unit of acceleration: `Distance / Time^2`.
-pub type AccelScalar = self::base::Accel<BaseType>;
+pub type AccelScalar = f32; // self::base::Accel<BaseType>;
 /// Unit of angular velocity: `Rotation / Time`.
-pub type RotationRate = self::base::RotationRate<BaseType>;
+pub type RotationRate = f32; // self::base::RotationRate<BaseType>;
 
 /// A 2D vector of [`Distance`]s.
 pub type Position = Vector2<Distance>;
