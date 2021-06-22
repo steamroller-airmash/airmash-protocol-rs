@@ -32,6 +32,7 @@ decl_enum! {
   /// [2]: #variant.UnitedNations
   #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = UnitedNations]
+  ##[base = u16]
   pub enum FlagCode {
     SyrianArabRepublic = 1,
     Thailand = 2,

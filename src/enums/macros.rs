@@ -249,11 +249,49 @@ macro_rules! decl_enum_to {
 }
 
 #[macro_export]
+macro_rules! decl_serde_v5 {
+  {
+    enum $name:ident ;
+  } => {
+    decl_serde_v5! {
+      base = u8;
+      enum $name ;
+    }
+  };
+  {
+    base = $basety:ty;
+    enum $name:ident ;
+  } => {
+    impl crate::v5::SerializeV5 for $name {
+      fn serialize<'ser>(
+        &self,
+        ser: &mut crate::v5::AirmashSerializerV5<'ser>
+      ) -> ::std::result::Result<(), crate::v5::Error> {
+        ser.serialize(&<$basety>::from(*self))
+      }
+    }
+
+    impl<'de> crate::v5::DeserializeV5<'de> for $name {
+      fn deserialize(
+        de: &mut crate::v5::AirmashDeserializerV5<'de>
+      ) -> ::std::result::Result<Self, crate::v5::Error> {
+        use ::std::convert::TryFrom;
+
+        let val: $basety = de.deserialize()?;
+        Self::try_from(val)
+          .map_err(|_| crate::v5::Error::new(crate::v5::ErrorKind::InvalidEnumValue))
+      }
+    }
+  }
+}
+
+#[macro_export]
 macro_rules! decl_enum {
   {
     $(
       $( #[$attr:meta] )*
       $( ##[default = $default:ident] )?
+      $( ##[base = $basety:ty ] )?
       $vis:vis enum $name:ident {
         $(
           $( #[$elemattr:meta] )*
@@ -285,6 +323,11 @@ macro_rules! decl_enum {
           }
         }
       )?
+
+      decl_serde_v5! {
+        $( base = $basety; )?
+        enum $name;
+      }
     )*
   };
 }

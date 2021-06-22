@@ -1,5 +1,6 @@
+//! Serialization and deserialization for the airmash v5 protocol.
+
 mod error;
-/// Serialization and deserialization for the airmash v5 protocol.
 mod protocol;
 
 pub use self::error::{Error, ErrorExt, ErrorKind};
