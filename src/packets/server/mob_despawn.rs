@@ -1,11 +1,11 @@
 use crate::enums::DespawnType;
 use crate::types::Mob;
 
-/// A mob despawned
-/// This is used when a powerup despawns
-/// and when a missile despawns without
-/// hitting anything. It does not cause
-/// an explosion to be shown at the location.
+/// A mob despawned.
+///
+/// This is used when a powerup despawns and when a missile despawns without
+/// hitting anything. It does not cause an explosion to be shown at the
+/// location.
 #[derive(Copy, Clone, Debug)]
 pub struct MobDespawn {
   pub id: Mob,

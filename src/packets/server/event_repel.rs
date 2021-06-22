@@ -30,8 +30,8 @@ pub struct EventRepelMob {
   pub max_speed: Speed,
 }
 
-/// Event triggered when something (player or missile)
-/// is deflected by a goliath repel.
+/// Event triggered when something (player or missile) is deflected by a goliath
+/// repel.
 #[derive(Clone, Debug)]
 pub struct EventRepel {
   pub clock: u32,

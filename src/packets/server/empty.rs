@@ -1,7 +1,6 @@
 //! Packets that have no data associated with them.
 
-/// Acknowledge successful receipt of a
-/// [`Backup`][0] packet.
+/// Acknowledge successful receipt of a [`Backup`][0] packet.
 ///
 /// [0]: ../client/struct.backup.html
 #[derive(Copy, Clone, Debug, Default)]
@@ -13,8 +12,8 @@ pub struct Ack;
 
 /// The current player has been votemuted.
 ///
-/// This happens after enough players have sent
-/// a [`VoteMute`][0] packet to the server.
+/// This happens after enough players have sent a [`VoteMute`][0] packet to the
+/// server.
 ///
 /// [0]: ../client/struct.VoteMute.html
 #[derive(Copy, Clone, Debug, Default)]

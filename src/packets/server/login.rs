@@ -1,11 +1,9 @@
 use crate::enums::{FlagCode, GameType, PlaneType, PlayerStatus};
 use crate::types::{Level, Player, Position, Rotation, Team, Upgrades};
 
-/// Initial data passed in for a
-/// player when the server starts.
+/// Initial data passed in for a player when the server starts.
 ///
-/// This is an element of the `players`
-/// array within the [`Login`] packet.
+/// This is an element of the `players` array within the [`Login`] packet.
 #[derive(Clone, Debug)]
 pub struct LoginPlayer {
   pub id: Player,
