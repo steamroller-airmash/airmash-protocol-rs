@@ -1,6 +1,5 @@
 //! Data serialization declarations for `ServerCustom`
 //! packets.
-//!
 
 mod btr;
 mod ctf;

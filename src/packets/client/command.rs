@@ -72,7 +72,6 @@
 ///
 /// // Serialize and send to server here...
 /// # }
-///
 #[derive(Clone, Debug)]
 pub struct Command {
   /// The command to send to the server. The

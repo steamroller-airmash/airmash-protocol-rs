@@ -10,8 +10,8 @@ use super::utils::*;
 /// representation used in the `data` field of `ServerCustom`.
 ///
 /// # Serialization Notes
-/// - If the server sends an invalid flag code it will be
-///   deserialized as [`FlagCode::UnitedNations`][1]
+/// - If the server sends an invalid flag code it will be deserialized as
+///   [`FlagCode::UnitedNations`][1]
 /// - `duration` is only encoded at the resolution of seconds.
 ///
 /// [0]: ../packets/client/struct.ServerCustom.html
