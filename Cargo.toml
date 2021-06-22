@@ -28,6 +28,7 @@ enum-primitive-derive = "0.1"
 num-traits = "0.2"
 
 nalgebra = "0.27.1"
+phf = { version = "0.9", features=["macros"] }
 
 [dependencies.specs]
 version = "0.15"
