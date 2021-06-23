@@ -10,7 +10,6 @@ use specs::{Component, DenseVecStorage};
 decl_enum! {
   /// Specifies whether the debug reply to a command should
   /// open a popup or be displayed in the chat window.
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = ShowInPopup]
   pub enum CommandReplyType {
     ShowInConsole = 0,
@@ -25,7 +24,6 @@ decl_enum! {
   /// Details on how the mob despawned. (i.e. whether
   /// it's lifetime ended or it collided with some
   /// other object)
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum DespawnType {
     LifetimeEnded = 0,
     Collided = 1,
@@ -35,7 +33,6 @@ decl_enum! {
   ///
   /// These are all server errors that the vanilla AIRMASH
   /// client (and the current STARMASH client) understands.
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = UnknownError]
   pub enum ErrorType {
     DisconnectedForPacketFlooding = 1,
@@ -59,7 +56,6 @@ decl_enum! {
   }
 
   /// TODO: Reverse engineer
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = _Unknown]
   pub enum FirewallStatus {
     #[doc(hidden)]
@@ -69,7 +65,6 @@ decl_enum! {
   }
 
   /// TODO: Reverse engineer
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = _Unknown]
   pub enum FirewallUpdateType {
     #[doc(hidden)]
@@ -90,7 +85,6 @@ decl_enum! {
   /// Implementors Note: This had a `TODO: rev-eng`
   /// comment on it but it doesn't seem to be missing
   /// any values.
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum FlagUpdateType {
     Position = 1,
     Carrier = 2,
@@ -113,7 +107,6 @@ decl_enum! {
   /// [0]: server/struct.ScoreDetailedFFA.html
   /// [1]: server/struct.ScoreDetailedCTF.html
   /// [2]: server/struct.ScoreDetailedBTR.html
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = FFA]
   pub enum GameType {
     FFA = 1,
@@ -127,7 +120,6 @@ decl_enum! {
   ///
   /// It is used in the following packets:
   /// - TODO
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum KeyCode {
     Up = 1,
     Down = 2,
@@ -144,7 +136,6 @@ decl_enum! {
   /// NOTE: The values here aren't in any way
   /// certain and should be verified before
   /// relying upon them.
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum LeaveHorizonType {
     Player = 0,
     Mob = 1,
@@ -158,7 +149,6 @@ decl_enum! {
   ///
   /// Used by:
   /// - TODO
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum MobType {
     PredatorMissile = 1,
     GoliathMissile = 2,
@@ -176,7 +166,6 @@ decl_enum! {
   ///
   /// Used in:
   /// - TODO
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = Predator]
   pub enum PlaneType {
     Predator = 1,
@@ -189,7 +178,6 @@ decl_enum! {
   /// Indicate whether a player levelled up, or has
   /// just logged in and their level is being communicated
   /// to the client.
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = Login]
   pub enum PlayerLevelType {
     Login = 0,
@@ -206,7 +194,6 @@ decl_enum! {
   /// [0]: server/struct.login.html
   /// [1]: server/struct.loginplayer.html
   /// [2]: server/struct.playernew.html
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = Alive]
   pub enum PlayerStatus {
     Alive = 0,
@@ -214,7 +201,6 @@ decl_enum! {
   }
 
   /// TODO: Reverse engineer
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = Shield]
   pub enum PowerupType {
     Shield = 1,
@@ -226,7 +212,6 @@ decl_enum! {
   /// Specific identifiers for server custom messages.
   ///
   /// TODO: Reverse Engineer
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum ServerCustomType {
     /// TODO: Determine if this name is accurate
     BTRWin = 1,
@@ -237,7 +222,6 @@ decl_enum! {
   /// Type specifier for server banner messages.
   ///
   /// TODO: Reverse engineer
-  #[cfg_attr(feature = "specs", derive(Component))]
   pub enum ServerMessageType {
     TimeToGameStart = 1,
     /// TODO: Verify the value of this one
@@ -251,7 +235,6 @@ decl_enum! {
   }
 
   /// All upgrade types.
-  #[cfg_attr(feature = "specs", derive(Component))]
   ##[default = None]
   pub enum UpgradeType {
     /// This seems to be sent by the official server when a
