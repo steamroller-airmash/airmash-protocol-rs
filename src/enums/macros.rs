@@ -303,12 +303,37 @@ macro_rules! decl_enum {
     $(
       $( #[$attr] )*
       #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
-      #[derive(Primitive)]
       $vis enum $name {
         $(
           $( #[$elemattr] )*
           $elem = $value,
         )*
+      }
+
+      impl ::num_traits::FromPrimitive for $name {
+        fn from_u64(val: u64) -> Option<Self> {
+          Some(match val as _ {
+            $( $value => Self::$elem, )*
+            _ => return None
+          })
+        }
+
+        fn from_i64(val: i64) -> Option<Self> {
+          Some(match val as _ {
+            $( $value => Self::$elem, )*
+            _ => return None
+          })
+        }
+      }
+
+      impl ::num_traits::ToPrimitive for $name {
+        fn to_u64(&self) -> Option<u64> {
+          Some(*self as isize as u64)
+        }
+
+        fn to_i64(&self) -> Option<i64> {
+          Some(*self as isize as i64)
+        }
       }
 
       decl_enum_from_to!{

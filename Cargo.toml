@@ -1,6 +1,6 @@
 [package]
 name = "airmash-protocol"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["STEAMROLLER"]
 readme = "README.md"
 description = "Protocol library for airma.sh"
@@ -16,25 +16,18 @@ maintenance = { status = "experimental" }
 [features]
 serde = [ "serde-feature-hack", "serde_json" ]
 default = []
-custom_data = ["serde"]
 
 [dependencies]
-lazy_static = "1.0"
-fnv = "1.0"
-dimensioned = "0.7"
-specs-derive = "0.4"
-derive_more = "0.15"
-enum-primitive-derive = "0.1"
-num-traits = "0.2"
-
 bstr = "0.2.16"
 smallvec = "1.6.1"
 nalgebra = "0.27.1"
 phf = { version = "0.9", features=["macros"] }
+num-traits = "0.2"
 
 [dependencies.specs]
-version = "0.15"
+version = "0.17"
 optional = true
+features = ["derive"]
 
 [dependencies.serde_json]
 version = "1.0"
