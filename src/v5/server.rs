@@ -15,7 +15,9 @@ decl_serde! {
     flag,
     upgrades
   }
+}
 
+decl_serde!{
   struct Login {
     success,
     id,
@@ -26,23 +28,31 @@ decl_serde! {
     room => { serialize_text_small, deserialize_text_small },
     players => { serialize_array_large, deserialize_array_large },
   }
+}
 
+decl_serde!{
   struct Ping {
     clock,
     num
   }
+}
 
+decl_serde!{
   struct PingResult {
     ping,
     players_total,
     players_game,
   }
+}
 
+decl_serde!{
   struct CommandReply {
     ty,
     text => { serialize_text_large, deserialize_text_large }
   }
+}
 
+decl_serde!{
   struct PlayerNew {
     id,
     status,
@@ -54,11 +64,15 @@ decl_serde! {
     flag,
     upgrades,
   }
+}
 
+decl_serde!{
   struct PlayerLeave {
     id
   }
+}
 
+decl_serde!{
   struct PlayerUpdate {
     clock,
     id,
@@ -66,9 +80,11 @@ decl_serde! {
     upgrades,
     pos => { serialize_pos24, deserialize_pos24 },
     rot => { serialize_rot, deserialize_rot },
-    speed => { serialize_speed, deserialize_speed }
+    speed => { serialize_vel, deserialize_vel }
   }
+}
 
+decl_serde!{
   struct PlayerFireProjectile {
     id,
     ty,
@@ -77,7 +93,9 @@ decl_serde! {
     accel => { serialize_accel, deserialize_accel },
     max_speed => { serialize_speed, deserialize_speed }
   }
+}
 
+decl_serde!{
   // Note: Need to implement this one manually
   struct PlayerFire {
     clock,
@@ -86,31 +104,41 @@ decl_serde! {
     energy_regen => { serialize_regen, deserialize_regen },
     projectiles => { serialize_array_small, deserialize_array_small },
   }
+}
 
+decl_serde!{
   struct PlayerRespawn {
     id,
     pos => { serialize_pos24, deserialize_pos24 },
     rot => { serialize_rot, deserialize_rot },
     upgrades
   }
+}
 
+decl_serde!{
   struct PlayerFlag {
     id,
     flag
   }
+}
 
+decl_serde!{
   struct PlayerLevel {
     id,
     ty,
     level
   }
+}
 
+decl_serde!{
   struct PlayerHitPlayer {
     id,
     health => { serialize_energy, deserialize_energy },
     health_regen => { serialize_regen, deserialize_regen }
   }
+}
 
+decl_serde!{
   // TODO: Need manual fixup
   struct PlayerHit {
     id,
@@ -119,14 +147,18 @@ decl_serde! {
     owner,
     players => { serialize_array_small, deserialize_array_small }
   }
+}
 
+decl_serde!{
   // TODO: Needs to be done manually as well
   struct PlayerKill {
     id,
-    killer,
+    killer => { serialize_option_player, deserialize_option_player },
     pos => { serialize_pos, deserialize_pos }
   }
+}
 
+decl_serde!{
   struct PlayerUpgrade {
     upgrades,
     ty,
@@ -135,43 +167,59 @@ decl_serde! {
     energy,
     missile
   }
+}
 
+decl_serde!{
   struct PlayerType {
     id,
     ty
   }
+}
 
+decl_serde!{
   struct PlayerPowerup {
     ty,
     duration
   }
+}
 
+decl_serde!{
   struct PlayerReteamPlayer {
     id,
     team
   }
+}
 
+decl_serde!{
   struct PlayerReteam {
     players => { serialize_array_large, deserialize_array_large }
   }
+}
 
+decl_serde!{
   struct GameFlag {
     ty,
     flag,
-    id,
+    id => { serialize_option_player, deserialize_option_player },
     pos => { serialize_pos24, deserialize_pos24 },
     blueteam,
     redteam
   }
+}
 
+decl_serde!{
   struct GameSpectate {
     id
   }
+}
 
+decl_serde!{
   struct GamePlayersAlive {
     players
   }
+}
 
+decl_serde!{
   struct GameFirewall {
     ty,
     status,
@@ -179,7 +227,9 @@ decl_serde! {
     radius,
     speed
   }
+}
 
+decl_serde!{
   struct EventRepelPlayer {
     id,
     keystate,
@@ -191,7 +241,9 @@ decl_serde! {
     health => { serialize_energy, deserialize_energy },
     health_regen => { serialize_regen, deserialize_regen }
   }
+}
 
+decl_serde!{
   struct EventRepelMob {
     id,
     ty,
@@ -200,7 +252,9 @@ decl_serde! {
     accel => { serialize_accel, deserialize_accel },
     max_speed => { serialize_speed, deserialize_speed }
   }
+}
 
+decl_serde!{
   struct EventRepel {
     clock,
     id,
@@ -212,7 +266,9 @@ decl_serde! {
     players => { serialize_array_small, deserialize_array_small },
     mobs => { serialize_array_small, deserialize_array_small }
   }
+}
 
+decl_serde!{
   struct EventBoost {
     clock,
     id,
@@ -223,7 +279,9 @@ decl_serde! {
     energy => { serialize_energy, deserialize_energy },
     energy_regen => { serialize_regen, deserialize_regen },
   }
+}
 
+decl_serde!{
   struct EventBounce {
     clock,
     id,
@@ -232,19 +290,25 @@ decl_serde! {
     rot => { serialize_rot, deserialize_rot },
     speed => { serialize_vel, deserialize_vel }
   }
+}
 
+decl_serde!{
   struct EventStealth {
     id,
     state,
     energy => { serialize_energy, deserialize_energy },
     energy_regen => { serialize_regen, deserialize_regen }
   }
+}
 
+decl_serde!{
   struct EventLeaveHorizon {
     ty,
     id
   }
+}
 
+decl_serde!{
   struct MobUpdate {
     clock,
     id,
@@ -254,24 +318,32 @@ decl_serde! {
     accel => { serialize_accel, deserialize_accel },
     max_speed => { serialize_speed, deserialize_speed }
   }
+}
 
+decl_serde!{
   struct MobUpdateStationary {
     id,
     ty,
     pos => { serialize_pos_f32, deserialize_pos_f32 }
   }
+}
 
+decl_serde!{
   struct MobDespawn {
     id,
     ty
   }
+}
 
+decl_serde!{
   struct MobDespawnCoords {
     id,
     ty,
     pos => { serialize_pos, deserialize_pos }
   }
+}
 
+decl_serde!{
   struct ScoreUpdate {
     id,
     score,
@@ -280,18 +352,31 @@ decl_serde! {
     total_kills,
     total_deaths
   }
+}
 
+decl_serde!{
   struct ScoreBoardData {
     id,
     score,
     level
   }
+}
 
+decl_serde!{
   struct ScoreBoardRanking {
     id,
     pos => { serialize_low_res_pos, deserialize_low_res_pos }
   }
+}
 
+decl_serde!{
+  struct ScoreBoard {
+    data => { serialize_array_large, deserialize_array_large },
+    rankings => { serialize_array_large, deserialize_array_large }
+  }
+}
+
+decl_serde!{
   struct ScoreDetailedFFAEntry {
     id,
     level,
@@ -301,11 +386,15 @@ decl_serde! {
     damage,
     ping
   }
+}
 
+decl_serde!{
   struct ScoreDetailedFFA {
     scores => { serialize_array_large, deserialize_array_large }
   }
+}
 
+decl_serde!{
   struct ScoreDetailedCTFEntry {
     id,
     level,
@@ -316,11 +405,15 @@ decl_serde! {
     damage,
     ping
   }
+}
 
+decl_serde!{
   struct ScoreDetailedCTF {
     scores => { serialize_array_large, deserialize_array_large }
   }
+}
 
+decl_serde!{
   struct ScoreDetailedBTREntry {
     id,
     level,
@@ -332,47 +425,65 @@ decl_serde! {
     damage,
     ping
   }
+}
 
+decl_serde!{
   struct ScoreDetailedBTR {
     scores => { serialize_array_large, deserialize_array_large }
   }
+}
 
+decl_serde!{
   struct ChatTeam {
     id,
     text => { serialize_text_small, deserialize_text_small }
   }
+}
 
+decl_serde!{
   struct ChatPublic {
     id,
     text => { serialize_text_small, deserialize_text_small }
   }
+}
 
+decl_serde!{
   struct ChatSay {
     id,
     text => { serialize_text_small, deserialize_text_small }
   }
+}
 
+decl_serde!{
   struct ChatWhisper {
     from,
     to,
     text => { serialize_text_small, deserialize_text_small }
   }
+}
 
+decl_serde!{
   struct ChatVoteMutePassed {
     id
   }
+}
 
+decl_serde!{
   struct ServerMessage {
     ty,
     duration,
     text => { serialize_text_large, deserialize_text_large }
   }
+}
 
+decl_serde!{
   struct ServerCustom {
     ty,
     data => { serialize_text_large, deserialize_text_large }
   }
+}
 
+decl_serde!{
   struct Error {
     error
   }

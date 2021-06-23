@@ -30,8 +30,21 @@ macro_rules! decl_serde {
     )*
   };
   { ser = $v:ident => $field:ident } => { $field.serialize($v)?; };
+  // Special cases where the argument type isn't quite as expected
+  { ser = $v:ident => $field:ident { serialize_text_small } } => {
+    $v.serialize_text_small((***$field).into())?;
+  };
+  { ser = $v:ident => $field:ident { serialize_text_large } } => {
+    $v.serialize_text_large((***$field).into())?;
+  };
+  { ser = $v:ident => $field:ident { serialize_array_small } } => {
+    $v.serialize_array_small(&**$field)?;
+  };
+  { ser = $v:ident => $field:ident { serialize_array_large } } => {
+    $v.serialize_array_large(&**$field)?;
+  };
   { ser = $v:ident => $field:ident { $ser:ident } } => {
-    $v.$ser($field.as_ref())?;
+    $v.$ser(*$field)?;
   };
   { de = $v:ident } => { $v.deserialize()? };
   { de = $v:ident { $de:ident } } => {
@@ -67,11 +80,15 @@ macro_rules! packet_serde {
             $( ser.serialize($x)?; )?
           }),*
         }
+
+        Ok(())
       }
     }
 
     impl<'de> DeserializeV5<'de> for $name {
       fn deserialize(de: &mut AirmashDeserializerV5<'de>) -> Result<Self> {
+        use crate::v5::ErrorExt as _;
+
         match de.deserialize_u8()? {
           $(
             $var::V5_PACKET_NO =>

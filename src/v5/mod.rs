@@ -6,6 +6,7 @@ mod macros;
 mod client;
 mod error;
 mod protocol;
+mod types;
 mod server;
 
 pub type Result<T = ()> = std::result::Result<T, Error>;

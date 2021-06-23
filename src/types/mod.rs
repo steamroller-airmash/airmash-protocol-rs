@@ -1,12 +1,6 @@
 mod units;
 
-mod flag;
-mod level;
-mod mob;
-mod player;
-mod score;
 mod server_key_state;
-mod team;
 mod upgrades;
 
 pub use dimensioned::Sqrt;
@@ -14,11 +8,12 @@ pub use dimensioned::Sqrt;
 pub use self::units::*;
 pub use nalgebra::Vector2;
 
-pub use self::flag::Flag;
-pub use self::level::Level;
-pub use self::mob::Mob;
-pub use self::player::Player;
-pub use self::score::Score;
 pub use self::server_key_state::ServerKeyState;
-pub use self::team::Team;
 pub use self::upgrades::Upgrades;
+
+pub type Player = u16;
+pub type Mob = u16;
+pub type Team = u16;
+pub type Flag = u16;
+pub type Level = u8;
+pub type Score = u32;
