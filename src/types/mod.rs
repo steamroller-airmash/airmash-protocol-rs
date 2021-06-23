@@ -3,8 +3,6 @@ mod units;
 mod server_key_state;
 mod upgrades;
 
-pub use dimensioned::Sqrt;
-
 pub use self::units::*;
 pub use nalgebra::Vector2;
 
