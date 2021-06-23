@@ -1,8 +1,5 @@
 //! Packets that the server sends to the client.
 
-mod score_detailed;
-pub use score_detailed::*;
-
 use crate::enums::*;
 use crate::types::*;
 use bstr::BString;
@@ -517,4 +514,60 @@ pub struct ServerMessage {
   // TODO: Make this a duration?
   pub duration: u32,
   pub text: BString,
+}
+
+/// Per-player data for detailed (tab) menu in BTR.
+#[derive(Copy, Clone, Debug)]
+pub struct ScoreDetailedBTREntry {
+  pub id: Player,
+  pub level: Level,
+  pub alive: bool,
+  pub wins: u16,
+  pub score: Score,
+  pub kills: u16,
+  pub deaths: u16,
+  pub damage: f32,
+  pub ping: u16,
+}
+
+#[derive(Clone, Debug)]
+pub struct ScoreDetailedBTR {
+  pub scores: Vec<ScoreDetailedBTREntry>,
+}
+
+/// Per-player data for detailed (tab) menu in CTF.
+#[derive(Copy, Clone, Debug)]
+pub struct ScoreDetailedCTFEntry {
+  pub id: Player,
+  pub level: Level,
+  pub captures: u16,
+  pub score: Score,
+  pub kills: u16,
+  pub deaths: u16,
+  pub damage: f32,
+  pub ping: u16,
+}
+
+/// Detailed score menu (tab) data for CTF.
+#[derive(Clone, Debug)]
+pub struct ScoreDetailedCTF {
+  pub scores: Vec<ScoreDetailedCTFEntry>,
+}
+
+/// Per-player data for detailed (tab) menu in FFA.
+#[derive(Copy, Clone, Debug)]
+pub struct ScoreDetailedFFAEntry {
+  pub id: Player,
+  pub level: Level,
+  pub score: Score,
+  pub kills: u16,
+  pub deaths: u16,
+  pub damage: f32,
+  pub ping: u16,
+}
+
+/// Detailed score menu (tab) data for FFA.
+#[derive(Clone, Debug)]
+pub struct ScoreDetailedFFA {
+  pub scores: Vec<ScoreDetailedFFAEntry>,
 }
