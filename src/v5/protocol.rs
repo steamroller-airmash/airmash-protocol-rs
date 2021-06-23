@@ -221,6 +221,10 @@ impl<'de> AirmashDeserializerV5<'de> {
     Self { data }
   }
 
+  pub fn remainder(&self) -> &'de [u8] {
+    self.data
+  }
+
   pub fn deserialize<T: DeserializeV5<'de>>(&mut self) -> Result<T> {
     T::deserialize(self)
   }
