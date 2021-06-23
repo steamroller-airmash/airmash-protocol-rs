@@ -30,11 +30,11 @@ pub struct Chat {
 /// # use airmash_protocol::client::Command;
 /// # fn main() {
 /// let cmd = Command {
-///     com: "flag".to_string(),
+///     com: "flag".into(),
 ///     // Set to desired flag code,
 ///     // unknown will result in UN flag.
 ///     // Here we will set to the UN flag.
-///     data: "XX".to_string()
+///     data: "XX".into()
 /// };
 ///
 /// // Serialize and send to server here...
@@ -47,12 +47,12 @@ pub struct Chat {
 /// # use airmash_protocol::client::Command;
 /// # fn main() {
 /// let cmd = Command {
-///     com: "respawn".to_string(),
+///     com: "respawn".into(),
 ///     // Choose the plane type here,
 ///     // each type is associated with
 ///     // an integer. Here we will pick
 ///     // predator.
-///     data: "1".to_string()
+///     data: "1".into()
 /// };
 ///
 /// // Serialize and send to server here...
@@ -65,10 +65,10 @@ pub struct Chat {
 /// # use airmash_protocol::client::Command;
 /// # fn main() {
 /// let cmd = Command {
-///     com: "upgrade".to_string(),
+///     com: "upgrade".into(),
 ///     // Choose upgrade type here.
 ///     // Here speed should be 1.
-///     data: "1".to_string()
+///     data: "1".into()
 /// };
 ///
 /// // Serialize and send to server here...
@@ -79,9 +79,10 @@ pub struct Chat {
 /// ```
 /// # extern crate airmash_protocol;
 /// # use airmash_protocol::client::Command;
+/// # use bstr::B;
 /// # fn main() {
 /// let cmd = Command {
-///     com: "spectate".to_string(),
+///     com: "spectate".into(),
 ///     // This can either be a player id, or
 ///     // one of -1, -2, or -3. -3 will force
 ///     // the player to go into spectate,
@@ -89,7 +90,7 @@ pub struct Chat {
 ///     // and -2 switches focus to the previous
 ///     // player. Here we will force the player
 ///     // to go into spectate.
-///     data: "-3".to_string()
+///     data: "-3".into()
 /// };
 ///
 /// // Serialize and send to server here...
