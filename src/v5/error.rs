@@ -9,6 +9,7 @@ pub enum ErrorKind {
   EndOfBuffer,
   InvalidEnumValue,
   ArraySizeTooLarge,
+  UnexpectedDataRemaining
 }
 
 #[derive(Clone, Debug)]
@@ -38,6 +39,7 @@ impl Error {
       ErrorKind::EndOfBuffer => "reached end of buffer",
       ErrorKind::InvalidEnumValue => "invalid enum value",
       ErrorKind::ArraySizeTooLarge => "array size too large for type",
+      ErrorKind::UnexpectedDataRemaining => "data left over after deserialization finished"
     }
   }
 }
