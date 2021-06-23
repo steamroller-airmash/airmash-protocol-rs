@@ -1,7 +1,7 @@
+use super::Result;
 use crate::v5::{Error, ErrorExt as _, ErrorKind};
 use crate::Vector2;
-use bstr::{BStr, ByteSlice};
-use super::Result;
+use bstr::{BStr, BString, ByteSlice};
 
 struct ScalarSpec {
   shift: i32,
@@ -97,6 +97,9 @@ impl<'ser> AirmashSerializerV5<'ser> {
   pub fn serialize_u24(&mut self, value: u32) -> Result {
     self.serialize_bytes(&value.to_le_bytes()[..3])
   }
+  pub fn serialize_bool(&mut self, value: bool) -> Result {
+    self.serialize_u8(if value { 1 } else { 0 })
+  }
 
   pub fn serialize_array_small<T>(&mut self, data: &[T]) -> Result
   where
@@ -131,7 +134,7 @@ impl<'ser> AirmashSerializerV5<'ser> {
     Ok(())
   }
 
-  pub fn serialize_text_small<T>(&mut self, data: &BStr) -> Result {
+  pub fn serialize_text_small(&mut self, data: &BStr) -> Result {
     if data.len() > u8::MAX as usize {
       return Err(Error::new(ErrorKind::ArraySizeTooLarge));
     }
@@ -139,7 +142,7 @@ impl<'ser> AirmashSerializerV5<'ser> {
     self.serialize_u8(data.len() as u8)?;
     self.serialize_bytes(data.as_bytes())
   }
-  pub fn serialize_text_large<T>(&mut self, data: &BStr) -> Result {
+  pub fn serialize_text_large(&mut self, data: &BStr) -> Result {
     if data.len() > u16::MAX as usize {
       return Err(Error::new(ErrorKind::ArraySizeTooLarge));
     }
@@ -197,7 +200,7 @@ impl<'ser> AirmashSerializerV5<'ser> {
   pub fn serialize_regen(&mut self, v: f32) -> Result {
     REGEN_SPEC.ser(self, v)
   }
-  pub fn serialize_rotation(&mut self, v: f32) -> Result {
+  pub fn serialize_rot(&mut self, v: f32) -> Result {
     ROTATION_SPEC.ser(self, v)
   }
   pub fn serialize_speed(&mut self, v: f32) -> Result {
@@ -286,6 +289,9 @@ impl<'de> AirmashDeserializerV5<'de> {
     let [a, b, c] = self.deserialize_fixed()?;
     Ok(u32::from_le_bytes([a, b, c, 0]))
   }
+  pub fn deserialize_bool(&mut self) -> Result<bool> {
+    Ok(self.deserialize_u8()? != 0)
+  }
 
   pub fn deserialize_array_small<T>(&mut self) -> Result<Vec<T>>
   where
@@ -314,17 +320,11 @@ impl<'de> AirmashDeserializerV5<'de> {
     Ok(data)
   }
 
-  pub fn deserialize_text_small<T>(&mut self) -> Result<&'de BStr>
-  where
-    T: DeserializeV5<'de>,
-  {
+  pub fn deserialize_text_small(&mut self) -> Result<BString> {
     let len = self.deserialize_u8()? as usize;
     Ok(self.deserialize_bytes(len)?.into())
   }
-  pub fn deserialize_text_large<T>(&mut self) -> Result<&'de BStr>
-  where
-    T: DeserializeV5<'de>,
-  {
+  pub fn deserialize_text_large(&mut self) -> Result<BString> {
     let len = self.deserialize_u16()? as usize;
     Ok(self.deserialize_bytes(len)?.into())
   }
@@ -385,7 +385,7 @@ impl<'de> AirmashDeserializerV5<'de> {
   pub fn deserialize_regen(&mut self) -> Result<f32> {
     REGEN_SPEC.de(self)
   }
-  pub fn deserialize_rotation(&mut self) -> Result<f32> {
+  pub fn deserialize_rot(&mut self) -> Result<f32> {
     ROTATION_SPEC.de(self)
   }
   pub fn deserialize_speed(&mut self) -> Result<f32> {
@@ -394,7 +394,7 @@ impl<'de> AirmashDeserializerV5<'de> {
 }
 
 pub trait SerializeV5 {
-  fn serialize<'ser>(&self, ser: &mut AirmashSerializerV5<'ser>) -> Result;
+  fn serialize(&self, ser: &mut AirmashSerializerV5) -> Result;
 }
 
 pub trait DeserializeV5<'de>: Sized {
@@ -428,7 +428,7 @@ macro_rules! impl_tuple {
     where $( $name: SerializeV5 ),*
     {
       #[allow(unused_variables, non_snake_case)]
-      fn serialize<'ser>(&self, ser: &mut AirmashSerializerV5<'ser>) -> Result {
+      fn serialize(&self, ser: &mut AirmashSerializerV5) -> Result {
 				let ($( $name, )*) = self;
 
         $( $name.serialize(ser)?; )*
@@ -463,3 +463,4 @@ impl_builtin!(i128, serialize_i128, deserialize_i128);
 
 impl_builtin!(f32, serialize_f32, deserialize_f32);
 impl_builtin!(f64, serialize_f64, deserialize_f64);
+impl_builtin!(bool, serialize_bool, deserialize_bool);

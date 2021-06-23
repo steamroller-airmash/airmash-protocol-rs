@@ -3,6 +3,7 @@
 mod v5;
 
 use crate::enums::KeyCode;
+use bstr::BString;
 
 /// Opening packet for opening a second server connection for the same client.
 ///
@@ -13,13 +14,13 @@ use crate::enums::KeyCode;
 /// through this channel, allowing for some reduction in head of line blocking.
 #[derive(Clone, Debug)]
 pub struct Backup {
-  pub token: String,
+  pub token: BString,
 }
 
 /// Say something in public chat.
 #[derive(Clone, Debug)]
 pub struct Chat {
-  pub text: String,
+  pub text: BString,
 }
 
 /// A free form command to be sent to the server. This is used for changing
@@ -101,10 +102,10 @@ pub struct Command {
   /// official server recognizes the commands
   /// `"spectate"`, `"upgrade"`, `"flag"`, and
   /// `"respawn"`.
-  pub com: String,
+  pub com: BString,
   /// The data associated with the command,
   /// value values epend on the given command.
-  pub data: String,
+  pub data: BString,
 }
 
 /// Sent periodically by the client to indicate that it is still alive to the
@@ -143,11 +144,11 @@ pub struct Login {
   /// The name that the player wishes to be called on the server. The actual
   /// name of the player given by the server will be in the
   /// [`Login`](../server/struct.login.html) packet returned by the server.
-  pub name: String,
+  pub name: BString,
   /// A session token for the current player. This session token is the way that
   /// a player would log in to the server. If the player does not wish to be
   /// logged on to the server then a session token of `"none"` will suffice.
-  pub session: String,
+  pub session: BString,
   /// Should set the size of the horizon beyond which game updates (missile
   /// updates and player updates) are not sent to the client. In practice, this
   /// doesn't appear to be used by the official server.
@@ -161,7 +162,7 @@ pub struct Login {
   /// If the flag code passed in is not one of the ones for which there is a
   /// known (to the server) flag, then the player will be assigned to UN flag
   /// (in the official server).
-  pub flag: String,
+  pub flag: BString,
 }
 
 /// Send a key update for the client.
@@ -187,13 +188,13 @@ pub struct Pong {
 /// Say a message in a chat bubble
 #[derive(Clone, Debug)]
 pub struct Say {
-  pub text: String,
+  pub text: BString,
 }
 
 /// Send a message to your team.
 #[derive(Clone, Debug)]
 pub struct TeamChat {
-  pub text: String,
+  pub text: BString,
 }
 
 /// Vote to mute a player
@@ -206,5 +207,5 @@ pub struct VoteMute {
 #[derive(Clone, Debug)]
 pub struct Whisper {
   pub id: u16,
-  pub text: String,
+  pub text: BString,
 }
