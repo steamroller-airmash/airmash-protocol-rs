@@ -18,6 +18,7 @@ use specs::{Component, DenseVecStorage};
 /// - [`PlayerUpgrade`](server/struct.PlayerUpgrade.html)
 #[derive(Copy, Clone, Debug, Default, Hash, Eq, PartialEq)]
 #[cfg_attr(feature = "specs", derive(Component))]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Upgrades {
   /// The number of speed upgrades that the player currently
   /// has equipped.
