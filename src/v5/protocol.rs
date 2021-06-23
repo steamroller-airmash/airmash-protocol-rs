@@ -206,6 +206,10 @@ impl<'ser> AirmashSerializerV5<'ser> {
   pub fn serialize_speed(&mut self, v: f32) -> Result {
     SPEED_SPEC.ser(self, v)
   }
+
+  pub fn serialize_option_player(&mut self, p: Option<u16>) -> Result {
+    p.unwrap_or(0).serialize(self)
+  }
 }
 
 pub struct AirmashDeserializerV5<'de> {
@@ -390,6 +394,13 @@ impl<'de> AirmashDeserializerV5<'de> {
   }
   pub fn deserialize_speed(&mut self) -> Result<f32> {
     SPEED_SPEC.de(self)
+  }
+
+  pub fn deserialize_option_player(&mut self) -> Result<Option<u16>> {
+    Ok(match self.deserialize_u16()? {
+      0 => None,
+      x => Some(x)
+    })
   }
 }
 
