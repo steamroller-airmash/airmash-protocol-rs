@@ -1,7 +1,5 @@
 //! Packets that the client sends to the server.
 
-mod v5;
-
 use crate::enums::KeyCode;
 use bstr::BString;
 
