@@ -15,7 +15,7 @@ maintenance = { status = "experimental" }
 
 [features]
 serde = [ "serde-feature-hack", "serde_json" ]
-default = []
+default = [ "serde" ]
 
 [dependencies]
 bstr = "0.2.16"
