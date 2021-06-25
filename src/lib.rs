@@ -1,4 +1,4 @@
-#![feature(optin_builtin_traits)]
+#![feature(auto_traits, negative_impls)]
 #![cfg_attr(test, feature(test))]
 
 //! Incomplete protocol interface for [AIRMASH][0]. This crate provides
