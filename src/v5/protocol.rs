@@ -95,7 +95,8 @@ impl<'ser> AirmashSerializerV5<'ser> {
   }
 
   pub fn serialize_u24(&mut self, value: u32) -> Result {
-    self.serialize_bytes(&value.to_le_bytes()[..3])
+    self.serialize_u16((value >> 8) as _)?;
+    self.serialize_u8(value as _)
   }
   pub fn serialize_bool(&mut self, value: bool) -> Result {
     self.serialize_u8(if value { 1 } else { 0 })
@@ -294,8 +295,10 @@ impl<'de> AirmashDeserializerV5<'de> {
   }
 
   pub fn deserialize_u24(&mut self) -> Result<u32> {
-    let [a, b, c] = self.deserialize_fixed()?;
-    Ok(u32::from_le_bytes([a, b, c, 0]))
+    let hi = self.deserialize_u16()? as u32;
+    let lo = self.deserialize_u8()? as u32;
+
+    Ok((hi << 8) | lo)
   }
   pub fn deserialize_bool(&mut self) -> Result<bool> {
     Ok(self.deserialize_u8()? != 0)

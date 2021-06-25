@@ -9,6 +9,9 @@ mod protocol;
 mod types;
 mod server;
 
+#[cfg(test)]
+mod tests;
+
 pub type Result<T = ()> = std::result::Result<T, Error>;
 
 pub use self::error::{Error, ErrorExt, ErrorKind};
