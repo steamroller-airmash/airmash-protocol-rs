@@ -406,7 +406,7 @@ impl<'de> AirmashDeserializerV5<'de> {
   pub fn deserialize_option_player(&mut self) -> Result<Option<u16>> {
     Ok(match self.deserialize_u16()? {
       0 => None,
-      x => Some(x)
+      x => Some(x),
     })
   }
 }

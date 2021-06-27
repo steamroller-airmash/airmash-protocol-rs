@@ -4,6 +4,8 @@ use crate::enums::*;
 use crate::types::*;
 use bstr::BString;
 
+use super::debug::{fmt_opt_vector, fmt_vector};
+
 #[derive(Clone, Debug)]
 pub struct ChatPublic {
   pub id: Player,
@@ -70,26 +72,32 @@ pub struct Error {
 }
 
 /// A predator has begun/stopped boosting
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct EventBoost {
   pub clock: u32,
   pub id: Player,
   pub boost: bool,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
   pub energy: Energy,
   pub energy_regen: EnergyRegen,
 }
 
 /// A player has run into a wall
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct EventBounce {
   pub clock: u32,
   pub id: Player,
   pub keystate: ServerKeyState,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
 }
 
@@ -107,12 +115,15 @@ pub struct EventLeaveHorizon {
 }
 
 /// A player has been repelled by a goliath.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct EventRepelPlayer {
   pub id: Player,
   pub keystate: ServerKeyState,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
   pub energy: Energy,
   pub energy_regen: EnergyRegen,
@@ -121,25 +132,32 @@ pub struct EventRepelPlayer {
 }
 
 /// A projectile has been repelled by a goliath
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct EventRepelMob {
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub accel: Accel,
   pub max_speed: Speed,
 }
 
 /// Event triggered when something (player or missile) is deflected by a goliath
 /// repel.
-#[derive(Clone, Debug)]
+#[derive(Clone, Derivative)]
+#[derivative(Debug)]
 pub struct EventRepel {
   pub clock: u32,
   pub id: Player,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
   pub energy: Energy,
   pub energy_regen: EnergyRegen,
@@ -157,23 +175,27 @@ pub struct EventStealth {
 }
 
 /// Update the "Wall of Fire" in BTR
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct GameFirewall {
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: FirewallUpdateType,
   pub status: FirewallStatus,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub radius: f32,
   pub speed: f32,
 }
 
 /// Update position of flag in CTF
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct GameFlag {
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: FlagUpdateType,
   pub flag: Flag,
   pub id: Option<Player>,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   /// Blue team score
   pub blueteam: u8,
@@ -196,7 +218,8 @@ pub struct GameSpectate {
 /// Initial data passed in for a player when the server starts.
 ///
 /// This is an element of the `players` array within the [`Login`] packet.
-#[derive(Clone, Debug)]
+#[derive(Clone, Derivative)]
+#[derivative(Debug)]
 pub struct LoginPlayer {
   pub id: Player,
   pub status: PlayerStatus,
@@ -205,6 +228,7 @@ pub struct LoginPlayer {
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: PlaneType,
   pub team: Team,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
   pub flag: FlagCode,
@@ -227,11 +251,13 @@ pub struct Login {
 
 /// A missile despawned with an explosion. This is used when a missile collides
 /// with a mountain to generate an explosion client-side.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct MobDespawnCoords {
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
 }
 
@@ -248,22 +274,28 @@ pub struct MobDespawn {
 }
 
 /// Update for powerups
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct MobUpdateStationary {
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct MobUpdate {
   pub clock: u32,
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub accel: Accel,
   pub max_speed: Speed,
 }
@@ -292,13 +324,17 @@ pub struct Ping {
 /// Data on a projectile fired by a plane.
 ///
 /// This is used in the `projectiles` array of the [`PlayerFire`] packet.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct PlayerFireProjectile {
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub accel: Accel,
   pub max_speed: Speed,
 }
@@ -329,20 +365,24 @@ pub struct PlayerHitPlayer {
 }
 
 /// Event for when players have been hit by a missile.
-#[derive(Clone, Debug)]
+#[derive(Clone, Derivative)]
+#[derivative(Debug)]
 pub struct PlayerHit {
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub owner: Player,
   pub players: Vec<PlayerHitPlayer>,
 }
 
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct PlayerKill {
   pub id: Player,
   pub killer: Option<Player>,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
 }
 
@@ -363,7 +403,8 @@ pub struct PlayerLevel {
 }
 
 /// Data for a newly-joined player.
-#[derive(Clone, Debug)]
+#[derive(Clone, Derivative)]
+#[derivative(Debug)]
 pub struct PlayerNew {
   pub id: Player,
   pub status: PlayerStatus,
@@ -371,6 +412,7 @@ pub struct PlayerNew {
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: PlaneType,
   pub team: Team,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
   pub flag: FlagCode,
@@ -388,9 +430,11 @@ pub struct PlayerPowerup {
 }
 
 /// Packet for when a player respawns.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct PlayerRespawn {
   pub id: Player,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
   pub upgrades: Upgrades,
@@ -419,14 +463,17 @@ pub struct PlayerType {
 }
 
 /// Movement update for a player.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct PlayerUpdate {
   pub clock: u32,
   pub id: Player,
   pub keystate: ServerKeyState,
   pub upgrades: Upgrades,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub pos: Position,
   pub rot: Rotation,
+  #[derivative(Debug(format_with = "fmt_vector"))]
   pub speed: Velocity,
 }
 
@@ -452,9 +499,11 @@ pub struct ScoreBoardData {
 }
 
 /// Low-res player positions, part of the [`ScoreBoard`] packet.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Derivative)]
+#[derivative(Debug)]
 pub struct ScoreBoardRanking {
   pub id: Player,
+  #[derivative(Debug(format_with = "fmt_opt_vector"))]
   pub pos: Option<Position>,
 }
 
