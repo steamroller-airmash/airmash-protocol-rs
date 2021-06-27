@@ -1,4 +1,3 @@
-
 macro_rules! impl_from_newtype_inner {
   ($enum:tt, $type:tt) => {
     impl From<$type> for $enum {

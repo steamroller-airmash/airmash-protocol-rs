@@ -1,4 +1,3 @@
-
 use crate::types::Vector2;
 
 /// On-map distances.

@@ -6,8 +6,8 @@ mod macros;
 mod client;
 mod error;
 mod protocol;
-mod types;
 mod server;
+mod types;
 
 #[cfg(test)]
 mod tests;
