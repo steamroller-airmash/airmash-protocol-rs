@@ -248,3 +248,24 @@ decl_enum! {
     Missile = 4,
   }
 }
+
+impl MobType {
+  pub fn is_missile(&self) -> bool {
+    use self::MobType::*;
+
+    match self {
+      PredatorMissile | GoliathMissile | MohawkMissile | TornadoSingleMissile
+      | TornadoTripleMissile | ProwlerMissile => true,
+      _ => false
+    }
+  }
+
+  pub fn is_powerup(&self) -> bool {
+    use self::MobType::*;
+
+    match self {
+      Shield | Inferno => true,
+      _ => false
+    }
+  }
+}
