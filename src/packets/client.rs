@@ -11,12 +11,14 @@ use bstr::BString;
 /// [`Login`](struct.login.html). The server will respond to client packets sent
 /// through this channel, allowing for some reduction in head of line blocking.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Backup {
   pub token: BString,
 }
 
 /// Say something in public chat.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Chat {
   pub text: BString,
 }
@@ -96,6 +98,7 @@ pub struct Chat {
 /// // Serialize and send to server here...
 /// # }
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Command {
   /// The command to send to the server. The
   /// official server recognizes the commands
@@ -110,10 +113,12 @@ pub struct Command {
 /// Sent periodically by the client to indicate that it is still alive to the
 /// server.
 #[derive(Copy, Clone, Debug, Default)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Ack;
 
 /// Request a detailed score packet from the server.
 #[derive(Copy, Clone, Debug, Default)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ScoreDetailed;
 
 /// Packet to tell the server to resize the horizon for the client.
@@ -121,6 +126,7 @@ pub struct ScoreDetailed;
 /// In theory this should expand the visible range for the client, in practice
 /// the official server appears to ignore these packets.
 #[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Horizon {
   pub horizon_x: u16,
   pub horizon_y: u16,
@@ -128,6 +134,7 @@ pub struct Horizon {
 
 /// Purpose unknown, doesn't appear to be used in the official client.
 #[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct LocalPing {
   pub auth: u32,
 }
@@ -136,6 +143,7 @@ pub struct LocalPing {
 ///
 /// This sent to the server when the player first joins.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Login {
   /// The current protocol version. Should always be 5 as of the writing of this
   /// documentation.
@@ -170,6 +178,7 @@ pub struct Login {
 /// - `seq` should be monotonically increasing with every key press.
 /// - `state`: `true` -> pressed, `false` -> released.
 #[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Key {
   pub seq: u32,
   pub key: KeyCode,
@@ -178,6 +187,7 @@ pub struct Key {
 
 /// Response packet to server [`Ping`](../server/struct.ping.html)s.
 #[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Pong {
   /// The ping number, should correspond to the `num` field within in the
   /// [`Ping`](../server/ping.html) packet sent by the server.
@@ -186,24 +196,28 @@ pub struct Pong {
 
 /// Say a message in a chat bubble
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Say {
   pub text: BString,
 }
 
 /// Send a message to your team.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct TeamChat {
   pub text: BString,
 }
 
 /// Vote to mute a player
 #[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct VoteMute {
   pub id: u16,
 }
 
 /// Send a whisper to another player.
 #[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Whisper {
   pub id: u16,
   pub text: BString,
