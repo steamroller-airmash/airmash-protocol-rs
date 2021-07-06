@@ -1,6 +1,3 @@
-#![feature(auto_traits, negative_impls)]
-#![cfg_attr(test, feature(test))]
-
 //! Incomplete protocol interface for [AIRMASH][0]. This crate provides
 //! a strongly typed interface for communicating with an airmash server.
 //! Since there can (in the future) be multiple protocol versions, this
@@ -46,9 +43,6 @@
 //! [1]: https://crates.io/crates/airmash-protocol-v5
 //! [2]: trait.Protocol.html
 //! [3]: trait.ProtocolSerializationExt.html
-
-#[cfg(test)]
-extern crate test;
 
 #[cfg(feature = "serde")]
 #[cfg_attr(feature = "serde", macro_use)]
