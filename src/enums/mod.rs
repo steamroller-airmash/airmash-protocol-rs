@@ -253,19 +253,20 @@ impl MobType {
   pub fn is_missile(&self) -> bool {
     use self::MobType::*;
 
-    match self {
-      PredatorMissile | GoliathMissile | MohawkMissile | TornadoSingleMissile
-      | TornadoTripleMissile | ProwlerMissile => true,
-      _ => false
-    }
+    matches!(
+      self,
+      PredatorMissile
+        | GoliathMissile
+        | MohawkMissile
+        | TornadoSingleMissile
+        | TornadoTripleMissile
+        | ProwlerMissile
+    )
   }
 
   pub fn is_powerup(&self) -> bool {
     use self::MobType::*;
 
-    match self {
-      Shield | Inferno => true,
-      _ => false
-    }
+    matches!(self, Shield | Inferno)
   }
 }
