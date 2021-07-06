@@ -6,18 +6,21 @@ use bstr::BString;
 
 use super::debug::{fmt_opt_vector, fmt_vector};
 
+/// A player has said something in global chat.
 #[derive(Clone, Debug)]
 pub struct ChatPublic {
   pub id: Player,
   pub text: BString,
 }
 
+/// A player has said something locally.
 #[derive(Clone, Debug)]
 pub struct ChatSay {
   pub id: Player,
   pub text: BString,
 }
 
+/// A player has said something in team chat for the current team.
 #[derive(Clone, Debug)]
 pub struct ChatTeam {
   pub id: Player,
@@ -30,6 +33,10 @@ pub struct ChatVoteMutePassed {
   pub id: Player,
 }
 
+/// A player has whispered.
+///
+/// This only occurs if the current player is either the whisperer or the one
+/// who originally sent the whisper message.
 #[derive(Clone, Debug)]
 pub struct ChatWhisper {
   pub from: Player,
@@ -51,7 +58,11 @@ pub struct CommandReply {
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Backup;
 
-/// TODO: Figure out what this does.
+/// Keepalive packet.
+///
+/// This packet should be sent periodically by the client so that even if the
+/// client is not actively performing any actions the server doesn't close the
+/// connection for lack of activity.
 #[derive(Copy, Clone, Debug, Default)]
 pub struct Ack;
 
