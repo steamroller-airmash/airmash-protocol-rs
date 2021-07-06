@@ -100,10 +100,8 @@ pub struct Chat {
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Command {
-  /// The command to send to the server. The
-  /// official server recognizes the commands
-  /// `"spectate"`, `"upgrade"`, `"flag"`, and
-  /// `"respawn"`.
+  /// The command to send to the server. The official server recognizes the
+  /// commands `"spectate"`, `"upgrade"`, `"flag"`, and `"respawn"`.
   pub com: BString,
   /// The data associated with the command,
   /// value values epend on the given command.

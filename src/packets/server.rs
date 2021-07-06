@@ -7,7 +7,7 @@ use bstr::BString;
 use super::debug::{fmt_opt_vector, fmt_vector};
 
 #[cfg(feature = "serde")]
-use crate::packets::serde::{VecRemote, opt_vec};
+use crate::packets::serde::{opt_vec, VecRemote};
 
 /// A player has said something in global chat.
 #[derive(Clone, Debug)]
