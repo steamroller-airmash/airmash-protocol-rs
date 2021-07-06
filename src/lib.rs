@@ -1,48 +1,45 @@
-//! Incomplete protocol interface for [AIRMASH][0]. This crate provides
-//! a strongly typed interface for communicating with an airmash server.
-//! Since there can (in the future) be multiple protocol versions, this
-//! crate must be used with another crate such as [airmash-protocol-v5][1]
-//! that provides a serialization layer.
+//! Protocol definitions for AIRMASH. This crate provides a strongly typed
+//! interface for communicating with an airmash server. It also provides an
+//! implementation of the airmash v5 protocol along with serde definitions for
+//! all interface structs. This is enough to communicate with any existing
+//! airmash server over a websocket connection.
 //!
 //! # Library Usage
-//! Once you have gotten an instance of [`Protocol`][2], it can be used to
-//! serialize and deserialize to and from the wire representation of that
-//! protocol version.
+//! The library is designed to be straightforward to use. First construct the
+//! appropriate packet from either [server packets](crate::ServerPacket) or
+//! [client packets](crate::ClientPacket). From there you can serialize it to
+//! bytes via [`v5::serialize`](crate::v5::serialize).
 //!
 //! ```
-//! # extern crate airmash_protocol;
-//! # use airmash_protocol::*;
-//! # use std::mem;
-//! # use std::error::Error;
-//! # // Just some error type that implements Error
-//! # use std::fmt::Error as FmtError;
-//! #
-//! # fn main() -> Result<(), Box<Error>> {
-//! # // This is required since if this example were to actually run
-//! # // it would immediately cause undefined behaviour.
-//! # return Ok(());
-//! # // This crate doesn't have any protocol implementations, but we can pretend it does by
-//! # // not actually being able to make them
-//! # let protocol_from_elsewhere: Box<Protocol<SerializeError = FmtError, DeserializeError = FmtError>> = unsafe{ mem::uninitialized() };
-//! # let bytes_from_elsewhere: Vec<u8> = unsafe{ mem::uninitialized() };
-//! let protocol = protocol_from_elsewhere;
-//! let bytes = bytes_from_elsewhere;
+//! # use airmash_protocol::{ClientPacket, KeyCode, v5, client::Key};
+//! # fn main() -> Result<(), v5::Error> {
+//! let packet = ClientPacket::from(Key {
+//!   seq: 0,
+//!   key: KeyCode::Fire,
+//!   state: true
+//! });
 //!
-//! // To deserialize a packet from the server
-//! let packet: ServerPacket = protocol.deserialize_server(&bytes)?;
-//!
-//! // To deserialize a packet from a client
-//! let packet: ClientPacket = protocol.deserialize_client(&bytes)?;
+//! let bytes = airmash_protocol::v5::serialize(&packet)?;
+//! // ... send bytes to server
+//! # Ok(())
 //! # }
 //! ```
 //!
-//! The [`ProtocolSerializationExt`][3] trait is also provided to allow
-//! for less typing when doing lots of serialization or deserialization.
+//! Note that while the individual packet types are serializable individually
+//! the only types expected to be passed between clients and servers are
+//! [`ServerPacket`] and [`ClientPacket`].
 //!
-//! [0]: https://airma.sh
-//! [1]: https://crates.io/crates/airmash-protocol-v5
-//! [2]: trait.Protocol.html
-//! [3]: trait.ProtocolSerializationExt.html
+//! For deserialization you can use [`v5::deserialize`] on any byte slice.
+//! ```
+//! # use airmash_protocol::{ClientPacket, v5};
+//! # fn get_some_bytes() -> Vec<u8> { return vec![5]; }
+//! # fn main() -> Result<(), v5::Error> {
+//! let bytes: Vec<u8> = get_some_bytes();
+//! let packet: ClientPacket = airmash_protocol::v5::deserialize(&bytes)?;
+//! // ... do stuff with packet
+//! # Ok(())
+//! # }
+//! ```
 
 #[cfg(feature = "serde")]
 #[cfg_attr(feature = "serde", macro_use)]
@@ -60,13 +57,13 @@ mod consts;
 mod enums;
 mod packets;
 mod types;
+mod error;
 
 mod client_packet;
 mod server_packet;
 
 #[cfg(feature = "serde")]
 pub mod custom;
-pub mod error;
 
 pub mod v5;
 
