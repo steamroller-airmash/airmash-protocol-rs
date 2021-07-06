@@ -3,8 +3,7 @@ use crate::v5::*;
 
 impl SerializeV5 for ServerKeyState {
   fn serialize(&self, ser: &mut AirmashSerializerV5) -> Result {
-    let val = 0
-      | (self.up as u8) << 0
+    let val = (self.up as u8)
       | (self.down as u8) << 1
       | (self.left as u8) << 2
       | (self.right as u8) << 3

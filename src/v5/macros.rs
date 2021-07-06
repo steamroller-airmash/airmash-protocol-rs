@@ -1,4 +1,3 @@
-#[macro_export]
 macro_rules! decl_serde {
   {$(
     struct $name:ident {
@@ -52,7 +51,6 @@ macro_rules! decl_serde {
   };
 }
 
-#[macro_export]
 macro_rules! decl_consts {
   {
     $( const $name:ident = $value:expr; )*
@@ -65,7 +63,6 @@ macro_rules! decl_consts {
   }
 }
 
-#[macro_export]
 macro_rules! packet_serde {
   {
     enum $name:ident {
