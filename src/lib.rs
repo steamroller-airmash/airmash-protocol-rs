@@ -53,11 +53,10 @@ extern crate derivative;
 #[macro_use]
 mod detail;
 
-mod consts;
 mod enums;
+mod error;
 mod packets;
 mod types;
-mod error;
 
 mod client_packet;
 mod server_packet;
