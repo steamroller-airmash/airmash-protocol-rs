@@ -5,6 +5,8 @@ use crate::{
   ServerKeyState, ServerPacket, Upgrades, Vector2,
 };
 
+use approx::*;
+
 #[test]
 fn reference_deserialize_player_update() {
   let reference = vec![
@@ -37,6 +39,38 @@ fn reference_deserialize_player_update() {
   let actual = serialize(&packet).unwrap();
 
   assert_eq!(reference, actual);
+}
+
+#[test]
+fn reference_deserialize_game_flag() {
+  let reference = vec![30, 1, 8, 4, 0, 192, 92, 0, 188, 129, 0, 3, 2];
+  let packet: ServerPacket = crate::v5::deserialize(&reference)
+    .unwrap_or_else(|e| panic!("Failed to deserialize reference packet: {}", e));
+
+  let inner = match packet {
+    ServerPacket::GameFlag(p) => p,
+    _ => panic!("Wrong packet type"),
+  };
+
+  assert_abs_diff_eq!(inner.pos.x, -4512.0, epsilon = 0.01);
+  assert_abs_diff_eq!(inner.pos.y, 222.0, epsilon = 0.01);
+}
+
+#[test]
+fn reference_serialize_game_flag() {
+  use crate::{server::GameFlag, FlagUpdateType};
+
+  let packet = ServerPacket::GameFlag(GameFlag {
+    ty: FlagUpdateType::Position,
+    flag: 8,
+    id: Some(4),
+    pos: Vector2::new(-9670.0, -1470.0),
+    blueteam: 3,
+    redteam: 2,
+  });
+  let bytes = crate::v5::serialize(&packet).unwrap_or_else(|e| panic!("{}", e));
+
+  assert_eq!(bytes, &[ 30, 1, 8, 4, 0, 116, 52, 0, 132, 116, 0, 3, 2 ]);
 }
 
 #[test]

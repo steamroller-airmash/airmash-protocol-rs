@@ -231,9 +231,9 @@ pub struct GameFirewall {
 #[derivative(Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct GameFlag {
-  // #[cfg_attr(feature = "serde", serde(rename = "type"))]
+  #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: FlagUpdateType,
-  pub flag: Flag,
+  pub flag: u8,
   pub id: Option<Player>,
   #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]

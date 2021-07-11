@@ -233,6 +233,10 @@ impl<'de> AirmashDeserializerV5<'de> {
   pub fn deserialize_fixed<const N: usize>(&mut self) -> Result<[u8; N]> {
     use std::convert::TryInto;
 
+    if self.data.len() < N {
+      return Err(Error::new(ErrorKind::EndOfBuffer));
+    }
+
     let slice: [u8; N] = self.data[..N]
       .try_into()
       .map_err(|_| Error::new(ErrorKind::EndOfBuffer))?;
