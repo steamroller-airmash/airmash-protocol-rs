@@ -70,7 +70,7 @@ fn reference_serialize_game_flag() {
   });
   let bytes = crate::v5::serialize(&packet).unwrap_or_else(|e| panic!("{}", e));
 
-  assert_eq!(bytes, &[ 30, 1, 8, 4, 0, 116, 52, 0, 132, 116, 0, 3, 2 ]);
+  assert_eq!(bytes, &[30, 1, 8, 4, 0, 116, 52, 0, 132, 116, 0, 3, 2]);
 }
 
 #[test]

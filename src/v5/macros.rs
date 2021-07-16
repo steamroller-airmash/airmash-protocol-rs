@@ -80,11 +80,11 @@ macro_rules! packet_serde {
     impl SerializeV5 for $name {
       fn serialize(&self, ser: &mut AirmashSerializerV5) -> Result {
         use crate::v5::ErrorExt as _;
-        
+
         match self {
           $( $name::$var $( ( $x ) )? => {
             ser.serialize_u8($var::V5_PACKET_NO)?;
-            $( 
+            $(
               ser.serialize($x)
                 .with_context(stringify!($name))
                 .with_context(stringify!($var))?;
