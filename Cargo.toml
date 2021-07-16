@@ -20,7 +20,7 @@ default = [ ]
 [dependencies]
 bstr = "0.2.16"
 smallvec = "1.6.1"
-nalgebra = "0.27.1"
+nalgebra = "0.28"
 num-traits = "0.2"
 derivative = "2.2"
 approx = "0.5"
