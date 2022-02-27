@@ -1,12 +1,12 @@
 
 # Airmash Rust Protocol Library
 
-![circleci] [![Latest Version]][crates.io] ![docs]
+![ghactions] [![Latest Version]][crates.io] ![docs]
 
 [Latest Version]: https://img.shields.io/crates/v/airmash-protocol.svg
 [crates.io]: https://crates.io/crates/airmash-protocol
 [docs]: https://docs.rs/airmash-protocol/badge.svg
-[circleci]: https://circleci.com/gh/steamroller-airmash/airmash-protocol-rs.svg?style=shield
+[ghactions]: https://img.shields.io/github/checks-status/steamroller-airmash/airmash-protocol-rs/master
 
 This library allows for communicating with the 
 [airmash](https://airma.sh) server or for communicating
@@ -21,7 +21,7 @@ to the use of a few nightly-only features.
 
 To use this library, just add 
 ```
-airmash-protocol = "^0.2"
+airmash-protocol = "0.4"
 ```
 to your `Cargo.toml`. This will give you the
 latest version of the library.
