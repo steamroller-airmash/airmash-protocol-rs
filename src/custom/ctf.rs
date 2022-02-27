@@ -13,13 +13,14 @@ use super::utils::*;
 /// - `duration` is only encoded at the resolution of seconds.
 ///
 /// [0]: ../packets/client/struct.ServerCustom.html
-#[derive(Copy, Clone, Debug, Serialize, Deserialize)]
+#[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CTFData {
-	#[serde(rename = "w")]
-	pub winner: Team,
-	#[serde(rename = "b")]
-	pub bounty: u32,
-	#[serde(rename = "t")]
-	#[serde(with = "duration")]
-	pub duration: Duration,
+  #[cfg_attr(feature = "serde", serde(rename = "w"))]
+  pub winner: Team,
+  #[cfg_attr(feature = "serde", serde(rename = "b"))]
+  pub bounty: u32,
+  #[cfg_attr(feature = "serde", serde(rename = "t"))]
+  #[cfg_attr(feature = "serde", serde(with = "duration"))]
+  pub duration: Duration,
 }
