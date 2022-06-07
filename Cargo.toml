@@ -1,6 +1,6 @@
 [package]
 name = "airmash-protocol"
-version = "0.4.0"
+version = "0.5.0"
 authors = ["STEAMROLLER"]
 readme = "README.md"
 description = "Protocol library for airmash"
@@ -11,7 +11,6 @@ edition = "2018"
 
 [badges]
 circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
-maintenance = { status = "experimental" }
 
 [features]
 serde = [ "serde-feature-hack", "serde_json", "bstr/serde1" ]
