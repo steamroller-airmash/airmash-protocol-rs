@@ -1,3 +1,4 @@
+use std::borrow::Cow;
 use std::convert::TryFrom;
 use std::str::FromStr;
 
@@ -28,6 +29,7 @@ decl_enum! {
   /// [0]: https://doc.rust-lang.org/std/str/trait.FromStr.html
   /// [1]: https://doc.rust-lang.org/std/convert/trait.TryFrom.html
   /// [2]: #variant.UnitedNations
+  #[non_exhaustive]
   ##[default = UnitedNations]
   ##[base = u16]
   pub enum FlagCode {
@@ -312,11 +314,11 @@ impl FromStr for FlagCode {
   }
 }
 
-impl<'a> From<FlagCode> for &'a str {
-  fn from(code: FlagCode) -> &'a str {
+impl<'a> From<FlagCode> for Cow<'a, str> {
+  fn from(code: FlagCode) -> Cow<'a, str> {
     use self::FlagCode::*;
 
-    match code {
+    Cow::Borrowed(match code {
       SyrianArabRepublic => "SY",
       Thailand => "TH",
       Turkmenistan => "TM",
@@ -442,13 +444,13 @@ impl<'a> From<FlagCode> for &'a str {
       HongKong => "HK",
       CzechRepublic => "CZ",
       Bulgaria => "BG",
-    }
+      Unknown(v) => return format!("UNKNOWN({})", v).into(),
+    })
   }
 }
 
 impl From<FlagCode> for String {
   fn from(code: FlagCode) -> String {
-    let s: &'static str = code.into();
-    s.to_owned()
+    Cow::from(code).into_owned()
   }
 }
