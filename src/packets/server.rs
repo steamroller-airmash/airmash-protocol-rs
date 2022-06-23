@@ -2,7 +2,6 @@
 
 use bstr::BString;
 
-use super::debug::{fmt_opt_vector, fmt_vector};
 use crate::enums::*;
 #[cfg(feature = "serde")]
 use crate::packets::serde::{opt_vec, VecRemote};
@@ -91,18 +90,15 @@ pub struct Error {
 }
 
 /// A predator has begun/stopped boosting
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct EventBoost {
   pub clock: u32,
   pub id: Player,
   pub boost: bool,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
   pub energy: Energy,
@@ -110,18 +106,15 @@ pub struct EventBoost {
 }
 
 /// A player has run into a wall
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct EventBounce {
   pub clock: u32,
   pub id: Player,
   pub keystate: ServerKeyState,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
 }
@@ -140,17 +133,14 @@ pub struct EventLeaveHorizon {
 }
 
 /// A player has been repelled by a goliath.
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct EventRepelPlayer {
   pub id: Player,
   pub keystate: ServerKeyState,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
   pub energy: Energy,
@@ -160,20 +150,16 @@ pub struct EventRepelPlayer {
 }
 
 /// A projectile has been repelled by a goliath
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct EventRepelMob {
   pub id: Mob,
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub accel: Accel,
   pub max_speed: Speed,
@@ -181,17 +167,14 @@ pub struct EventRepelMob {
 
 /// Event triggered when something (player or missile) is deflected by a goliath
 /// repel.
-#[derive(Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct EventRepel {
   pub clock: u32,
   pub id: Player,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
   pub energy: Energy,
@@ -211,14 +194,12 @@ pub struct EventStealth {
 }
 
 /// Update the "Wall of Fire" in BTR
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct GameFirewall {
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: FirewallUpdateType,
   pub status: FirewallStatus,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub radius: f32,
@@ -226,15 +207,13 @@ pub struct GameFirewall {
 }
 
 /// Update position of flag in CTF
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct GameFlag {
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: FlagUpdateType,
   pub flag: u8,
   pub id: Option<Player>,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   /// Blue team score
@@ -260,8 +239,7 @@ pub struct GameSpectate {
 /// Initial data passed in for a player when the server starts.
 ///
 /// This is an element of the `players` array within the [`Login`] packet.
-#[derive(Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct LoginPlayer {
   pub id: Player,
@@ -271,7 +249,6 @@ pub struct LoginPlayer {
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: PlaneType,
   pub team: Team,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
@@ -296,14 +273,12 @@ pub struct Login {
 
 /// A missile despawned with an explosion. This is used when a missile collides
 /// with a mountain to generate an explosion client-side.
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobDespawnCoords {
   pub id: Mob,
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
 }
@@ -322,33 +297,27 @@ pub struct MobDespawn {
 }
 
 /// Update for powerups
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobUpdateStationary {
   pub id: Mob,
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
 }
 
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobUpdate {
   pub clock: u32,
   pub id: Mob,
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub accel: Accel,
   pub max_speed: Speed,
@@ -380,20 +349,16 @@ pub struct Ping {
 /// Data on a projectile fired by a plane.
 ///
 /// This is used in the `projectiles` array of the [`PlayerFire`] packet.
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerFireProjectile {
   pub id: Mob,
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub accel: Accel,
   pub max_speed: Speed,
@@ -428,27 +393,23 @@ pub struct PlayerHitPlayer {
 }
 
 /// Event for when players have been hit by a missile.
-#[derive(Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerHit {
   pub id: Mob,
   // #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: MobType,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub owner: Player,
   pub players: Vec<PlayerHitPlayer>,
 }
 
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerKill {
   pub id: Player,
   pub killer: Option<Player>,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
 }
@@ -472,8 +433,7 @@ pub struct PlayerLevel {
 }
 
 /// Data for a newly-joined player.
-#[derive(Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerNew {
   pub id: Player,
@@ -482,7 +442,6 @@ pub struct PlayerNew {
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
   pub ty: PlaneType,
   pub team: Team,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
@@ -501,12 +460,10 @@ pub struct PlayerPowerup {
 }
 
 /// Packet for when a player respawns.
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerRespawn {
   pub id: Player,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
@@ -539,19 +496,16 @@ pub struct PlayerType {
 }
 
 /// Movement update for a player.
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerUpdate {
   pub clock: u32,
   pub id: Player,
   pub keystate: ServerKeyState,
   pub upgrades: Upgrades,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
   pub rot: Rotation,
-  #[derivative(Debug(format_with = "fmt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub speed: Velocity,
 }
@@ -579,12 +533,10 @@ pub struct ScoreBoardData {
 }
 
 /// Low-res player positions, part of the [`ScoreBoard`] packet.
-#[derive(Copy, Clone, Derivative)]
-#[derivative(Debug)]
+#[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ScoreBoardRanking {
   pub id: Player,
-  #[derivative(Debug(format_with = "fmt_opt_vector"))]
   #[cfg_attr(feature = "serde", serde(with = "opt_vec"))]
   pub pos: Option<Position>,
 }

@@ -48,9 +48,6 @@ extern crate serde;
 extern crate specs;
 
 #[macro_use]
-extern crate derivative;
-
-#[macro_use]
 mod detail;
 
 mod enums;
