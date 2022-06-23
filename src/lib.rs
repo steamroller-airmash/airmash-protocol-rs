@@ -43,7 +43,7 @@
 
 #[cfg(feature = "serde")]
 #[cfg_attr(feature = "serde", macro_use)]
-extern crate serde;
+extern crate serde1 as serde;
 #[cfg(feature = "specs")]
 extern crate specs;
 
