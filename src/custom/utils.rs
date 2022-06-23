@@ -1,7 +1,9 @@
 pub(crate) mod flag_code {
-  use crate::enums::FlagCode;
-  use serde::*;
   use std::convert::TryInto;
+
+  use serde::*;
+
+  use crate::enums::FlagCode;
 
   pub fn serialize<S>(flag: &FlagCode, s: S) -> Result<S::Ok, S::Error>
   where
@@ -23,8 +25,9 @@ pub(crate) mod flag_code {
 }
 
 pub(crate) mod duration {
-  use serde::*;
   use std::time::Duration;
+
+  use serde::*;
 
   pub fn serialize<S>(duration: &Duration, s: S) -> Result<S::Ok, S::Error>
   where

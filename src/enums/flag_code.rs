@@ -1,7 +1,8 @@
-#[cfg(feature = "specs")]
-use specs::{Component, DenseVecStorage};
 use std::convert::TryFrom;
 use std::str::FromStr;
+
+#[cfg(feature = "specs")]
+use specs::{Component, DenseVecStorage};
 
 decl_enum! {
   /// All player flags currently available within

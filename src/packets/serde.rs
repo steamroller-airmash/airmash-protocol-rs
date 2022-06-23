@@ -1,4 +1,5 @@
-use crate::{types::VectorExt, Vector2};
+use crate::types::VectorExt;
+use crate::Vector2;
 
 type FVec2 = Vector2;
 
@@ -27,9 +28,10 @@ impl From<VecRemote> for FVec2 {
 }
 
 pub(crate) mod opt_vec {
+  use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
   use super::FVec2;
   use crate::types::VectorExt;
-  use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
   #[derive(Serialize, Deserialize)]
   pub struct FakeVec {

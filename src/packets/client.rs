@@ -1,7 +1,8 @@
 //! Packets that the client sends to the server.
 
-use crate::enums::KeyCode;
 use bstr::BString;
+
+use crate::enums::KeyCode;
 
 /// Opening packet for opening a second server connection for the same client.
 ///

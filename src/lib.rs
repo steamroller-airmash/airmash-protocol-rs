@@ -66,10 +66,9 @@ pub mod custom;
 
 pub mod v5;
 
-pub use crate::error::EnumValueOutOfRangeError;
-
 pub use self::client_packet::ClientPacket;
 pub use self::enums::*;
 pub use self::packets::*;
 pub use self::server_packet::ServerPacket;
 pub use self::types::*;
+pub use crate::error::EnumValueOutOfRangeError;

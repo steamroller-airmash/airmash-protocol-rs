@@ -1,13 +1,12 @@
 //! Packets that the server sends to the client.
 
-use crate::enums::*;
-use crate::types::*;
 use bstr::BString;
 
 use super::debug::{fmt_opt_vector, fmt_vector};
-
+use crate::enums::*;
 #[cfg(feature = "serde")]
 use crate::packets::serde::{opt_vec, VecRemote};
+use crate::types::*;
 
 /// A player has said something in global chat.
 #[derive(Clone, Debug)]

@@ -1,3 +1,11 @@
 
 tab_spaces = 2
+
+# Having the autoformatter wrap comments by default is much nicer than having
+# to manually do it each time.
 wrap_comments = true
+
+# rust-analyzer automatically inserts use statements so these two settings
+# format the mess it leaves behind into something that is much nicer.
+imports_granularity = "module"
+group_imports = "stdexternalcrate"
