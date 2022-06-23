@@ -20,6 +20,7 @@ use crate::server::*;
 /// [1]: https://doc.rust-lang.org/std/convert/trait.Into.html#tymethod.into
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+#[non_exhaustive]
 pub enum ServerPacket {
   Login(Login),
   Backup,
