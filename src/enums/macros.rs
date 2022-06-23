@@ -67,7 +67,6 @@ macro_rules! decl_enum {
           $elem,
         )*
 
-        #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
         Unknown(enum_basetype!($($basety)?))
       }
 

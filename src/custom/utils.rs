@@ -1,26 +1,20 @@
 pub(crate) mod flag_code {
-  use std::convert::TryInto;
-
   use serde::*;
 
   use crate::enums::FlagCode;
 
-  pub fn serialize<S>(flag: &FlagCode, s: S) -> Result<S::Ok, S::Error>
+  pub fn serialize<S>(&flag: &FlagCode, s: S) -> Result<S::Ok, S::Error>
   where
     S: Serializer,
   {
-    s.serialize_u32(*flag as u32)
+    s.serialize_u16(flag.into())
   }
 
   pub fn deserialize<'de, D>(de: D) -> Result<FlagCode, D::Error>
   where
     D: Deserializer<'de>,
   {
-    Ok(
-      u8::deserialize(de)?
-        .try_into()
-        .unwrap_or(FlagCode::UnitedNations),
-    )
+    Ok(u16::deserialize(de)?.into())
   }
 }
 
