@@ -13,7 +13,7 @@ edition = "2018"
 circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
 
 [features]
-serde = [ "serde-feature-hack", "serde_json", "bstr/serde1" ]
+serde = [ "serde1", "serde_json", "bstr/serde1" ]
 default = [ ]
 
 [dependencies]
@@ -21,14 +21,10 @@ bstr       = { version = "0.2.16", default-features = false, features=["std"] }
 smallvec   = "1.6.1"
 num-traits = "0.2"
 mint       = "0.5"
+serde1     = { version = "1.0", features = ["derive"], optional = true, package = "serde" }
 
 [dependencies.serde_json]
 version = "1.0"
-optional = true
-
-[dependencies.serde-feature-hack]
-version = "0.2"
-features = ["derive"]
 optional = true
 
 [dev-dependencies]
