@@ -2,9 +2,6 @@
 mod macros;
 mod flag_code;
 
-#[cfg(feature = "specs")]
-use specs::{Component, DenseVecStorage};
-
 pub use self::flag_code::FlagCode;
 
 decl_enum! {
