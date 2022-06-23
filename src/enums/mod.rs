@@ -112,6 +112,7 @@ decl_enum! {
   ///
   /// It is used in the following packets:
   /// - TODO
+  #[non_exhaustive]
   pub enum KeyCode {
     Up = 1,
     Down = 2,
@@ -128,6 +129,7 @@ decl_enum! {
   /// NOTE: The values here aren't in any way
   /// certain and should be verified before
   /// relying upon them.
+  #[non_exhaustive]
   pub enum LeaveHorizonType {
     Player = 0,
     Mob = 1,
@@ -172,6 +174,7 @@ decl_enum! {
   /// Indicate whether a player levelled up, or has
   /// just logged in and their level is being communicated
   /// to the client.
+  #[non_exhaustive]
   ##[default = Login]
   pub enum PlayerLevelType {
     Login = 0,
@@ -188,6 +191,7 @@ decl_enum! {
   /// [0]: server/struct.login.html
   /// [1]: server/struct.loginplayer.html
   /// [2]: server/struct.playernew.html
+  #[non_exhaustive]
   ##[default = Alive]
   pub enum PlayerStatus {
     Alive = 0,
