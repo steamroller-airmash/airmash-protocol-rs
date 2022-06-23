@@ -1,7 +1,7 @@
-use crate::Team;
 use std::time::Duration;
 
 use super::utils::*;
+use crate::Team;
 
 /// Serde serialization declaration for CTF [`ServerCustom`][0]
 /// data.

@@ -1,12 +1,10 @@
-use super::serialize;
-use crate::{
-  server::PlayerUpdate,
-  types::VectorExt,
-  v5::{AirmashDeserializerV5, AirmashSerializerV5},
-  ServerKeyState, ServerPacket, Upgrades, Vector2,
-};
-
 use approx::*;
+
+use super::serialize;
+use crate::server::PlayerUpdate;
+use crate::types::VectorExt;
+use crate::v5::{AirmashDeserializerV5, AirmashSerializerV5};
+use crate::{ServerKeyState, ServerPacket, Upgrades, Vector2};
 
 #[test]
 fn reference_deserialize_player_update() {
@@ -59,7 +57,8 @@ fn reference_deserialize_game_flag() {
 
 #[test]
 fn reference_serialize_game_flag() {
-  use crate::{server::GameFlag, FlagUpdateType};
+  use crate::server::GameFlag;
+  use crate::FlagUpdateType;
 
   let packet = ServerPacket::GameFlag(GameFlag {
     ty: FlagUpdateType::Position,

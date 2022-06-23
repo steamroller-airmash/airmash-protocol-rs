@@ -1,8 +1,9 @@
+use bstr::{BStr, BString, ByteSlice};
+
 use super::Result;
 use crate::types::VectorExt;
 use crate::v5::{Error, ErrorExt as _, ErrorKind};
 use crate::Vector2;
-use bstr::{BStr, BString, ByteSlice};
 
 struct ScalarSpec {
   shift: i32,

@@ -1,7 +1,7 @@
-use crate::enums::FlagCode;
 use std::time::Duration;
 
 use super::utils::*;
+use crate::enums::FlagCode;
 
 /// Serde serialization declaration for BTR [`ServerCustom`][0]
 /// data.
