@@ -20,7 +20,6 @@ default = [ ]
 bstr       = { version = "0.2.16", default-features = false, features=["std"] }
 smallvec   = "1.6.1"
 num-traits = "0.2"
-derivative = "2.2"
 mint       = "0.5"
 
 [dependencies.serde_json]
