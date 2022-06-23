@@ -225,6 +225,13 @@ impl<'de> AirmashDeserializerV5<'de> {
     self.data
   }
 
+  pub fn checkpoint(&self) -> &'de [u8] {
+    self.remainder()
+  }
+  pub fn restore(&mut self, checkpoint: &'de [u8]) {
+    self.data = checkpoint;
+  }
+
   pub fn deserialize<T: DeserializeV5<'de>>(&mut self) -> Result<T> {
     T::deserialize(self)
   }

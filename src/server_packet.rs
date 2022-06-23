@@ -17,6 +17,7 @@ use crate::server::*;
 #[non_exhaustive]
 pub enum ServerPacket {
   Login(Login),
+  Login2(Login2),
   Backup,
   Ping(Ping),
   PingResult(PingResult),

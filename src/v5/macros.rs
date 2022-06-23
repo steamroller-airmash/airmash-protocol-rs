@@ -71,7 +71,7 @@ macro_rules! decl_consts {
   }
 }
 
-macro_rules! packet_serde {
+macro_rules! packet_serialize {
   {
     enum $name:ident {
       $( $var:ident $( ( $x:ident ) )? ),* $(,)?
@@ -89,31 +89,72 @@ macro_rules! packet_serde {
                 .with_context(stringify!($name))
                 .with_context(stringify!($var))?;
             )?
-          }),*
+          }, )*
         }
 
         Ok(())
       }
     }
+  }
+}
 
+macro_rules! packet_deserialize {
+  {
+    enum $name:ident {
+      $( $var:ident $( ( $x:ident ) )? ),* $(,)?
+    }
+
+    match $de:ident {
+      $( $pat:pat => $result:expr ),* $(,)?
+    }
+  } => {
     impl<'de> DeserializeV5<'de> for $name {
-      fn deserialize(de: &mut AirmashDeserializerV5<'de>) -> Result<Self> {
+      fn deserialize($de: &mut AirmashDeserializerV5<'de>) -> Result<Self> {
         use crate::v5::ErrorExt as _;
 
-        match de.deserialize_u8()? {
-          $(
-            $var::V5_PACKET_NO =>
-              Ok($name::$var $( ({
-                #[allow(unused_variables)]
-                let $x = ();
-                de.deserialize()
-                   .with_context(stringify!($name))
-                   .with_context(stringify!($var))?
-              }) )?),
-          )*
-          _ => Err(super::Error::new(super::ErrorKind::InvalidEnumValue))
-        }
+        let mut eval = move || {
+          match $de.deserialize_u8()? {
+            $(
+              $var::V5_PACKET_NO =>
+                Ok($name::$var $( ({
+                  #[allow(unused_variables)]
+                  let $x = ();
+                  $de.deserialize()
+                    .with_context(stringify!($var))?
+                }) )?),
+            )*
+
+            $( $pat => $result, )*
+
+            _ => Err(super::Error::new(super::ErrorKind::InvalidEnumValue))
+          }
+        };
+
+        eval().with_context(stringify!($name))
       }
+    }
+  }
+}
+
+macro_rules! packet_serde {
+  {
+    enum $name:ident {
+      $( $var:ident $( ( $x:ident ) )? ),* $(,)?
+    }
+
+  } => {
+    packet_serialize! {
+      enum $name {
+        $( $var $( ( $x ) )? ),*
+      }
+    }
+
+    packet_deserialize! {
+      enum $name {
+        $( $var $( ( $x ) )? ),*
+      }
+
+      match de {}
     }
   }
 }
