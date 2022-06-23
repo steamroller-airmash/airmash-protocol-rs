@@ -31,6 +31,20 @@ decl_serde! {
 }
 
 decl_serde! {
+  struct LoginBot {
+    id
+  }
+}
+
+decl_serde! {
+  struct Login2 {
+    login,
+    config => { serialize_text_large, deserialize_text_large },
+    bots => { serialize_array_large, deserialize_array_large },
+  }
+}
+
+decl_serde! {
   struct Ping {
     clock,
     num
@@ -491,6 +505,7 @@ decl_serde! {
 
 decl_consts! {
   const Login = 0;
+  const Login2 = 0;
   const Backup = 1;
   const Ping = 5;
   const PingResult = 6;
@@ -538,9 +553,10 @@ decl_consts! {
   const ServerCustom = 91;
 }
 
-packet_serde! {
+packet_serialize! {
   enum ServerPacket {
     Login(x),
+    Login2(x),
     Backup,
     Ping(x),
     PingResult(x),
@@ -586,5 +602,77 @@ packet_serde! {
     ChatVoteMuted,
     ServerMessage(x),
     ServerCustom(x)
+  }
+}
+
+packet_deserialize! {
+  enum ServerPacket {
+    // Login(x),
+    // Login2(x),
+    Backup,
+    Ping(x),
+    PingResult(x),
+    Ack,
+    Error(x),
+    CommandReply(x),
+    PlayerNew(x),
+    PlayerLeave(x),
+    PlayerUpdate(x),
+    PlayerFire(x),
+    PlayerRespawn(x),
+    PlayerFlag(x),
+    PlayerHit(x),
+    PlayerKill(x),
+    PlayerUpgrade(x),
+    PlayerType(x),
+    PlayerPowerup(x),
+    PlayerLevel(x),
+    PlayerReteam(x),
+    GameFlag(x),
+    GameSpectate(x),
+    GamePlayersAlive(x),
+    GameFirewall(x),
+    EventRepel(x),
+    EventBoost(x),
+    EventBounce(x),
+    EventStealth(x),
+    EventLeaveHorizon(x),
+    MobUpdate(x),
+    MobUpdateStationary(x),
+    MobDespawn(x),
+    MobDespawnCoords(x),
+    ScoreUpdate(x),
+    ScoreBoard(x),
+    ScoreDetailedFFA(x),
+    ScoreDetailedCTF(x),
+    ScoreDetailedBTR(x),
+    ChatTeam(x),
+    ChatPublic(x),
+    ChatSay(x),
+    ChatWhisper(x),
+    ChatVoteMutePassed(x),
+    ChatVoteMuted,
+    ServerMessage(x),
+    ServerCustom(x)
+  }
+
+  match de {
+    Login::V5_PACKET_NO => {
+      let login = de.deserialize().with_context("Login")?;
+
+      if de.remainder().is_empty() {
+        return Ok(ServerPacket::Login(login));
+      }
+
+      Ok(ServerPacket::Login2(Login2 {
+        login,
+        config: de.deserialize_text_large()
+          .with_context("config")
+          .with_context("Login2")?,
+        bots: de.deserialize_array_large()
+          .with_context("bots")
+          .with_context("Login2")?,
+      }))
+    }
   }
 }

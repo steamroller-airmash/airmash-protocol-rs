@@ -1,5 +1,7 @@
 //! Packets that the server sends to the client.
 
+use std::ops::{Deref, DerefMut};
+
 use bstr::BString;
 
 use crate::enums::*;
@@ -269,6 +271,23 @@ pub struct Login {
   pub ty: GameType,
   pub room: BString,
   pub players: Vec<LoginPlayer>,
+}
+
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub struct LoginBot {
+  pub id: Player,
+}
+
+/// Upgraded Login packet introduced in https://github.com/wight-airmash/ab-protocol
+#[derive(Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+
+pub struct Login2 {
+  pub login: Login,
+  #[cfg_attr(feature = "serde", serde(rename = "serverConfiguration"))]
+  pub config: BString,
+  pub bots: Vec<LoginBot>,
 }
 
 /// A missile despawned with an explosion. This is used when a missile collides
@@ -662,4 +681,21 @@ pub struct ScoreDetailedFFAEntry {
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct ScoreDetailedFFA {
   pub scores: Vec<ScoreDetailedFFAEntry>,
+}
+
+//===================================================================
+// Extra trait implementations
+
+impl Deref for Login2 {
+  type Target = Login;
+
+  fn deref(&self) -> &Self::Target {
+    &self.login
+  }
+}
+
+impl DerefMut for Login2 {
+  fn deref_mut(&mut self) -> &mut Self::Target {
+    &mut self.login
+  }
 }
