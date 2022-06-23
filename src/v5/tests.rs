@@ -1,6 +1,7 @@
 use super::serialize;
 use crate::{
   server::PlayerUpdate,
+  types::VectorExt,
   v5::{AirmashDeserializerV5, AirmashSerializerV5},
   ServerKeyState, ServerPacket, Upgrades, Vector2,
 };

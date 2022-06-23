@@ -17,11 +17,11 @@ serde = [ "serde-feature-hack", "serde_json", "bstr/serde1" ]
 default = [ ]
 
 [dependencies]
-bstr = "0.2.16"
-smallvec = "1.6.1"
-nalgebra = "0.31.0"
+bstr       = { version = "0.2.16", default-features = false, features=["std"] }
+smallvec   = "1.6.1"
 num-traits = "0.2"
 derivative = "2.2"
+mint       = "0.5"
 
 [dependencies.serde_json]
 version = "1.0"
