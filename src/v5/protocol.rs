@@ -1,4 +1,5 @@
 use super::Result;
+use crate::types::VectorExt;
 use crate::v5::{Error, ErrorExt as _, ErrorKind};
 use crate::Vector2;
 use bstr::{BStr, BString, ByteSlice};
@@ -152,36 +153,33 @@ impl<'ser> AirmashSerializerV5<'ser> {
     self.serialize_bytes(data.as_bytes())
   }
 
-  pub fn serialize_accel(&mut self, v: Vector2<f32>) -> Result {
-    ACCEL_SPEC.ser(self, v[0])?;
-    ACCEL_SPEC.ser(self, v[1])
+  pub fn serialize_accel(&mut self, v: Vector2) -> Result {
+    ACCEL_SPEC.ser(self, v.x)?;
+    ACCEL_SPEC.ser(self, v.y)
   }
-  pub fn serialize_low_res_pos(&mut self, pos: Option<Vector2<f32>>) -> Result {
-    let x = pos
-      .map(|v| ((v[0] / 128.0) as i32 + 128) as u8)
-      .unwrap_or(0);
-    let y = pos
-      .map(|v| ((v[1] / 128.0) as i32 + 128) as u8)
-      .unwrap_or(0);
+  pub fn serialize_low_res_pos(&mut self, pos: Option<Vector2>) -> Result {
+    let x = pos.map(|v| ((v.x / 128.0) as i32 + 128) as u8).unwrap_or(0);
+    let y = pos.map(|v| ((v.y / 128.0) as i32 + 128) as u8).unwrap_or(0);
 
     x.serialize(self)?;
     y.serialize(self)
   }
-  pub fn serialize_pos_f32(&mut self, pos: Vector2<f32>) -> Result {
-    self.serialize_f32(pos[0])?;
-    self.serialize_f32(pos[1])
+  pub fn serialize_pos_f32(&mut self, pos: Vector2) -> Result {
+    self.serialize_f32(pos.x)?;
+    self.serialize_f32(pos.y)
   }
-  pub fn serialize_pos(&mut self, pos: Vector2<f32>) -> Result {
-    self.serialize_coordx(pos[0])?;
-    self.serialize_coordy(pos[1])
+  pub fn serialize_pos(&mut self, pos: Vector2) -> Result {
+    self.serialize_coordx(pos.x)?;
+    self.serialize_coordy(pos.y)
   }
-  pub fn serialize_pos24(&mut self, pos: Vector2<f32>) -> Result {
-    self.serialize_coord24(pos[0])?;
-    self.serialize_coord24(pos[1])
+
+  pub fn serialize_pos24(&mut self, pos: Vector2) -> Result {
+    self.serialize_coord24(pos.x)?;
+    self.serialize_coord24(pos.y)
   }
-  pub fn serialize_vel(&mut self, pos: Vector2<f32>) -> Result {
-    self.serialize_speed(pos[0])?;
-    self.serialize_speed(pos[1])
+  pub fn serialize_vel(&mut self, pos: Vector2) -> Result {
+    self.serialize_speed(pos.x)?;
+    self.serialize_speed(pos.y)
   }
 
   pub fn serialize_coord24(&mut self, v: f32) -> Result {
@@ -344,10 +342,10 @@ impl<'de> AirmashDeserializerV5<'de> {
     Ok(self.deserialize_bytes(len)?.into())
   }
 
-  pub fn deserialize_accel(&mut self) -> Result<Vector2<f32>> {
+  pub fn deserialize_accel(&mut self) -> Result<Vector2> {
     Ok(Vector2::new(ACCEL_SPEC.de(self)?, ACCEL_SPEC.de(self)?))
   }
-  pub fn deserialize_low_res_pos(&mut self) -> Result<Option<Vector2<f32>>> {
+  pub fn deserialize_low_res_pos(&mut self) -> Result<Option<Vector2>> {
     let (x, y): (u8, u8) = self.deserialize()?;
 
     if x == 0 && y == 0 {
@@ -359,25 +357,25 @@ impl<'de> AirmashDeserializerV5<'de> {
       ((y as i32 - 128) * 128) as f32,
     )))
   }
-  pub fn deserialize_pos_f32(&mut self) -> Result<Vector2<f32>> {
+  pub fn deserialize_pos_f32(&mut self) -> Result<Vector2> {
     Ok(Vector2::new(
       self.deserialize_f32()?,
       self.deserialize_f32()?,
     ))
   }
-  pub fn deserialize_pos(&mut self) -> Result<Vector2<f32>> {
+  pub fn deserialize_pos(&mut self) -> Result<Vector2> {
     Ok(Vector2::new(
       self.deserialize_coordx()?,
       self.deserialize_coordy()?,
     ))
   }
-  pub fn deserialize_pos24(&mut self) -> Result<Vector2<f32>> {
+  pub fn deserialize_pos24(&mut self) -> Result<Vector2> {
     Ok(Vector2::new(
       self.deserialize_coord24()?,
       self.deserialize_coord24()?,
     ))
   }
-  pub fn deserialize_vel(&mut self) -> Result<Vector2<f32>> {
+  pub fn deserialize_vel(&mut self) -> Result<Vector2> {
     Ok(Vector2::new(
       self.deserialize_speed()?,
       self.deserialize_speed()?,

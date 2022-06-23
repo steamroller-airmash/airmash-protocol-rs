@@ -1,6 +1,6 @@
-use crate::Vector2;
+use crate::{types::VectorExt, Vector2};
 
-type FVec2 = Vector2<f32>;
+type FVec2 = Vector2;
 
 #[derive(Serialize, Deserialize)]
 #[serde(remote = "FVec2")]
@@ -28,6 +28,7 @@ impl From<VecRemote> for FVec2 {
 
 pub(crate) mod opt_vec {
   use super::FVec2;
+  use crate::types::VectorExt;
   use serde::{Deserialize, Deserializer, Serialize, Serializer};
 
   #[derive(Serialize, Deserialize)]

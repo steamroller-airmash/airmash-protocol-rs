@@ -58,8 +58,8 @@ pub type AccelScalar = f32; // self::base::Accel<BaseType>;
 pub type RotationRate = f32;
 
 /// A 2D vector of [`Distance`]s.
-pub type Position = Vector2<Distance>;
+pub type Position = Vector2;
 /// A 2D vector of [`Speed`]s.
-pub type Velocity = Vector2<Speed>;
+pub type Velocity = Vector2;
 /// A 2D vector of [`AccelScalar`]s.
-pub type Accel = Vector2<AccelScalar>;
+pub type Accel = Vector2;
