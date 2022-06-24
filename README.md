@@ -1,5 +1,5 @@
 
-# Airmash Rust Protocol Library
+# Rust Airmash Protocol Library
 
 ![ghactions] [![Latest Version]][crates.io] ![docs]
 
@@ -8,20 +8,10 @@
 [docs]: https://docs.rs/airmash-protocol/badge.svg
 [ghactions]: https://img.shields.io/github/checks-status/steamroller-airmash/airmash-protocol-rs/master
 
-This library allows for communicating with the 
-[airmash](https://airma.sh) server or for communicating
-with clients using the same protocol. It is meant to be used
-with a protocol backend such as the
-[protocol-v5](https://crates.io/crate/airmash-protocol-v5) crate.
-
-## Getting the library
-
-To use this library, just add 
-```
-airmash-protocol = "0.4"
-```
-to your `Cargo.toml`. This will give you the
-latest version of the library.
+This library allows for communicating with the [airmash](https://airmash.online) servers or 
+for communicating with clients using the same protocol. By default it provides serialization
+and deserialization for the airmash v5 protocol under the `v5` module allows for serializing
+and deserializing all provided types using `serde` if the `"serde"` feature is enabled.
 
 ## License
 
