@@ -82,21 +82,19 @@ decl_enum! {
 
   /// Game Type.
   ///
-  /// Hopefully self explanatory, used to indicate to
-  /// the client which game is being played. The client
-  /// uses this to decide on player colouring and
-  /// whether or not to show the flags in-game.
-  /// It will also correspond with the type of detailed
-  /// score ([`ScoreDetailedFFA`][0], [`ScoreDetailedCTF`][1],
-  /// or [`ScoreDetailedBTR`][2]) that the client expects
-  /// to receive.
+  /// This is used to indicate to the client which game type is being played.
+  /// The client will then use this to decide team colouring and whether to
+  /// show CTF flags in-game. It will also decide the type of detailed score
+  /// packet that the client expects to receive: one of [`ScoreDetailedFFA`],
+  /// [`ScoreDetailedCTF`], or [`ScoreDetailedBTR`], corresponding to `FFA`,
+  /// `CTF`, and `BTR`, respectively.
   ///
   /// Used in:
   /// - TODO
   ///
-  /// [0]: server/struct.ScoreDetailedFFA.html
-  /// [1]: server/struct.ScoreDetailedCTF.html
-  /// [2]: server/struct.ScoreDetailedBTR.html
+  /// [`ScoreDetailedFFA`]: crate::ScoreDetailedFFA
+  /// [`ScoreDetailedCTF`]: crate::ScoreDetailedCTF
+  /// [`ScoreDetailedBTR`]: crate::ScoreDetailedBTR
   ##[default = FFA]
   pub enum GameType {
     FFA = 1,
