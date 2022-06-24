@@ -4,6 +4,14 @@ pub(crate) fn variant_eq(value: &[u8], variant: &str) -> bool {
   let mut it1 = value.bytes();
   let mut it2 = variant.bytes();
 
+  // If the first letter is uppercase then we don't want to support adding
+  // '-' and '_' chars at the front of the string.
+  match (it1.next(), it2.next()) {
+    (None, None) => return true,
+    (Some(b1), Some(b2)) if b1.eq_ignore_ascii_case(&b2) => (),
+    _ => return false,
+  }
+
   loop {
     let (b1, b2) = match (it1.next(), it2.next()) {
       (None, None) => return true,
@@ -75,7 +83,7 @@ mod variant_eq_tests {
     kebab_1 => "blah-bleh-blah" == "BlahBlehBlah";
     kebab_2 => "blahbleh-blah" == "BlahBlehBlah";
     kebab_3 => "bl-ahBLEHblah" != "BlahBlehBlah";
-    kebab_4 => "-blahblehblah" == "BlahBlehBlah";
+    kebab_4 => "-blahblehblah" != "BlahBlehBlah";
 
     // SCREAMING_CASE tests
     screaming_1 => "BLAH_BLEH" == "BlahBleh";
