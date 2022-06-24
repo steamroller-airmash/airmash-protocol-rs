@@ -9,9 +9,6 @@ keywords = ["protocol", "games"]
 license = "Apache-2.0 OR MIT"
 edition = "2018"
 
-[badges]
-circle-ci = { repository = "steamroller-airmash/airmash-protocol-rs" }
-
 [features]
 serde = [ "serde-feature-hack", "serde_json", "bstr/serde1" ]
 default = [ ]
