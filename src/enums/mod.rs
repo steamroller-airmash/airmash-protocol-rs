@@ -127,7 +127,6 @@ decl_enum! {
   }
 
   /// Indicates the type of entity that just left the player's horizon.
-  ##[catchall = Mob]
   pub enum LeaveHorizonType {
     Player = 0,
     Mob = 1,
