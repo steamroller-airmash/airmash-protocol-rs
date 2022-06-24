@@ -33,16 +33,18 @@ decl_enum! {
   /// These are all server errors that the vanilla AIRMASH
   /// client (and the current STARMASH client) understands.
   #[non_exhaustive]
-  ##[default = UnknownError]
   pub enum ErrorType {
-    DisconnectedForPacketFlooding = 1,
-    BannedForPacketFlooding = 2,
+    PacketFloodingDisconnect = 1,
+    PacketFloodingBan = 2,
     Banned = 3,
+    /// This error doesn't actually show an error on the client side but
+    /// instead forces the client to reload the page.
+    ForceClientReload = 4,
     IdleRequiredBeforeRespawn = 5,
     AfkTimeout = 6,
     Kicked = 7,
     InvalidLogin = 8,
-    IncorrectProtocolLevel = 9,
+    IncorrectProtocol = 9,
     AccountBanned = 10,
     AccountAlreadyLoggedIn = 11,
     NoRespawnInBTR = 12,
@@ -51,8 +53,6 @@ decl_enum! {
     ChatThrottled = 30,
     FlagChangeThrottled = 31,
     UnknownCommand = 100,
-
-    UnknownError = 255,
   }
 
   /// TODO: Reverse engineer
@@ -261,6 +261,19 @@ impl ServerCustomType {
   pub const BTRWin: Self = Self::BTR;
   #[deprecated]
   pub const CTFWin: Self = Self::CTF;
+}
+
+#[allow(non_upper_case_globals)]
+impl ErrorType {
+  #[deprecated(
+    since = "0.6.0",
+    note = "use ErrorType::PacketFloodingDisconnect instead"
+  )]
+  pub const DisconnectedForPacketFlooding: Self = Self::PacketFloodingDisconnect;
+  #[deprecated(since = "0.6.0", note = "use ErrorType::PacketFloodingBan instead")]
+  pub const BannedForPacketFlooding: Self = Self::PacketFloodingBan;
+  #[deprecated(since = "0.6.0", note = "use ErrorType::IncorrectProtocol instead")]
+  pub const IncorrectProtocolLevel: Self = Self::IncorrectProtocol;
 }
 
 impl MobType {
