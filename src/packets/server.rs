@@ -350,7 +350,8 @@ pub struct MobUpdate {
   pub max_speed: Speed,
 }
 
-/// MobUpdate but extended with an extra ownerId field as present in ab-protocol.
+/// MobUpdate but extended with an extra ownerId field as present in
+/// ab-protocol.
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobUpdate2 {
@@ -374,9 +375,11 @@ pub struct PingResult {
 
 /// A ping request by the server.
 ///
-/// All clients must respond with a [`Pong`](../client/struct.pong.html) with
-/// `num` set to the same value as this packet. If a client does not do this,
-/// the client will be disconnected by the server.
+/// All clients must respond with a [`Pong`] with `num` set to the same value as
+/// this packet. If a client does not do this, the client will be disconnected
+/// by the server.
+///
+/// [`Pong`]: crate::client::Pong
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct Ping {
