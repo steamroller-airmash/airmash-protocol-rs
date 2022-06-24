@@ -185,18 +185,14 @@ decl_enum! {
     Dead = 1,
   }
 
-  /// TODO: Reverse engineer
+  /// The type of powerup effect that a player has.
   ##[default = Shield]
   pub enum PowerupType {
     Shield = 1,
-    /// This is just a guess.
-    /// TODO: Verify
     Inferno = 2,
   }
 
   /// Specific identifiers for server custom messages.
-  ///
-  /// TODO: Reverse Engineer
   pub enum ServerCustomType {
     /// Triggers the game-end screen in BTR.
     BTR = 1,
@@ -209,17 +205,23 @@ decl_enum! {
 
   /// Type specifier for server banner messages.
   ///
-  /// TODO: Reverse engineer
+  /// This _mostly_ doesn't correspond to behaviour within the default client.
+  /// The one exception is that [`Informational`] messages will keep showing
+  /// even if other messages are shown. However, alternate clients may use the
+  /// custom classes to show different messages in different ways.
+  ///
+  /// [`Informational`]: ServerMessageType::Informational
   pub enum ServerMessageType {
+    /// Used by the CTF server to show messages counting down to the start of
+    /// the next game.
     TimeToGameStart = 1,
-    /// TODO: Verify the value of this one
-    Flag = 2,
-    /// New Type, used by this server for shutdown message
-    /// (once they work)
-    Shutdown = 15,
-    /// New Type, used by this server for banner messages
-    /// on player join.
-    Banner = 16,
+    /// An informational message related to the current game state. This won't
+    /// be overwritten by any other message category so it should be used for
+    /// important game-related information.
+    ///
+    /// # Usage Examples
+    /// - CTF uses this server message type to show flag-related updates.
+    Informational = 2,
   }
 
   /// All upgrade types.
@@ -279,4 +281,14 @@ impl MobType {
 
     matches!(self, Shield | Inferno)
   }
+}
+
+#[allow(non_upper_case_globals)]
+impl ServerMessageType {
+  pub const Flag: Self = Self::Informational;
+  pub const Shutdown: Self = Self::Unknown(15);
+
+  /// Unofficial message type. Used by the rust server for banner messages at
+  /// login.
+  pub const Banner: Self = Self::Unknown(16);
 }
