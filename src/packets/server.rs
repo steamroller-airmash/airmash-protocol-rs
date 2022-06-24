@@ -350,7 +350,7 @@ pub struct MobUpdate {
   pub max_speed: Speed,
 }
 
-/// MobUpdate but extended with an extra ownerId field as present ab-protocol.
+/// MobUpdate but extended with an extra ownerId field as present in ab-protocol.
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobUpdate2 {
