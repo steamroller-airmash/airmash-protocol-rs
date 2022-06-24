@@ -113,7 +113,6 @@ macro_rules! decl_enum {
     $(
       $( #[$attr] )*
       #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
-      // #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
       $vis enum $name {
         $(
           $( #[$elemattr] )*
