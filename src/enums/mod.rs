@@ -20,11 +20,14 @@ decl_enum! {
     ShowInPopup = 1,
   }
 
-  /// Details on how the mob despawned. (i.e. whether
-  /// it's lifetime ended or it collided with some
-  /// other object)
+  /// Details on how the mob despawned. 
   pub enum DespawnType {
+    /// The mob did not hit anything and will simply vanish.
     LifetimeEnded = 0,
+    /// The mob ran into something and exploded.
+    /// 
+    /// This is generally only used for missiles, some alternate clients may
+    /// run into issues if used for box-type mobs.
     Collided = 1,
   }
 
