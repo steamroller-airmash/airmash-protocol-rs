@@ -1,6 +1,8 @@
 #[macro_use]
 mod macros;
 mod flag_code;
+#[cfg(test)]
+mod tests;
 
 pub use self::flag_code::FlagCode;
 
