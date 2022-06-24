@@ -128,9 +128,8 @@ decl_enum! {
 
   /// Types of all mobs present in the game.
   ///
-  /// In AIRMASH, mobs are any non-player and non-wall
-  /// items that can be interacted with. This includes
-  /// powerups, upgrades, and all missiles.
+  /// In AIRMASH, mobs are any non-player and non-wall items that can be
+  /// interacted with. This includes powerups, upgrades, and all missiles.
   ///
   /// Used by:
   /// - TODO
