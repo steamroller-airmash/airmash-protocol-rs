@@ -104,12 +104,15 @@ decl_enum! {
     BTR = 3,
   }
 
-  /// The key that's had it's state changed.
-  /// This is only used for client -> server
-  /// communication.
+  /// The key that's had it's state changed. 
+  /// 
+  /// This is only used for client to server communication. For communications
+  /// back from server to client see [`ServerKeyState`].
   ///
   /// It is used in the following packets:
   /// - TODO
+  /// 
+  /// [`ServerKeyState`]: crate::ServerKeyState
   pub enum KeyCode {
     Up = 1,
     Down = 2,
