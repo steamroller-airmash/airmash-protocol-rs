@@ -67,10 +67,6 @@ pub enum FirewallStatus {
 }
 
 decl_enum! {
-  /// TODO: Reverse engineer
-  #[non_exhaustive]
-  pub enum FirewallUpdateType {}
-
   /// Flag update type
   ///
   /// Used to indicate whether the flag is now being

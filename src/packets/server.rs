@@ -199,8 +199,9 @@ pub struct EventStealth {
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct GameFirewall {
+  /// This field is not used for anything by the client.
   #[cfg_attr(feature = "serde", serde(rename = "type"))]
-  pub ty: FirewallUpdateType,
+  pub ty: u8,
   pub status: FirewallStatus,
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub pos: Position,
