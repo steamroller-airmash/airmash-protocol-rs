@@ -1,5 +1,6 @@
 use bstr::ByteSlice;
 
+#[allow(dead_code)]
 pub(crate) fn variant_eq(value: &[u8], variant: &str) -> bool {
   let mut it1 = value.bytes();
   let mut it2 = variant.bytes();

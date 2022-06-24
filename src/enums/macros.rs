@@ -96,12 +96,76 @@ macro_rules! enum_variant_serialize_decl {
     }
 }
 
+macro_rules! decl_enum_utils {
+  {
+    [enum $( base($basety:ty) )?]
+
+    $( #[$attr:meta] )*
+    $vis:vis enum $name:ident {
+      $(
+        $( #[$elemattr:meta] )*
+        $elem:ident
+      ),* $(,)?
+    }
+  } => {
+    $( #[$attr] )*
+    #[non_exhaustive]
+    $vis enum $name {
+      $(
+        $( #[$elemattr] )*
+        $elem,
+      )*
+
+      Unknown(enum_basetype!($($basety)?))
+    }
+  };
+  {
+    [enum catchall($catchall:ident) $( base($basety:ty) )?]
+
+    $( #[$attr:meta] )*
+    $vis:vis enum $name:ident {
+      $(
+        $( #[$elemattr:meta] )*
+        $elem:ident
+      ),* $(,)?
+    }
+  } => {
+    $( #[$attr] )*
+    $vis enum $name {
+      $(
+        $( #[$elemattr] )*
+        $elem,
+      )*
+    }
+  };
+
+  {
+    match {
+      catchall => $expr1:expr,
+      default  => $expr2:expr $(,)?
+    }
+  } => {
+    $expr2
+  };
+  {
+    match catchall($catchall:ident) {
+      catchall => $expr1:expr,
+      default  => $expr2:expr $(,)?
+    }
+  } => {
+    $expr1
+  };
+
+
+}
+
 macro_rules! decl_enum {
   {
     $(
       $( #[$attr:meta] )*
       $( ##[default = $default:ident] )?
       $( ##[base = $basety:ty ] )?
+      $( ##[catchall = $catchall:ident ] )?
       $vis:vis enum $name:ident {
         $(
           $( #[$elemattr:meta] )*
@@ -111,15 +175,17 @@ macro_rules! decl_enum {
     )*
   } => {
     $(
-      $( #[$attr] )*
-      #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
-      $vis enum $name {
-        $(
-          $( #[$elemattr] )*
-          $elem,
-        )*
+      decl_enum_utils! {
+        [enum $( catchall($catchall) )? $( base($basety) )?]
 
-        Unknown(enum_basetype!($($basety)?))
+        $( #[$attr] )*
+        #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
+        $vis enum $name {
+          $(
+            $( #[$elemattr] )*
+            $elem,
+          )*
+        }
       }
 
       const _: () = {
@@ -129,7 +195,13 @@ macro_rules! decl_enum {
           fn from(v: BaseTy) -> Self {
             match v {
               $( $value => Self::$elem, )*
-              v => Self::Unknown(v)
+              #[allow(unused_variables, unreachable_patterns)]
+              v => decl_enum_utils! {
+                match $( catchall($catchall) )? {
+                  catchall => { $( Self::$catchall )? },
+                  default  => Self::Unknown(v),
+                }
+              }
             }
           }
         }
@@ -138,7 +210,16 @@ macro_rules! decl_enum {
           fn from(v: $name) -> Self {
             match v {
               $( $name::$elem => $value, )*
-              $name::Unknown(v) => v,
+              #[allow(unused_variables, unreachable_patterns)]
+              v => decl_enum_utils! {
+                match $( catchall($catchall) )? {
+                  catchall => unreachable!(),
+                  default  => match v {
+                    $name::Unknown(v) => v,
+                    _ => unreachable!(),
+                  },
+                }
+              }
             }
           }
         }
@@ -168,7 +249,16 @@ macro_rules! decl_enum {
 
             match self {
               $( Self::$elem => ser.serialize_str(stringify!($elem)), )*
-              Self::Unknown(v) => v.serialize(ser),
+              #[allow(unused_variables, unreachable_patterns)]
+              v => decl_enum_utils! {
+                match $( catchall($catchall) )? {
+                  catchall => unreachable!(),
+                  default  => match v {
+                    $name::Unknown(v) => v.serialize(ser),
+                    _ => unreachable!(),
+                  },
+                }
+              }
             }
           }
         }
@@ -192,7 +282,13 @@ macro_rules! decl_enum {
 
             Ok(match value {
               $( $value => Self::Value::$elem, )*
-              value => Self::Value::Unknown(value),
+              #[allow(unused_variables)]
+              value => decl_enum_utils! {
+                match $( catchall($catchall) )? {
+                  catchall => { $( Self::Value::$catchall )? },
+                  default  => Self::Value::Unknown(value),
+                }
+              }
             })
           }
 

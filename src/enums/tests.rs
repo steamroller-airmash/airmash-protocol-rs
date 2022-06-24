@@ -19,6 +19,11 @@ mod serde {
     };
   }
 
+  fn de<'de, T: serde::Deserialize<'de>>(data: &'de str) -> T {
+    serde_json::from_str(data) //
+      .expect(&format!("Failed to deserialize from `{}`", data))
+  }
+
   roundtrip_planetype_test!(roundtrip_predator => Predator);
   roundtrip_planetype_test!(roundtrip_tornado => Tornado);
   roundtrip_planetype_test!(roundtrip_mohawk => Mohawk);
@@ -50,11 +55,6 @@ mod serde {
   fn mobtype_deserialize_test() {
     use self::MobType::*;
 
-    fn de(data: &str) -> MobType {
-      serde_json::from_str(data) //
-        .expect(&format!("Failed to deserialize mobtype from `{}`", data))
-    }
-
     // raw numerical values should work
     assert_eq!(PredatorMissile, de("1"));
 
@@ -68,5 +68,21 @@ mod serde {
     assert_eq!(PredatorMissile, de(r#""predator-missile""#));
     assert_eq!(PredatorMissile, de(r#""predator_missile""#));
     assert_eq!(PredatorMissile, de(r#""PREDATOR_MISSILE""#));
+  }
+
+  #[test]
+  fn firewall_status_test() {
+    use self::FirewallStatus::*;
+
+    // the catchall case should work as expectd
+    assert_eq!(Removed, de("0"));
+    assert_eq!(Present, de("2"));
+    assert_eq!(Present, de("255"));
+  }
+
+  #[test]
+  #[should_panic]
+  fn firewall_status_out_of_bounds() {
+    de::<FirewallStatus>("256");
   }
 }
