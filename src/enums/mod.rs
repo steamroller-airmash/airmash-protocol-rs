@@ -169,8 +169,7 @@ decl_enum! {
     LevelUp = 1,
   }
 
-  /// Flag for indicating whether a player is
-  /// alive or dead.
+  /// Flag for indicating whether a player is alive or dead.
   ///
   /// This is used in the following packets:
   /// - [`Login`][0] (specifically [`LoginPlayer`][1])
