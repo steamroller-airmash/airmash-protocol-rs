@@ -7,16 +7,20 @@ mod tests;
 pub use self::flag_code::FlagCode;
 
 decl_enum! {
-  /// Specifies whether the debug reply to a command should
-  /// open a popup or be displayed in the chat window.
+  /// Specifies whether the debug reply to a command should open a popup or be
+  /// displayed in the chat window.
+  /// 
+  /// The original client will consider any command reply that isn't
+  /// `ShowInConsole` to be `ShowInPopup` however other clients may handle
+  /// things differently.
   ##[default = ShowInPopup]
   pub enum CommandReplyType {
+    /// Add a new message within the chat window.
     ShowInConsole = 0,
-    /// Technically this should be any value other than `0`,
-    /// the [`From`][0] integer implementation for this enum deals
-    /// with that.
-    ///
-    /// [0]: https://doc.rust-lang.org/std/convert/trait.From.html
+    /// Show a popup with the message.
+    /// 
+    /// Note that the original client will fail to show any message that is not
+    /// valid JSON if shown in a popup. 
     ShowInPopup = 1,
   }
 
