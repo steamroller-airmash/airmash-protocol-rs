@@ -335,6 +335,13 @@ decl_serde! {
 }
 
 decl_serde! {
+  struct MobUpdate2 {
+    update,
+    owner
+  }
+}
+
+decl_serde! {
   struct MobUpdateStationary {
     id,
     ty,
@@ -505,7 +512,7 @@ decl_serde! {
 
 decl_consts! {
   const Login = 0;
-  const Login2 = 0;
+  const Login2 = Login::V5_PACKET_NO;
   const Backup = 1;
   const Ping = 5;
   const PingResult = 6;
@@ -535,6 +542,7 @@ decl_consts! {
   const EventStealth = 43;
   const EventLeaveHorizon = 44;
   const MobUpdate = 60;
+  const MobUpdate2 = MobUpdate::V5_PACKET_NO;
   const MobUpdateStationary = 61;
   const MobDespawn = 62;
   const MobDespawnCoords = 63;
@@ -586,6 +594,7 @@ packet_serialize! {
     EventStealth(x),
     EventLeaveHorizon(x),
     MobUpdate(x),
+    MobUpdate2(x),
     MobUpdateStationary(x),
     MobDespawn(x),
     MobDespawnCoords(x),
@@ -637,7 +646,8 @@ packet_deserialize! {
     EventBounce(x),
     EventStealth(x),
     EventLeaveHorizon(x),
-    MobUpdate(x),
+    // MobUpdate(x),
+    // MobUpdate2(x),
     MobUpdateStationary(x),
     MobDespawn(x),
     MobDespawnCoords(x),
@@ -672,6 +682,20 @@ packet_deserialize! {
         bots: de.deserialize_array_large()
           .with_context("bots")
           .with_context("Login2")?,
+      }))
+    },
+    MobUpdate::V5_PACKET_NO => {
+      let update = de.deserialize().with_context("MobUpdate")?;
+
+      if de.remainder().is_empty() {
+        return Ok(ServerPacket::MobUpdate(update));
+      }
+
+      Ok(ServerPacket::MobUpdate2(MobUpdate2 {
+        update,
+        owner: de.deserialize_u16()
+          .with_context("owner")
+          .with_context("MobUpdate2")?,
       }))
     }
   }

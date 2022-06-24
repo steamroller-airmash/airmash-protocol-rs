@@ -284,6 +284,7 @@ pub struct LoginBot {
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 
 pub struct Login2 {
+  #[cfg_attr(feature = "serde", serde(flatten))]
   pub login: Login,
   #[cfg_attr(feature = "serde", serde(rename = "serverConfiguration"))]
   pub config: BString,
@@ -340,6 +341,17 @@ pub struct MobUpdate {
   #[cfg_attr(feature = "serde", serde(with = "VecRemote"))]
   pub accel: Accel,
   pub max_speed: Speed,
+}
+
+/// MobUpdate but extended with an extra ownerId field as present ab-protocol.
+#[derive(Copy, Clone, Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub struct MobUpdate2 {
+  #[cfg_attr(feature = "serde", serde(flatten))]
+  pub update: MobUpdate,
+  #[cfg_attr(feature = "serde", serde(flatten))]
+  #[cfg_attr(feature = "serde", serde(rename = "ownerId"))]
+  pub owner: Player,
 }
 
 /// Resulting ping data sent back from the server.
@@ -697,5 +709,19 @@ impl Deref for Login2 {
 impl DerefMut for Login2 {
   fn deref_mut(&mut self) -> &mut Self::Target {
     &mut self.login
+  }
+}
+
+impl Deref for MobUpdate2 {
+  type Target = MobUpdate;
+
+  fn deref(&self) -> &Self::Target {
+    &self.update
+  }
+}
+
+impl DerefMut for MobUpdate2 {
+  fn deref_mut(&mut self) -> &mut Self::Target {
+    &mut self.update
   }
 }
