@@ -227,10 +227,9 @@ decl_enum! {
   /// All upgrade types.
   ##[default = None]
   pub enum UpgradeType {
-    /// This seems to be sent by the official server when a
-    /// player leaves. Packets with this value are ignored
-    /// by the client, so they don't seem to affect gameplay
-    /// at all.
+    /// This seems to be sent by the official server when a player leaves.
+    /// Packets with this value are ignored by the client, so they don't seem
+    /// to affect gameplay at all.
     None = 0,
     Speed = 1,
     Defense = 2,
