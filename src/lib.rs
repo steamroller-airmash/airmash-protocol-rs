@@ -52,6 +52,7 @@ mod enums;
 mod error;
 mod packets;
 mod types;
+mod util;
 
 mod client_packet;
 mod server_packet;

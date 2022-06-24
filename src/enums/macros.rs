@@ -146,82 +146,93 @@ macro_rules! decl_enum {
 
       #[cfg(feature = "serde")]
       const _: () = {
-        use std::fmt;
-
-        use serde::de::{Unexpected, Visitor};
-        use serde::ser::SerializeTupleVariant;
-        use serde::{Deserialize, Deserializer, Serialize, Serializer};
+        use ::serde::{Serialize, Serializer, Deserialize, Deserializer};
+        use ::serde::de::{Visitor, Unexpected, self};
+        use ::core::fmt;
 
         type BaseTy = enum_basetype!($($basety)?);
+
+        const NAME: &'static str = stringify!($name);
+        const VARIANTS: &'static [&'static str] = &[
+          $( stringify!($elem), )*
+        ];
 
         impl Serialize for $name {
           fn serialize<S>(&self, ser: S) -> Result<S::Ok, S::Error>
           where
             S: Serializer,
           {
-            if ser.is_human_readable() {
-              enum_variant_serialize_decl! {
-                [0u32] $name => $( $elem )*;
+            if !ser.is_human_readable() {
+              return BaseTy::from(*self).serialize(ser);
+            }
 
-                match self => ser {}
-              }
-            } else {
-              BaseTy::serialize(&BaseTy::from(*self), ser)
+            match self {
+              $( Self::$elem => ser.serialize_str(stringify!($elem)), )*
+              Self::Unknown(v) => v.serialize(ser),
             }
           }
         }
 
+        struct FieldVisitor;
+        impl<'de> Visitor<'de> for FieldVisitor {
+          type Value = $name;
+
+          fn expecting(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+            fmt.write_str(concat!("enum ", stringify!($name)))
+          }
+
+          fn visit_u64<E>(self, value: u64) -> Result<Self::Value, E>
+          where
+            E: de::Error
+          {
+            use ::core::convert::TryInto;
+
+            let value: BaseTy = value.try_into() //
+              .map_err(|_| E::invalid_value(Unexpected::Unsigned(value), &self))?;
+
+            Ok(match value {
+              $( $value => Self::Value::$elem, )*
+              value => Self::Value::Unknown(value),
+            })
+          }
+
+          fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+          where
+            E: de::Error
+          {
+            $(
+              if crate::util::variant_eq(value.as_bytes(), stringify!($elem)) {
+                return Ok(Self::Value::$elem);
+              }
+            )*
+
+            Err(E::unknown_variant(value, VARIANTS))
+          }
+
+          fn visit_bytes<E>(self, value: &[u8]) -> Result<Self::Value, E>
+          where
+            E: de::Error
+          {
+            $(
+              if crate::util::variant_eq(value, stringify!($elem)) {
+                return Ok(Self::Value::$elem);
+              }
+            )*
+
+            let value = String::from_utf8_lossy(value);
+            Err(E::unknown_variant(&value, VARIANTS))
+          }
+        }
+
         impl<'de> Deserialize<'de> for $name {
-          fn deserialize<D>(de: D) -> Result<Self, <D as Deserializer<'de>>::Error>
+          fn deserialize<D>(de: D) -> Result<Self, D::Error>
           where
             D: Deserializer<'de>,
           {
-            struct TyVisitor;
-
-            impl<'de> Visitor<'de> for TyVisitor {
-              type Value = $name;
-
-              fn expecting(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
-                write!(
-                  fmt,
-                  "an enum value (either a string or a {})",
-                  None
-                    $( .or_else(|| Some(stringify!($basety))) )?
-                    .unwrap_or("u8")
-                )
-              }
-
-              fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
-              where
-                E: serde::de::Error,
-              {
-                match v {
-                  $( stringify!($elem) => Ok($name::$elem), )*
-                  _ => Err(E::invalid_value(Unexpected::Str(v), &self)),
-                }
-              }
-
-              fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E>
-              where
-                E: serde::de::Error
-              {
-                use std::convert::TryFrom;
-
-                match BaseTy::try_from(v) {
-                  Ok(v) => Ok($name::from(v)),
-                  Err(_) => Err(E::invalid_value(
-                    Unexpected::Unsigned(v),
-                    &self
-                  ))
-                }
-              }
+            match de.is_human_readable() {
+              true  => de.deserialize_any(FieldVisitor),
+              false => BaseTy::deserialize(de).map(From::from),
             }
-
-            de.deserialize_enum(
-              stringify!($name),
-              &[ $( stringify!($elem) ),* ],
-              TyVisitor
-            )
           }
         }
       };
