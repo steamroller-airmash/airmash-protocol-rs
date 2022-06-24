@@ -160,9 +160,8 @@ decl_enum! {
     Prowler = 5,
   }
 
-  /// Indicate whether a player levelled up, or has
-  /// just logged in and their level is being communicated
-  /// to the client.
+  /// Indicate whether a player levelled up, or has just logged in and their
+  /// level is being communicated to the client.
   ##[default = Login]
   pub enum PlayerLevelType {
     Login = 0,
