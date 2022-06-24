@@ -127,20 +127,17 @@ decl_enum! {
     Fire = 5,
     Special = 6,
   }
+}
 
-  /// Indicates the type of entity that just
-  /// went outside of the player's horizon.
-  ///
-  /// TODO: Complete reverse engineering this.
-  /// NOTE: The values here aren't in any way
-  /// certain and should be verified before
-  /// relying upon them.
-  #[non_exhaustive]
-  pub enum LeaveHorizonType {
-    Player = 0,
-    Mob = 1,
-  }
+/// Indicates the type of entity that just left the player's horizon.
+#[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub enum LeaveHorizonType {
+  Player = 0,
+  Mob = 1,
+}
 
+decl_enum! {
   /// Types of all mobs present in the game.
   ///
   /// In AIRMASH, mobs are any non-player and non-wall
@@ -319,6 +316,20 @@ impl From<FirewallStatus> for u8 {
   }
 }
 
-decl_serde_v5! {
-  enum FirewallStatus;
+impl From<u8> for LeaveHorizonType {
+  fn from(v: u8) -> Self {
+    match v {
+      0 => LeaveHorizonType::Player,
+      _ => LeaveHorizonType::Mob,
+    }
+  }
 }
+
+impl From<LeaveHorizonType> for u8 {
+  fn from(v: LeaveHorizonType) -> Self {
+    v as u8
+  }
+}
+
+decl_serde_v5! { enum FirewallStatus; }
+decl_serde_v5! { enum LeaveHorizonType; }
