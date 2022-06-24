@@ -317,7 +317,9 @@ pub struct MobDespawn {
   pub ty: DespawnType,
 }
 
-/// Update for powerups
+/// Update for an immobile mob.
+///
+/// This is sent when a powerup is enters a player's view radius.
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobUpdateStationary {
@@ -328,6 +330,10 @@ pub struct MobUpdateStationary {
   pub pos: Position,
 }
 
+/// Update for a mobile missile-type mob.
+///
+/// This is sent when a mob enters a player's view radius or something changes
+/// about its state that needs to be communicated to the client.
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct MobUpdate {
@@ -453,8 +459,10 @@ pub struct PlayerLeave {
   pub id: Player,
 }
 
-/// Assign a level to a player. Either the player levelled up, or the server is
-/// updating their level for all clients.
+/// Assign a level to a player.
+///
+/// Either the player levelled up, or the server is updating their level for all
+/// clients.
 #[derive(Copy, Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct PlayerLevel {
