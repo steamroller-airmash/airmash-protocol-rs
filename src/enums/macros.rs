@@ -201,7 +201,7 @@ macro_rules! decl_enum {
             E: de::Error
           {
             $(
-              if value.eq_ignore_ascii_case(stringify!($elem)) {
+              if crate::util::variant_eq(value.as_bytes(), stringify!($elem)) {
                 return Ok(Self::Value::$elem);
               }
             )*
@@ -214,7 +214,7 @@ macro_rules! decl_enum {
             E: de::Error
           {
             $(
-              if value.eq_ignore_ascii_case(stringify!($elem).as_bytes()) {
+              if crate::util::variant_eq(value, stringify!($elem)) {
                 return Ok(Self::Value::$elem);
               }
             )*

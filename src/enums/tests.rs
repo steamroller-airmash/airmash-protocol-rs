@@ -31,7 +31,7 @@ mod serde {
 
     fn de(data: &str) -> PlaneType {
       serde_json::from_str(data) //
-        .expect(&format!("Failed to deserialize planetype from {}", data))
+        .expect(&format!("Failed to deserialize planetype from `{}`", data))
     }
 
     // raw numerical values should work
@@ -44,5 +44,29 @@ mod serde {
 
     assert_eq!(Unknown(0), de("0"));
     assert_eq!(Unknown(255), de("255"));
+  }
+
+  #[test]
+  fn mobtype_deserialize_test() {
+    use self::MobType::*;
+
+    fn de(data: &str) -> MobType {
+      serde_json::from_str(data) //
+        .expect(&format!("Failed to deserialize mobtype from `{}`", data))
+    }
+
+    // raw numerical values should work
+    assert_eq!(PredatorMissile, de("1"));
+
+    // same with all casings
+    assert_eq!(PredatorMissile, de(r#""PredatorMissile""#));
+    assert_eq!(PredatorMissile, de(r#""PREDATORMISSILE""#));
+    assert_eq!(PredatorMissile, de(r#""predatormissile""#));
+    assert_eq!(PredatorMissile, de(r#""pReDaToRmIsSiLe""#));
+
+    // we also support kebab-case, snake_case, and SCREAMING_SNAKE_CASE
+    assert_eq!(PredatorMissile, de(r#""predator-missile""#));
+    assert_eq!(PredatorMissile, de(r#""predator_missile""#));
+    assert_eq!(PredatorMissile, de(r#""PREDATOR_MISSILE""#));
   }
 }
