@@ -213,10 +213,13 @@ decl_enum! {
   /// TODO: Reverse Engineer
   #[non_exhaustive]
   pub enum ServerCustomType {
-    /// TODO: Determine if this name is accurate
-    BTRWin = 1,
-    /// TODO: Determine if this name is accurate
-    CTFWin = 2,
+    /// Triggers the game-end screen in BTR.
+    BTR = 1,
+    /// Triggers the game-end screen in CTF.
+    CTF = 2,
+
+    /// For suggesting a different game server for the player to switch to.
+    SwitchGameSuggestion = 100,
   }
 
   /// Type specifier for server banner messages.
@@ -249,6 +252,15 @@ decl_enum! {
     Energy = 3,
     Missile = 4,
   }
+}
+
+#[allow(non_upper_case_globals)]
+impl ServerCustomType {
+  // Old aliases for CTF and BTR - kept here for backcompat
+  #[deprecated]
+  pub const BTRWin: Self = Self::BTR;
+  #[deprecated]
+  pub const CTFWin: Self = Self::CTF;
 }
 
 impl MobType {
