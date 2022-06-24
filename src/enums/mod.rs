@@ -30,8 +30,12 @@ decl_enum! {
 
   /// All error codes that can be sent to the client.
   ///
-  /// These are all server errors that the vanilla AIRMASH
-  /// client (and the current STARMASH client) understands.
+  /// These are all server errors that the vanilla AIRMASH client (and the
+  /// current STARMASH client) understands. [Ab-server][ab-server] has some
+  /// additional custom error types for its sync protocols but this crate
+  /// doesn't handle those packet types at the moment.
+  /// 
+  /// [ab-server]: https://github.com/wight-airmash/ab-protocol
   pub enum ErrorType {
     PacketFloodingDisconnect = 1,
     PacketFloodingBan = 2,
