@@ -176,12 +176,12 @@ decl_enum! {
   /// Flag for indicating whether a player is alive or dead.
   ///
   /// This is used in the following packets:
-  /// - [`Login`][0] (specifically [`LoginPlayer`][1])
-  /// - [`PlayerNew`][2]
+  /// - [`Login`] (specifically [`LoginPlayer`])
+  /// - [`PlayerNew`]
   ///
-  /// [0]: server/struct.login.html
-  /// [1]: server/struct.loginplayer.html
-  /// [2]: server/struct.playernew.html
+  /// [`Login`]: crate::server::Login
+  /// [`LoginPlayer`]: crate::server::LoginPlayer
+  /// [`PlayerNew`]: crate::server::PlayerNew
   ##[default = Alive]
   pub enum PlayerStatus {
     Alive = 0,
