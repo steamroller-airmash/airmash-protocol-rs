@@ -56,19 +56,16 @@ decl_enum! {
     FlagChangeThrottled = 31,
     UnknownCommand = 100,
   }
-}
 
-/// This is used to control whether the firewall exists in BTR.
-#[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub enum FirewallStatus {
-  /// If this status is sent then the client will remove the ring of fire.
-  Removed = 0,
-  /// Otherwise, any other status means it should exist.
-  Present = 1,
-}
+  /// This is used to control whether the firewall exists in BTR.
+  ##[catchall = Present]
+  pub enum FirewallStatus {
+    /// If this status is sent then the client will remove the ring of fire.
+    Removed = 0,
+    /// Otherwise, any other status means it should exist.
+    Present = 1,
+  }
 
-decl_enum! {
   /// Flag update type
   ///
   /// Used to indicate whether the flag is now being
@@ -127,17 +124,14 @@ decl_enum! {
     Fire = 5,
     Special = 6,
   }
-}
 
-/// Indicates the type of entity that just left the player's horizon.
-#[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
-#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
-pub enum LeaveHorizonType {
-  Player = 0,
-  Mob = 1,
-}
+  /// Indicates the type of entity that just left the player's horizon.
+  ##[catchall = Mob]
+  pub enum LeaveHorizonType {
+    Player = 0,
+    Mob = 1,
+  }
 
-decl_enum! {
   /// Types of all mobs present in the game.
   ///
   /// In AIRMASH, mobs are any non-player and non-wall
@@ -300,36 +294,3 @@ impl MobType {
     matches!(self, Shield | Inferno)
   }
 }
-
-impl From<u8> for FirewallStatus {
-  fn from(v: u8) -> Self {
-    match v {
-      0 => FirewallStatus::Removed,
-      _ => FirewallStatus::Present,
-    }
-  }
-}
-
-impl From<FirewallStatus> for u8 {
-  fn from(v: FirewallStatus) -> Self {
-    v as u8
-  }
-}
-
-impl From<u8> for LeaveHorizonType {
-  fn from(v: u8) -> Self {
-    match v {
-      0 => LeaveHorizonType::Player,
-      _ => LeaveHorizonType::Mob,
-    }
-  }
-}
-
-impl From<LeaveHorizonType> for u8 {
-  fn from(v: LeaveHorizonType) -> Self {
-    v as u8
-  }
-}
-
-decl_serde_v5! { enum FirewallStatus; }
-decl_serde_v5! { enum LeaveHorizonType; }
