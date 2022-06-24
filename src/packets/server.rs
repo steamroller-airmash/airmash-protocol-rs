@@ -280,7 +280,7 @@ pub struct LoginBot {
   pub id: Player,
 }
 
-/// Upgraded Login packet introduced in https://github.com/wight-airmash/ab-protocol
+/// Upgraded Login packet introduced in <https://github.com/wight-airmash/ab-protocol>
 #[derive(Clone, Debug)]
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 
