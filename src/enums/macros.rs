@@ -109,6 +109,7 @@ macro_rules! decl_enum_utils {
     }
   } => {
     $( #[$attr] )*
+    #[non_exhaustive]
     $vis enum $name {
       $(
         $( #[$elemattr] )*

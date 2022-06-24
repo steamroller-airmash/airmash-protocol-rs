@@ -9,7 +9,6 @@ pub use self::flag_code::FlagCode;
 decl_enum! {
   /// Specifies whether the debug reply to a command should
   /// open a popup or be displayed in the chat window.
-  #[non_exhaustive]
   ##[default = ShowInPopup]
   pub enum CommandReplyType {
     ShowInConsole = 0,
@@ -24,7 +23,6 @@ decl_enum! {
   /// Details on how the mob despawned. (i.e. whether
   /// it's lifetime ended or it collided with some
   /// other object)
-  #[non_exhaustive]
   pub enum DespawnType {
     LifetimeEnded = 0,
     Collided = 1,
@@ -34,7 +32,6 @@ decl_enum! {
   ///
   /// These are all server errors that the vanilla AIRMASH
   /// client (and the current STARMASH client) understands.
-  #[non_exhaustive]
   pub enum ErrorType {
     PacketFloodingDisconnect = 1,
     PacketFloodingBan = 2,
@@ -78,7 +75,6 @@ decl_enum! {
   /// Implementors Note: This had a `TODO: rev-eng`
   /// comment on it but it doesn't seem to be missing
   /// any values.
-  #[non_exhaustive]
   pub enum FlagUpdateType {
     Position = 1,
     Carrier = 2,
@@ -101,7 +97,6 @@ decl_enum! {
   /// [0]: server/struct.ScoreDetailedFFA.html
   /// [1]: server/struct.ScoreDetailedCTF.html
   /// [2]: server/struct.ScoreDetailedBTR.html
-  #[non_exhaustive]
   ##[default = FFA]
   pub enum GameType {
     FFA = 1,
@@ -115,7 +110,6 @@ decl_enum! {
   ///
   /// It is used in the following packets:
   /// - TODO
-  #[non_exhaustive]
   pub enum KeyCode {
     Up = 1,
     Down = 2,
@@ -140,7 +134,6 @@ decl_enum! {
   ///
   /// Used by:
   /// - TODO
-  #[non_exhaustive]
   pub enum MobType {
     PredatorMissile = 1,
     GoliathMissile = 2,
@@ -158,7 +151,6 @@ decl_enum! {
   ///
   /// Used in:
   /// - TODO
-  #[non_exhaustive]
   ##[default = Predator]
   pub enum PlaneType {
     Predator = 1,
@@ -171,7 +163,6 @@ decl_enum! {
   /// Indicate whether a player levelled up, or has
   /// just logged in and their level is being communicated
   /// to the client.
-  #[non_exhaustive]
   ##[default = Login]
   pub enum PlayerLevelType {
     Login = 0,
@@ -188,7 +179,6 @@ decl_enum! {
   /// [0]: server/struct.login.html
   /// [1]: server/struct.loginplayer.html
   /// [2]: server/struct.playernew.html
-  #[non_exhaustive]
   ##[default = Alive]
   pub enum PlayerStatus {
     Alive = 0,
@@ -196,7 +186,6 @@ decl_enum! {
   }
 
   /// TODO: Reverse engineer
-  #[non_exhaustive]
   ##[default = Shield]
   pub enum PowerupType {
     Shield = 1,
@@ -208,7 +197,6 @@ decl_enum! {
   /// Specific identifiers for server custom messages.
   ///
   /// TODO: Reverse Engineer
-  #[non_exhaustive]
   pub enum ServerCustomType {
     /// Triggers the game-end screen in BTR.
     BTR = 1,
@@ -222,7 +210,6 @@ decl_enum! {
   /// Type specifier for server banner messages.
   ///
   /// TODO: Reverse engineer
-  #[non_exhaustive]
   pub enum ServerMessageType {
     TimeToGameStart = 1,
     /// TODO: Verify the value of this one
@@ -236,7 +223,6 @@ decl_enum! {
   }
 
   /// All upgrade types.
-  #[non_exhaustive]
   ##[default = None]
   pub enum UpgradeType {
     /// This seems to be sent by the official server when a

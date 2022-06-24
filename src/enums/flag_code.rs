@@ -29,7 +29,6 @@ decl_enum! {
   /// [0]: https://doc.rust-lang.org/std/str/trait.FromStr.html
   /// [1]: https://doc.rust-lang.org/std/convert/trait.TryFrom.html
   /// [2]: #variant.UnitedNations
-  #[non_exhaustive]
   ##[default = UnitedNations]
   ##[base = u16]
   pub enum FlagCode {
