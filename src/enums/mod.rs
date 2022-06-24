@@ -9,7 +9,7 @@ pub use self::flag_code::FlagCode;
 decl_enum! {
   /// Specifies whether the debug reply to a command should open a popup or be
   /// displayed in the chat window.
-  /// 
+  ///
   /// The original client will consider any command reply that isn't
   /// `ShowInConsole` to be `ShowInPopup` however other clients may handle
   /// things differently.
@@ -18,18 +18,18 @@ decl_enum! {
     /// Add a new message within the chat window.
     ShowInConsole = 0,
     /// Show a popup with the message.
-    /// 
+    ///
     /// Note that the original client will fail to show any message that is not
-    /// valid JSON if shown in a popup. 
+    /// valid JSON if shown in a popup.
     ShowInPopup = 1,
   }
 
-  /// Details on how the mob despawned. 
+  /// Details on how the mob despawned.
   pub enum DespawnType {
     /// The mob did not hit anything and will simply vanish.
     LifetimeEnded = 0,
     /// The mob ran into something and exploded.
-    /// 
+    ///
     /// This is generally only used for missiles, some alternate clients may
     /// run into issues if used for box-type mobs.
     Collided = 1,
@@ -41,7 +41,7 @@ decl_enum! {
   /// current STARMASH client) understands. [Ab-server][ab-server] has some
   /// additional custom error types for its sync protocols but this crate
   /// doesn't handle those packet types at the moment.
-  /// 
+  ///
   /// [ab-server]: https://github.com/wight-airmash/ab-protocol
   pub enum ErrorType {
     PacketFloodingDisconnect = 1,
@@ -108,14 +108,14 @@ decl_enum! {
     BTR = 3,
   }
 
-  /// The key that's had it's state changed. 
-  /// 
+  /// The key that's had it's state changed.
+  ///
   /// This is only used for client to server communication. For communications
   /// back from server to client see [`ServerKeyState`].
   ///
   /// It is used in the following packets:
   /// - TODO
-  /// 
+  ///
   /// [`ServerKeyState`]: crate::ServerKeyState
   pub enum KeyCode {
     Up = 1,
