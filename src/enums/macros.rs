@@ -43,6 +43,59 @@ macro_rules! enum_basetype {
   };
 }
 
+#[allow(unused_macros)]
+macro_rules! dummy_count {
+  ($($tt:tt)*) => {
+    1
+  };
+}
+
+#[allow(unused_macros)]
+macro_rules! enum_variant_serialize_decl {
+    {
+      [$index:expr] $name:ident => $elem:ident $( $rest:ident )*;
+
+      match $self:ident => $ser:ident {
+        $( $pat:pat => $expr:expr ),* $(,)?
+      }
+    } => {
+      enum_variant_serialize_decl! {
+        [$index + 1] $name => $( $rest )* ;
+
+        match $self => $ser {
+          Self::$elem => $ser.serialize_unit_variant(
+            stringify!($name),
+            $index,
+            stringify!($elem),
+          ),
+          $( $pat => $expr ),*
+        }
+      }
+    };
+    {
+      [$index:expr] $name:ident => ;
+
+      match $self:ident => $ser:ident {
+        $( $pat:pat => $expr:expr ),* $(,)?
+      }
+    } => {
+
+      match $self {
+        $( $pat => $expr, )*
+        Self::Unknown(val) => {
+          let mut ser = $ser.serialize_tuple_variant(
+            stringify!($name),
+            $index,
+            "Unknown",
+            1
+          )?;
+          ser.serialize_field(val)?;
+          ser.end()
+        }
+      }
+    }
+}
+
 macro_rules! decl_enum {
   {
     $(
@@ -60,7 +113,6 @@ macro_rules! decl_enum {
     $(
       $( #[$attr] )*
       #[derive(Copy, Clone, Debug, Hash, Eq, PartialEq)]
-      #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
       $vis enum $name {
         $(
           $( #[$elemattr] )*
@@ -88,6 +140,88 @@ macro_rules! decl_enum {
               $( $name::$elem => $value, )*
               $name::Unknown(v) => v,
             }
+          }
+        }
+      };
+
+      #[cfg(feature = "serde")]
+      const _: () = {
+        use std::fmt;
+
+        use serde::de::{Unexpected, Visitor};
+        use serde::ser::SerializeTupleVariant;
+        use serde::{Deserialize, Deserializer, Serialize, Serializer};
+
+        type BaseTy = enum_basetype!($($basety)?);
+
+        impl Serialize for $name {
+          fn serialize<S>(&self, ser: S) -> Result<S::Ok, S::Error>
+          where
+            S: Serializer,
+          {
+            if ser.is_human_readable() {
+              enum_variant_serialize_decl! {
+                [0u32] $name => $( $elem )*;
+
+                match self => ser {}
+              }
+            } else {
+              BaseTy::serialize(&BaseTy::from(*self), ser)
+            }
+          }
+        }
+
+        impl<'de> Deserialize<'de> for $name {
+          fn deserialize<D>(de: D) -> Result<Self, <D as Deserializer<'de>>::Error>
+          where
+            D: Deserializer<'de>,
+          {
+            struct TyVisitor;
+
+            impl<'de> Visitor<'de> for TyVisitor {
+              type Value = $name;
+
+              fn expecting(&self, fmt: &mut fmt::Formatter) -> fmt::Result {
+                write!(
+                  fmt,
+                  "an enum value (either a string or a {})",
+                  None
+                    $( .or_else(|| Some(stringify!($basety))) )?
+                    .unwrap_or("u8")
+                )
+              }
+
+              fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
+              where
+                E: serde::de::Error,
+              {
+                match v {
+                  $( stringify!($elem) => Ok($name::$elem), )*
+                  _ => Err(E::invalid_value(Unexpected::Str(v), &self)),
+                }
+              }
+
+              fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E>
+              where
+                E: serde::de::Error
+              {
+                use std::convert::TryFrom;
+
+                match BaseTy::try_from(v) {
+                  Ok(v) => Ok($name::from(v)),
+                  Err(_) => Err(E::invalid_value(
+                    Unexpected::Unsigned(v),
+                    &self
+                  ))
+                }
+              }
+            }
+
+            de.deserialize_enum(
+              stringify!($name),
+              &[ $( stringify!($elem) ),* ],
+              TyVisitor
+            )
           }
         }
       };
