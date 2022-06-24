@@ -217,6 +217,9 @@ decl_enum! {
     BTRWin = 1,
     /// TODO: Determine if this name is accurate
     CTFWin = 2,
+
+    /// For suggesting a different game server for the player to switch to.
+    SwitchGameSuggestion = 100,
   }
 
   /// Type specifier for server banner messages.
