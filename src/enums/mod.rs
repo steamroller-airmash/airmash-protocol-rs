@@ -54,11 +54,19 @@ decl_enum! {
     FlagChangeThrottled = 31,
     UnknownCommand = 100,
   }
+}
 
-  /// TODO: Reverse engineer
-  #[non_exhaustive]
-  pub enum FirewallStatus {}
+/// This is used to control whether the firewall exists in BTR.
+#[derive(Copy, Clone, Debug, Eq, PartialEq, PartialOrd, Ord)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
+pub enum FirewallStatus {
+  /// If this status is sent then the client will remove the ring of fire.
+  Removed = 0,
+  /// Otherwise, any other status means it should exist.
+  Present = 1,
+}
 
+decl_enum! {
   /// TODO: Reverse engineer
   #[non_exhaustive]
   pub enum FirewallUpdateType {}
@@ -296,4 +304,23 @@ impl MobType {
 
     matches!(self, Shield | Inferno)
   }
+}
+
+impl From<u8> for FirewallStatus {
+  fn from(v: u8) -> Self {
+    match v {
+      0 => FirewallStatus::Removed,
+      _ => FirewallStatus::Present,
+    }
+  }
+}
+
+impl From<FirewallStatus> for u8 {
+  fn from(v: FirewallStatus) -> Self {
+    v as u8
+  }
+}
+
+decl_serde_v5! {
+  enum FirewallStatus;
 }
