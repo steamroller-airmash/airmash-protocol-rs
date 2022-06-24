@@ -47,6 +47,7 @@ pub enum ServerPacket {
   EventStealth(EventStealth),
   EventLeaveHorizon(EventLeaveHorizon),
   MobUpdate(MobUpdate),
+  MobUpdate2(MobUpdate2),
   MobUpdateStationary(MobUpdateStationary),
   MobDespawn(MobDespawn),
   MobDespawnCoords(MobDespawnCoords),
@@ -78,6 +79,7 @@ macro_rules! impl_from_empty {
 }
 
 impl_from_newtype!(Login);
+impl_from_newtype!(Login2);
 impl_from_newtype!(Ping);
 impl_from_newtype!(PingResult);
 impl_from_newtype!(Error);
@@ -105,6 +107,7 @@ impl_from_newtype!(EventBounce);
 impl_from_newtype!(EventStealth);
 impl_from_newtype!(EventLeaveHorizon);
 impl_from_newtype!(MobUpdate);
+impl_from_newtype!(MobUpdate2);
 impl_from_newtype!(MobUpdateStationary);
 impl_from_newtype!(MobDespawn);
 impl_from_newtype!(MobDespawnCoords);
