@@ -146,8 +146,7 @@ decl_enum! {
     Inferno = 9,
   }
 
-  /// Used to indicate the type of plane
-  /// that the packet refers to.
+  /// Used to indicate the type of plane that the packet refers to.
   ///
   /// Used in:
   /// - TODO
