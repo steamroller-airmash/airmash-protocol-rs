@@ -14,7 +14,7 @@ serde = [ "serde-feature-hack", "serde_json", "bstr/serde1" ]
 default = [ ]
 
 [dependencies]
-bstr = { version = "0.2.16", default-features = false, features=["std"] }
+bstr = { version = "1.0.0", default-features = false, features=["std"] }
 mint = "0.5"
 
 [dependencies.serde_json]
